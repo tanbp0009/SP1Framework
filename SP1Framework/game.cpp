@@ -1,4 +1,4 @@
-// This is the main file for the game logic and function
+ï»¿// This is the main file for the game logic and function
 //
 //
 #include "game.h"
@@ -6,6 +6,8 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+
+char buttondir;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -28,6 +30,8 @@ Console g_Console(80, 25, "SP1 Framework");
 //--------------------------------------------------------------
 void init( void )
 {
+	buttondir = '^';
+
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
     g_dBounceTime = 0.0;
@@ -143,7 +147,7 @@ void gameplay()            // gameplay logic
 
 void moveCharacter()
 {
-    bool bSomethingHappened = false;
+    bool bSomethingHappened = false; 
     if (g_dBounceTime > g_dElapsedTime)
         return;
 
@@ -152,24 +156,28 @@ void moveCharacter()
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
+		g_sChar.playerdir = 'u';
         g_sChar.m_cLocation.Y--;
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
+		g_sChar.playerdir = 'l';
         g_sChar.m_cLocation.X--;
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
+		g_sChar.playerdir = 'd';
         g_sChar.m_cLocation.Y++;
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
+		g_sChar.playerdir = 'r';
         g_sChar.m_cLocation.X++;
         bSomethingHappened = true;
     }
@@ -232,7 +240,7 @@ void renderMap()
         c.X = 5 * i;
         c.Y = i + 1;
         colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
+        g_Console.writeToBuffer(c, " Â°Â±Â²Ã›", colors[i]);
     }
 }
 
@@ -240,11 +248,28 @@ void renderCharacter()
 {
     // Draw the location of the character
     WORD charColor = 0x0C;
+
     if (g_sChar.m_bActive)
     {
         charColor = 0x0A;
     }
-    g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+	if (g_sChar.playerdir == 'u')
+	{
+		buttondir = '^';
+	}
+	if (g_sChar.playerdir == 'd')
+	{
+		buttondir = 'v';
+	}
+	if (g_sChar.playerdir == 'l')
+	{
+		buttondir = '<';
+	}
+	if (g_sChar.playerdir == 'r')
+	{
+		buttondir = '>';
+	}
+    g_Console.writeToBuffer(g_sChar.m_cLocation, buttondir, charColor);
 }
 
 void renderFramerate()

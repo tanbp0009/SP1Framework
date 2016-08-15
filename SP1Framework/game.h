@@ -31,6 +31,7 @@ struct SGameChar
 {
     COORD m_cLocation;
     bool  m_bActive;
+	char playerdir;
 };
 
 void init        ( void );      // initialize your variables, allocate memory, etc
