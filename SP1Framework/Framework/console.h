@@ -67,14 +67,14 @@ class Console
         void writeToBuffer(SHORT x, SHORT y, LPCSTR str, WORD attribute = 0x0F);
         void writeToBuffer(SHORT x, SHORT y, std::string& s, WORD attribute = 0x0F);
         void writeToBuffer(SHORT x, SHORT y, char ch, WORD attribute = 0x0F);
-        
+
         //===================================================================================================
         // These are for your eyes only, don't bother to try to call the following functions.
     private:
         // Set a screen buffer for us to write to before flushing it to the screen
         HANDLE m_hScreenBuffer;
-        CHAR_INFO* m_ciScreenDataBuffer;
-        COORD m_cConsoleSize;
+		CHAR_INFO* m_ciScreenDataBuffer; 
+		COORD m_cConsoleSize;
 		COORD m_cMaxConsoleSize; // maximum console size
         const UINT32 m_u32ScreenDataBufferSize;
 

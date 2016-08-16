@@ -8,6 +8,7 @@
 #include <sstream>
 
 char buttondir;
+bool maprendered;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -31,6 +32,7 @@ Console g_Console(80, 25, "SP1 Framework");
 void init( void )
 {
 	buttondir = '^';
+	maprendered = false;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -44,6 +46,7 @@ void init( void )
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
+	GetMap("config/example.txt");
 }
 
 //--------------------------------------------------------------
@@ -155,31 +158,47 @@ void moveCharacter()
     // providing a beep sound whenver we shift the character
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
-        //Beep(1440, 30);
 		g_sChar.playerdir = 'u';
-        g_sChar.m_cLocation.Y--;
-        bSomethingHappened = true;
+		//if (g_Console.m_ciScreenDataBuffer[g_sChar.m_cLocation.X + g_Console.m_cConsoleSize.X * (g_sChar.m_cLocation.Y-1)].Char.AsciiChar == ' ')
+		{
+			//Beep(1440, 30);
+			
+			g_sChar.m_cLocation.Y--;
+			bSomethingHappened = true;
+		}
     }
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
-        //Beep(1440, 30);
 		g_sChar.playerdir = 'l';
-        g_sChar.m_cLocation.X--;
-        bSomethingHappened = true;
+		//if (g_Console.m_ciScreenDataBuffer[(g_sChar.m_cLocation.X-1) + g_Console.m_cConsoleSize.X * g_sChar.m_cLocation.Y].Char.AsciiChar == ' ')
+		{
+			//Beep(1440, 30);
+
+			g_sChar.m_cLocation.X--;
+			bSomethingHappened = true;
+		}
     }
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
-        //Beep(1440, 30);
 		g_sChar.playerdir = 'd';
-        g_sChar.m_cLocation.Y++;
-        bSomethingHappened = true;
+		//if (g_Console.m_ciScreenDataBuffer[g_sChar.m_cLocation.X + g_Console.m_cConsoleSize.X * (g_sChar.m_cLocation.Y + 1)].Char.AsciiChar == ' ')
+		{
+			//Beep(1440, 30);
+
+			g_sChar.m_cLocation.Y++;
+			bSomethingHappened = true;
+		}
     }
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
-        //Beep(1440, 30);
 		g_sChar.playerdir = 'r';
-        g_sChar.m_cLocation.X++;
-        bSomethingHappened = true;
+		//if (g_Console.m_ciScreenDataBuffer[(g_sChar.m_cLocation.X+1) + g_Console.m_cConsoleSize.X * g_sChar.m_cLocation.Y].Char.AsciiChar == ' ')
+		{
+			//Beep(1440, 30);
+
+			g_sChar.m_cLocation.X++;
+			bSomethingHappened = true;
+		}
     }
     if (g_abKeyPressed[K_SPACE])
     {
@@ -223,6 +242,10 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
+	//if (maprendered == false)
+	{
+		SetMap();
+	}
     renderCharacter();  // renders the character into the buffer
 }
 
@@ -295,3 +318,4 @@ void renderToScreen()
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
 }
+
