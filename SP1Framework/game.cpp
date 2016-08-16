@@ -126,6 +126,21 @@ void update(double dt)
 // Input    : void
 // Output   : void
 //--------------------------------------------------------------
+
+void loadLevel()
+{
+	if (maprendered == false && level == 2)
+	{
+		GetMap("config/Level2.txt");
+		maprendered = true;
+	}
+	if (maprendered == false && level == 1)
+	{
+		GetMap("config/level1.txt");
+		maprendered = true;
+	}
+	g_eGameState = S_GAME;
+}
 void render()
 {
     clearScreen();      // clears the current screen and draw from scratch 
@@ -135,6 +150,8 @@ void render()
             break;
         case S_GAME: renderGame();
             break;
+		case S_LOADLEVEL: loadLevel();
+			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -143,7 +160,7 @@ void render()
 void splashScreenWait()    // waits for time to pass in splash screen
 {
     if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
-        g_eGameState = S_GAME;
+        g_eGameState = S_LOADLEVEL;
 }
 
 void gameplay()            // gameplay logic
@@ -225,18 +242,20 @@ void processUserInput()
 	{
 		maprendered = false;
 		level = 2;
+		g_eGameState = S_LOADLEVEL;
 	}
 	if (g_abKeyPressed[K_1] && maprendered == true)
 	{
 		maprendered = false;
 		level = 1;
+		g_eGameState = S_LOADLEVEL;
 	}
 }
 
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
-    g_Console.clearBuffer(0x1F);
+    g_Console.clearBuffer(0x0F);
 }
 
 void renderSplashScreen()  // renders the splash screen
@@ -255,17 +274,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    renderMap();        // renders the map to the buffer first
-	if (maprendered == false && level == 2)
-	{
-		GetMap("config/Level2.txt");
-		maprendered = true;
-	}
-	if (maprendered == false && level == 1)
-	{
-		GetMap("config/level1.txt");
-		maprendered = true;
-	}
+    //renderMap();        // renders the map to the buffer first
 	SetMap();
     renderCharacter();  // renders the character into the buffer
 }
