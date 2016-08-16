@@ -73,7 +73,7 @@ class Console
     private:
         // Set a screen buffer for us to write to before flushing it to the screen
         HANDLE m_hScreenBuffer;
-		CHAR_INFO* m_ciScreenDataBuffer; 
+		CHAR_INFO* m_ciScreenDataBuffer;
 		COORD m_cConsoleSize;
 		COORD m_cMaxConsoleSize; // maximum console size
         const UINT32 m_u32ScreenDataBufferSize;

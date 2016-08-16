@@ -9,6 +9,7 @@
 
 char buttondir;
 bool maprendered;
+int level;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -22,6 +23,8 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
 
+extern int maparray[25][80];
+
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
 //            Initialize variables, allocate memory, load data from file, etc. 
@@ -33,6 +36,7 @@ void init( void )
 {
 	buttondir = '^';
 	maprendered = false;
+	level = 1;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -46,7 +50,6 @@ void init( void )
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
-	GetMap("config/example.txt");
 }
 
 //--------------------------------------------------------------
@@ -83,6 +86,8 @@ void getInput( void )
     g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+	g_abKeyPressed[K_2] = isKeyPressed('2');
+	g_abKeyPressed[K_1] = isKeyPressed('1');
 }
 
 //--------------------------------------------------------------
@@ -159,7 +164,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
 		g_sChar.playerdir = 'u';
-		//if (g_Console.m_ciScreenDataBuffer[g_sChar.m_cLocation.X + g_Console.m_cConsoleSize.X * (g_sChar.m_cLocation.Y-1)].Char.AsciiChar == ' ')
+		if (maparray[g_sChar.m_cLocation.Y-1][g_sChar.m_cLocation.X] == ' ')
 		{
 			//Beep(1440, 30);
 			
@@ -170,7 +175,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
 		g_sChar.playerdir = 'l';
-		//if (g_Console.m_ciScreenDataBuffer[(g_sChar.m_cLocation.X-1) + g_Console.m_cConsoleSize.X * g_sChar.m_cLocation.Y].Char.AsciiChar == ' ')
+		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X-1] == ' ')
 		{
 			//Beep(1440, 30);
 
@@ -181,7 +186,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
 		g_sChar.playerdir = 'd';
-		//if (g_Console.m_ciScreenDataBuffer[g_sChar.m_cLocation.X + g_Console.m_cConsoleSize.X * (g_sChar.m_cLocation.Y + 1)].Char.AsciiChar == ' ')
+		if (maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ')
 		{
 			//Beep(1440, 30);
 
@@ -192,7 +197,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
 		g_sChar.playerdir = 'r';
-		//if (g_Console.m_ciScreenDataBuffer[(g_sChar.m_cLocation.X+1) + g_Console.m_cConsoleSize.X * g_sChar.m_cLocation.Y].Char.AsciiChar == ' ')
+		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X+1] == ' ')
 		{
 			//Beep(1440, 30);
 
@@ -205,7 +210,6 @@ void moveCharacter()
         g_sChar.m_bActive = !g_sChar.m_bActive;
         bSomethingHappened = true;
     }
-
     if (bSomethingHappened)
     {
         // set the bounce time to some time in the future to prevent accidental triggers
@@ -216,7 +220,17 @@ void processUserInput()
 {
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
-        g_bQuitGame = true;    
+        g_bQuitGame = true;
+	if (g_abKeyPressed[K_2] && maprendered == true)
+	{
+		maprendered = false;
+		level = 2;
+	}
+	if (g_abKeyPressed[K_1] && maprendered == true)
+	{
+		maprendered = false;
+		level = 1;
+	}
 }
 
 void clearScreen()
@@ -242,10 +256,17 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
-	//if (maprendered == false)
+	if (maprendered == false && level == 2)
 	{
-		SetMap();
+		GetMap("config/Level2.txt");
+		maprendered = true;
 	}
+	if (maprendered == false && level == 1)
+	{
+		GetMap("config/level1.txt");
+		maprendered = true;
+	}
+	SetMap();
     renderCharacter();  // renders the character into the buffer
 }
 

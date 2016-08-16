@@ -9,9 +9,8 @@ int col = 0;
 void GetMap(std::string Inlevel)
 {
 	char ch;
-	COORD v;
-	v.Y = 0;
-	v.X = 0;
+	row = 0;
+	col = 0;
 	//std::string line;
 	//std::ifstream myfile("config/example.txt");
 	//COORD v;
