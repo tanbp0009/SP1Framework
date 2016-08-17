@@ -54,7 +54,7 @@ void interactobjectinfront()
 	{
 		switch (objectinfront)
 		{
-		case ')': door(); // game logic for the splash screen
+		case 'o': door(); // game logic for the splash screen
 			break;
 		case '|': something(); // gameplay logic when we are in the game
 			break;
@@ -64,9 +64,34 @@ void interactobjectinfront()
 	}
 }
 
+int a = 0;
+int b = 0;
 void door()
 {
-
+	{
+		int y;
+		int x;
+		for (y = 0; y < 25; y++)
+		{
+			for (x = 0; x < 80; x++)
+			{
+				if (maparray[y][x] == ')')
+				{
+					a = x;
+					b = y;
+					break;
+				}
+			}
+		}
+	}
+	if (maparray[b][a] == ')')
+	{
+		maparray[b][a] = ' ';
+	}
+	else if (maparray[b][a] == ' ')
+	{
+		maparray[b][a] = ')';
+	}
 }
 
 void something()
