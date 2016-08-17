@@ -1,9 +1,9 @@
 #include "InteractiveObjects.h"
 
-extern int maparray[25][80];
+extern char maparray[25][80];
 extern SGameChar g_sChar;
 extern int level;
-extern bool maprendered;
+extern bool mapSaved[5];
 extern EGAMESTATES g_eGameState;
 
 char objectinfront;
@@ -101,17 +101,16 @@ void something()
 
 void nextlevel()
 {
+	savelevel(level);
 	if (ObjectPosition.X > 40)
 	{
 		g_sChar.m_cLocation.X = 1;
-		maprendered = false;
 		level = 2;
 		g_eGameState = S_LOADLEVEL;
 	}
 	if (ObjectPosition.X < 40)
 	{
 		g_sChar.m_cLocation.X = 78;
-		maprendered = false;
 		level = 1;
 		g_eGameState = S_LOADLEVEL;
 	}

@@ -8,7 +8,7 @@
 #include <sstream>
 
 char buttondir;
-bool maprendered;
+bool mapSaved[5];
 int level;
 
 double  g_dElapsedTime;
@@ -23,7 +23,7 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
 
-extern int maparray[25][80];
+extern char maparray[25][80];
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -35,7 +35,11 @@ extern int maparray[25][80];
 void init( void )
 {
 	buttondir = '^';
-	maprendered = false;
+	mapSaved[0] = false;
+	mapSaved[1] = false;
+	mapSaved[2] = false;
+	mapSaved[3] = false;
+	mapSaved[4] = false;
 	level = 1;
 
     // Set precision for floating point output
