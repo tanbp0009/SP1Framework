@@ -3,6 +3,9 @@
 
 // defined in game.cpp
 extern Console g_Console;
+extern EGAMESTATES g_eGameState;
+extern bool maprendered;
+extern int level;
 int maparray[25][80];
 int row = 0;
 int col = 0;
@@ -35,5 +38,23 @@ void SetMap()
 		{
 			g_Console.writeToBuffer(setmapcoord, maparray[setmapcoord.Y][setmapcoord.X], 0x0A);
 		}
+	}
+}
+
+void loadLevel()
+{
+	if (maprendered == false)
+	{
+		if (level == 2)
+		{
+			GetMap("config/Level2.txt");
+			maprendered = true;
+		}
+		if (level == 1)
+		{
+			GetMap("config/level1.txt");
+			maprendered = true;
+		}
+		g_eGameState = S_GAME;
 	}
 }

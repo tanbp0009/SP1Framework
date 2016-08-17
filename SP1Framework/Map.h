@@ -8,3 +8,4 @@
 
 void GetMap(std::string Inlevel);
 void SetMap();
+void loadLevel();

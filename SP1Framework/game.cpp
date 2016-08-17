@@ -127,23 +127,6 @@ void update(double dt)
 // Output   : void
 //--------------------------------------------------------------
 
-void loadLevel()
-{
-	if (maprendered == false)
-	{
-		if (level == 2)
-		{
-			GetMap("config/Level2.txt");
-			maprendered = true;
-		}
-		if (level == 1)
-		{
-			GetMap("config/level1.txt");
-			maprendered = true;
-		}
-		g_eGameState = S_GAME;
-	}
-}
 void render()
 {
     clearScreen();      // clears the current screen and draw from scratch 
@@ -242,18 +225,6 @@ void processUserInput()
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
         g_bQuitGame = true;
-	if (g_abKeyPressed[K_2] && maprendered == true)
-	{
-		maprendered = false;
-		level = 2;
-		g_eGameState = S_LOADLEVEL;
-	}
-	if (g_abKeyPressed[K_1] && maprendered == true)
-	{
-		maprendered = false;
-		level = 1;
-		g_eGameState = S_LOADLEVEL;
-	}
 }
 
 void clearScreen()
