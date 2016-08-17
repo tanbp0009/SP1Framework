@@ -1,0 +1,11 @@
+              =========           
+              |       |           
+	===========       ============
+	|s                      )    |
+	===========       ============
+              |       |           
+              =========           
+ 
+	      Level 1 : Tutorial
+ 
+ Use the Arrow keys to move around the level.
