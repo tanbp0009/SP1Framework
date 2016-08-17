@@ -129,17 +129,20 @@ void update(double dt)
 
 void loadLevel()
 {
-	if (maprendered == false && level == 2)
+	if (maprendered == false)
 	{
-		GetMap("config/Level2.txt");
-		maprendered = true;
+		if (level == 2)
+		{
+			GetMap("config/Level2.txt");
+			maprendered = true;
+		}
+		if (level == 1)
+		{
+			GetMap("config/level1.txt");
+			maprendered = true;
+		}
+		g_eGameState = S_GAME;
 	}
-	if (maprendered == false && level == 1)
-	{
-		GetMap("config/level1.txt");
-		maprendered = true;
-	}
-	g_eGameState = S_GAME;
 }
 void render()
 {

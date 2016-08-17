@@ -3,6 +3,7 @@
 
 #include "Framework\timer.h"
 #include "Map.h"
+#include "InteractiveObjects.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
