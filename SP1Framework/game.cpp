@@ -8,7 +8,7 @@
 #include <sstream>
 
 char buttondir;
-bool mapSaved[5];
+bool mapSaved;
 int level;
 
 double  g_dElapsedTime;
@@ -23,7 +23,7 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 // Console object
 Console g_Console(80, 25, "SP1 Framework");
 
-extern char maparray[25][80];
+extern char mapCurrent[25][80];
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -35,12 +35,9 @@ extern char maparray[25][80];
 void init( void )
 {
 	buttondir = '^';
-	mapSaved[0] = false;
-	mapSaved[1] = false;
-	mapSaved[2] = false;
-	mapSaved[3] = false;
-	mapSaved[4] = false;
+	mapSaved = false;
 	level = 1;
+	g_sChar.lives = 3;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -173,7 +170,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
 		g_sChar.playerdir = 'u';
-		if (maparray[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || maparray[g_sChar.m_cLocation.Y-1][g_sChar.m_cLocation.X] == '#')
+		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y-1][g_sChar.m_cLocation.X] == '#')
 		{
 			//Beep(1440, 30);
 			
@@ -185,7 +182,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
 		g_sChar.playerdir = 'l';
-		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#')
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#')
 		{
 			//Beep(1440, 30);
 
@@ -197,7 +194,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
 		g_sChar.playerdir = 'd';
-		if (maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#')
+		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#')
 		{
 			//Beep(1440, 30);
 
@@ -209,7 +206,7 @@ void moveCharacter()
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
 		g_sChar.playerdir = 'r';
-		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#')
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#')
 		{
 			//Beep(1440, 30);
 

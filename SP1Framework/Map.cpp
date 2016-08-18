@@ -4,22 +4,22 @@
 // defined in game.cpp
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
-extern bool mapSaved[5];
+extern bool mapSaved;
 extern int level;
-char savemap[5][25][80];
-char maparray[25][80];
+char savemap[10][25][80];
+char mapCurrent[25][80];
 
-void GetMap(std::string Inlevel)
+void GetMap(std::string filelocation, int Inlevel)
 {
 	char ch;
 	int row = 0;
 	int col = 0;
 
-	std::fstream fin(Inlevel, std::fstream::in);
+	std::fstream fin(filelocation, std::fstream::in);
 	while (fin >> std::noskipws >> ch)
 	{
-		maparray[row][col] = ch;
-	//	g_Console.writeToBuffer(v, ch, 0x0A);
+		savemap[Inlevel][row][col] = ch;
+		//	g_Console.writeToBuffer(v, ch, 0x0A);
 		col++;
 		if (col == 81)
 		{
@@ -36,39 +36,9 @@ void SetMap()
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			g_Console.writeToBuffer(setmapcoord, maparray[setmapcoord.Y][setmapcoord.X], 0x0A);
+			g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 		}
 	}
-}
-
-void loadLevel()
-{
-	if (mapSaved[level] == false)
-	{
-		if (level == 2)
-		{
-			GetMap("config/Level2.txt");
-			mapSaved[level] = true;
-		}
-		if (level == 1)
-		{
-			GetMap("config/level1.txt");
-			mapSaved[level] = true;
-		}
-	}
-
-	else
-	{
-		if (level == 2)
-		{
-			GetSavedMap(level);
-		}
-		if (level == 1)
-		{
-			GetSavedMap(level);
-		}	
-	}
-	g_eGameState = S_GAME;
 }
 
 void savelevel(int Inlevel)
@@ -78,10 +48,40 @@ void savelevel(int Inlevel)
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			savemap[Inlevel][setmapcoord.Y][setmapcoord.X] = maparray[setmapcoord.Y][setmapcoord.X];	
+			savemap[Inlevel][setmapcoord.Y][setmapcoord.X] = mapCurrent[setmapcoord.Y][setmapcoord.X];
 		}
 	}
-	mapSaved[Inlevel] = true;
+	mapSaved = true;
+}
+
+void loadLevel()
+{
+	if (mapSaved == false)
+	{
+		GetMap("config/Level2.txt", 2);
+		GetMap("config/level1.txt", 1);
+		GetMap("config/Lose page.txt",9);
+		mapSaved = true;
+	}
+
+	//else
+	{
+		if (level == 2)
+		{
+			GetSavedMap(level);
+			g_eGameState = S_GAME;
+		}
+		if (level == 1)
+		{
+			GetSavedMap(level);
+			g_eGameState = S_GAME;
+		}
+		if (level == 9)
+		{
+			GetSavedMap(level);
+		}
+	}
+
 }
 
 void GetSavedMap(int Inlevel)
@@ -91,12 +91,13 @@ void GetSavedMap(int Inlevel)
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			maparray[setmapcoord.Y][setmapcoord.X] = savemap[Inlevel][setmapcoord.Y][setmapcoord.X];
+			mapCurrent[setmapcoord.Y][setmapcoord.X] = savemap[Inlevel][setmapcoord.Y][setmapcoord.X];
 		}
 	}
 }
 void losepage()
 {
-	GetMap("config/Lose page.txt");
+	level = 9;
+	loadLevel();
 	SetMap();
 }

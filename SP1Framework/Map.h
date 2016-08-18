@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-void GetMap(std::string Inlevel);
+void GetMap(std::string filelocation, int Inlevel);
 void SetMap();
 void loadLevel();
 void savelevel(int Inlevel);

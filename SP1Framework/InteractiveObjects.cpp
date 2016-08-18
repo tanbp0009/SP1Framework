@@ -1,9 +1,9 @@
 #include "InteractiveObjects.h"
 
-extern char maparray[25][80];
+extern char mapCurrent[25][80];
 extern SGameChar g_sChar;
 extern int level;
-extern bool mapSaved[5];
+extern bool mapSaved;
 extern EGAMESTATES g_eGameState;
 
 char objectinfront;
@@ -14,32 +14,32 @@ bool PlayerFacingObject()
 	ObjectPosition.X = 0;
 	ObjectPosition.Y = 0;
 	objectinfront = ' ';
-	if (g_sChar.playerdir == 'u' && maparray[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != ' ')
+	if (g_sChar.playerdir == 'u' && mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y-1;
-		objectinfront = maparray[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X];
+		objectinfront = mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X];
 		return true;
 	}
-	if (g_sChar.playerdir == 'd' && maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != ' ')
+	if (g_sChar.playerdir == 'd' && mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y + 1;
-		objectinfront = maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X];
+		objectinfront = mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X];
 		return true;
 	}
-	if (g_sChar.playerdir == 'l' && maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != ' ')
+	if (g_sChar.playerdir == 'l' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X-1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
-		objectinfront = maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1];
+		objectinfront = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1];
 		return true;
 	}
-	if (g_sChar.playerdir == 'r' && maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != ' ')
+	if (g_sChar.playerdir == 'r' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X + 1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
-		objectinfront = maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1];
+		objectinfront = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1];
 		return true;
 	}
 	else
@@ -75,7 +75,7 @@ void door()
 		{
 			for (x = 0; x < 80; x++)
 			{
-				if (maparray[y][x] == ')')
+				if (mapCurrent[y][x] == ')')
 				{
 					a = x;
 					b = y;
@@ -84,19 +84,19 @@ void door()
 			}
 		}
 	}
-	if (maparray[b][a] == ')')
+	if (mapCurrent[b][a] == ')')
 	{
-		maparray[b][a] = ' ';
+		mapCurrent[b][a] = ' ';
 	}
-	else if (maparray[b][a] == ' ')
+	else if (mapCurrent[b][a] == ' ')
 	{
-		maparray[b][a] = ')';
+		mapCurrent[b][a] = ')';
 	}
 }
 
 void something()
 {
-	maparray[ObjectPosition.Y][ObjectPosition.X] = ' ';
+	mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 }
 
 void nextlevel()
@@ -117,7 +117,7 @@ void nextlevel()
 }
 void trap()
 {
-	if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
 	{
 		g_sChar.lives--;
 	}
