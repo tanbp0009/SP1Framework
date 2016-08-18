@@ -56,7 +56,7 @@ void interactobjectinfront()
 		{
 		case 'o': door(); // game logic for the splash screen
 			break;
-		case '|': something(); // gameplay logic when we are in the game
+		case 'Û': something(); // gameplay logic when we are in the game
 			break;
 		case 'D': nextlevel(); // gameplay logic when we are in the game
 			break;
@@ -102,17 +102,51 @@ void something()
 void nextlevel()
 {
 	savelevel(level);
-	if (ObjectPosition.X > 40)
+	switch (level)
 	{
-		g_sChar.m_cLocation.X = 1;
-		level = 2;
-		g_eGameState = S_LOADLEVEL;
-	}
-	if (ObjectPosition.X < 40)
-	{
-		g_sChar.m_cLocation.X = 78;
-		level = 1;
-		g_eGameState = S_LOADLEVEL;
+	case 1:
+		if (ObjectPosition.X == 79)
+		{
+			g_sChar.m_cLocation.X = 1;
+			level = 2;
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 2:
+		if (ObjectPosition.X == 0)
+		{
+			g_sChar.m_cLocation.X = 78;
+			level = 1;
+			g_eGameState = S_LOADLEVEL;
+		}
+		if (ObjectPosition.X == 79)
+		{
+			g_sChar.m_cLocation.X = 1;
+			level = 3;
+			g_eGameState = S_LOADLEVEL;
+		}
+		if (ObjectPosition.Y == 24)
+		{
+			g_sChar.m_cLocation.Y = 1;
+			level = 4;
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 3:
+		if (ObjectPosition.X == 0)
+		{
+			g_sChar.m_cLocation.X = 78;
+			level = 2;
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 4:
+		if (ObjectPosition.Y == 0)
+		{
+			g_sChar.m_cLocation.Y = 23;
+			level = 2;
+			g_eGameState = S_LOADLEVEL;
+		}
 	}
 }
 void trap()

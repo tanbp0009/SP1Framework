@@ -253,7 +253,6 @@ void renderMainMenu()
 	c.X = c.X / 2 - 10;
 	g_Console.writeToBuffer(c, "Main Menu", 0x03);
 	c.Y += 1;
-	g_Console.getConsoleSize().X / 2 - 8;
 	if (g_abKeyPressed[K_UP])
 		gmmc = 0;
 	else if (g_abKeyPressed[K_DOWN])
