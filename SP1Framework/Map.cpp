@@ -64,6 +64,7 @@ void loadLevel()
 		GetMap("config/Level4.txt", 4);
 		GetMap("config/Lose page.txt",9);
 		GetMap("config/Main_Menu.txt", 0);
+		GetMap("config/Title_Game.txt", 8);
 		mapSaved = true;
 	}
 
@@ -71,7 +72,6 @@ void loadLevel()
 	{
 		if (level == 1 || level == 2 || level == 3 || level == 4 || level == 5)
 		{
-
 			GetSavedMap(level);
 			g_eGameState = S_GAME;
 		}
@@ -83,6 +83,11 @@ void loadLevel()
 		{
 			GetSavedMap(level);
 			g_eGameState = S_MAINMENU;
+		}
+		if (level == 8)
+		{
+			GetSavedMap(level);
+			g_eGameState = S_TITLE;
 		}
 	}
 

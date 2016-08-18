@@ -37,7 +37,7 @@ void init( void )
 {
 	buttondir = '^';
 	mapSaved = false;
-	level = 0;
+	level = 8;
 	g_sChar.lives = 3;
 	gmmc = 0;
 
@@ -145,7 +145,10 @@ void render()
 			break;
 		case S_MAINMENU: renderMainMenu();
 			break;
+		case S_TITLE: renderTitle();
+			break;
     }
+
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
@@ -249,11 +252,11 @@ void renderMainMenu()
 	std::string Menu[2] = { "Start Your Adventure", "Exit" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
-	c.Y = 1;
-	c.X = c.X / 2 - 5;
-	g_Console.writeToBuffer(c, "Main Menu", 0x03);
-	c.Y = 19;
-	c.X = c.X / 2 + 13;
+	c.Y = 16;
+	c.X = c.X / 2 - 11;
+	g_Console.writeToBuffer(c, "Press <Space> to Select:", 0x03);
+	c.X = c.X / 2 + 16;
+	c.Y += 2;
 	if (g_abKeyPressed[K_UP])
 		gmmc = 0;
 	else if (g_abKeyPressed[K_DOWN])
@@ -262,9 +265,9 @@ void renderMainMenu()
 	{
 	case 0:
 		g_Console.writeToBuffer(c, Menu[0], 0x05);
-		c.Y += 1;
-		c.X = c.X / 2 + 22;
-		g_Console.writeToBuffer(c, Menu[1], 0x03);
+		c.Y += 2;
+		c.X = c.X / 2 + 23;
+		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
 			level = 1;
@@ -272,13 +275,23 @@ void renderMainMenu()
 		}
 		break;
 	case 1:
-		g_Console.writeToBuffer(c, Menu[0], 0x03);
-		c.Y += 1;
-		c.X = c.X / 2 + 22;
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
+		c.Y += 2;
+		c.X = c.X / 2 + 23;
 		g_Console.writeToBuffer(c, Menu[1], 0x05);
 		if (g_abKeyPressed[K_SPACE])
 			g_bQuitGame = true;
 		break;
+	}
+}
+
+void renderTitle()
+{
+	SetMap();
+	if (g_dElapsedTime > 6.0) // wait for 3 seconds to switch to game mode, else do nothing
+	{
+		level = 0;
+		g_eGameState = S_LOADLEVEL;
 	}
 }
 
