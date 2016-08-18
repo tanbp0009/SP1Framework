@@ -249,10 +249,11 @@ void renderMainMenu()
 	std::string Menu[2] = { "Start Your Adventure", "Exit" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
-	c.Y = 19;
-	c.X = c.X / 2 - 10;
+	c.Y = 1;
+	c.X = c.X / 2 - 5;
 	g_Console.writeToBuffer(c, "Main Menu", 0x03);
-	c.Y += 1;
+	c.Y = 19;
+	c.X = c.X / 2 + 13;
 	if (g_abKeyPressed[K_UP])
 		gmmc = 0;
 	else if (g_abKeyPressed[K_DOWN])
@@ -262,6 +263,7 @@ void renderMainMenu()
 	case 0:
 		g_Console.writeToBuffer(c, Menu[0], 0x05);
 		c.Y += 1;
+		c.X = c.X / 2 + 22;
 		g_Console.writeToBuffer(c, Menu[1], 0x03);
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -272,6 +274,7 @@ void renderMainMenu()
 	case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x03);
 		c.Y += 1;
+		c.X = c.X / 2 + 22;
 		g_Console.writeToBuffer(c, Menu[1], 0x05);
 		if (g_abKeyPressed[K_SPACE])
 			g_bQuitGame = true;
