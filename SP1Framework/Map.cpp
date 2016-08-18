@@ -95,3 +95,8 @@ void GetSavedMap(int Inlevel)
 		}
 	}
 }
+void losepage()
+{
+	GetMap("config/Lose page.txt");
+	SetMap();
+}

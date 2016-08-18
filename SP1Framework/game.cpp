@@ -142,6 +142,8 @@ void render()
             break;
 		case S_LOADLEVEL: loadLevel();
 			break;
+		case S_LOSEGAME: losepage();
+			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -171,44 +173,48 @@ void moveCharacter()
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
     {
 		g_sChar.playerdir = 'u';
-		if (maparray[g_sChar.m_cLocation.Y-1][g_sChar.m_cLocation.X] == ' ')
+		if (maparray[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || maparray[g_sChar.m_cLocation.Y-1][g_sChar.m_cLocation.X] == '#')
 		{
 			//Beep(1440, 30);
 			
 			g_sChar.m_cLocation.Y--;
+			trap();
 			bSomethingHappened = true;
 		}
     }
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
 		g_sChar.playerdir = 'l';
-		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X-1] == ' ')
+		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#')
 		{
 			//Beep(1440, 30);
 
 			g_sChar.m_cLocation.X--;
+			trap();
 			bSomethingHappened = true;
 		}
     }
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
 		g_sChar.playerdir = 'd';
-		if (maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ')
+		if (maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || maparray[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#')
 		{
 			//Beep(1440, 30);
 
 			g_sChar.m_cLocation.Y++;
+			trap();
 			bSomethingHappened = true;
 		}
     }
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
 		g_sChar.playerdir = 'r';
-		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X+1] == ' ')
+		if (maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || maparray[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#')
 		{
 			//Beep(1440, 30);
 
 			g_sChar.m_cLocation.X++;
+			trap();
 			bSomethingHappened = true;
 		}
     }
@@ -327,4 +333,7 @@ void renderToScreen()
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
 }
-
+void losegame()
+{
+	g_eGameState = S_LOSEGAME;
+}

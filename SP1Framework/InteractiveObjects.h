@@ -12,4 +12,4 @@ void interactobjectinfront();
 void door();
 void something();
 void nextlevel();
-
+void trap();

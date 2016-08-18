@@ -11,3 +11,4 @@ void SetMap();
 void loadLevel();
 void savelevel(int Inlevel);
 void GetSavedMap(int Inlevel);
+void losepage();
