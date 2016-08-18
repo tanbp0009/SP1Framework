@@ -27,6 +27,7 @@ enum EGAMESTATES
 {
     S_SPLASHSCREEN,
     S_GAME,
+	S_MAINMENU,
 	S_LOADLEVEL,
 	S_LOSEGAME,
     S_COUNT
@@ -40,6 +41,8 @@ struct SGameChar
 	char playerdir;
 	int lives;
 };
+
+
 
 void init        ( void );      // initialize your variables, allocate memory, etc
 void getInput    ( void );      // get input from player
@@ -59,4 +62,5 @@ void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void losegame();
+void renderMainMenu();
 #endif // _GAME_H

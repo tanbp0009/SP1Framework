@@ -10,6 +10,7 @@
 char buttondir;
 bool mapSaved;
 int level;
+int gmmc;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -36,8 +37,9 @@ void init( void )
 {
 	buttondir = '^';
 	mapSaved = false;
-	level = 1;
+	level = 0;
 	g_sChar.lives = 3;
+	gmmc = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -141,6 +143,8 @@ void render()
 			break;
 		case S_LOSEGAME: losepage();
 			break;
+		case S_MAINMENU: renderMainMenu();
+			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -238,6 +242,42 @@ void clearScreen()
 {
     // Clears the buffer with this colour attribute
     g_Console.clearBuffer(0x0F);
+}
+
+void renderMainMenu()
+{
+	std::string Menu[2] = { "Start Your Adventure", "Exit" };
+	COORD c = g_Console.getConsoleSize();
+	SetMap();
+	c.Y = 19;
+	c.X = c.X / 2 - 10;
+	g_Console.writeToBuffer(c, "Main Menu", 0x03);
+	c.Y += 1;
+	g_Console.getConsoleSize().X / 2 - 8;
+	if (g_abKeyPressed[K_UP])
+		gmmc = 0;
+	else if (g_abKeyPressed[K_DOWN])
+		gmmc = 1;
+	switch (gmmc)
+	{
+	case 0:
+		g_Console.writeToBuffer(c, Menu[0], 0x05);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], 0x03);
+		if (g_abKeyPressed[K_SPACE])
+		{
+			level = 1;
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 1:
+		g_Console.writeToBuffer(c, Menu[0], 0x03);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], 0x05);
+		if (g_abKeyPressed[K_SPACE])
+			g_bQuitGame = true;
+		break;
+	}
 }
 
 void renderSplashScreen()  // renders the splash screen
