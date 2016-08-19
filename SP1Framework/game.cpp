@@ -99,6 +99,7 @@ void getInput( void )
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_2] = isKeyPressed('2');
 	g_abKeyPressed[K_1] = isKeyPressed('1');
+	g_abKeyPressed[K_I] = isKeyPressed(0x49);
 }
 
 //--------------------------------------------------------------
@@ -155,6 +156,8 @@ void render()
 			break;
 		case S_TITLE: renderTitle();
 			break;
+		case S_INVENTORY: renderInventory();
+			break;
     }
 
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
@@ -172,6 +175,7 @@ void gameplay()            // gameplay logic
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
+
 }
 
 void moveCharacter()
@@ -310,14 +314,26 @@ void moveCharacter()
 void processUserInput()
 {
     // quits the game if player hits the escape key
-    if (g_abKeyPressed[K_ESCAPE])
-        g_bQuitGame = true;
+	if (g_abKeyPressed[K_ESCAPE])
+	{
+		g_bQuitGame = true;
+	}
+	if (g_abKeyPressed[K_I])
+	{
+		level = 7;
+		g_eGameState = S_LOADLEVEL;
+	}
 }
 
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
     g_Console.clearBuffer(0x0F);
+}
+
+void renderInventory()
+{
+	SetMap();
 }
 
 void renderMainMenu()
