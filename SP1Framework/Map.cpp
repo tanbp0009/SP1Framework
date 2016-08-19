@@ -32,11 +32,21 @@ void GetMap(std::string filelocation, int Inlevel)
 void SetMap()
 {
 	COORD setmapcoord;
+
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+			if (mapCurrent[setmapcoord.Y][setmapcoord.X] == 'ê')
+			{
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+			}
+			if (mapCurrent[setmapcoord.Y][setmapcoord.X] == '¾')
+			{
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0F);
+			}
+			else
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 		}
 	}
 }

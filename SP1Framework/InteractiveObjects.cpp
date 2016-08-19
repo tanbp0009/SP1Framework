@@ -60,6 +60,8 @@ void interactobjectinfront()
 			break;
 		case 'D': nextlevel(); // gameplay logic when we are in the game
 			break;
+		case 'ê': moveboulder(); // gameplay logic when we are in the game
+			break;
 		}
 	}
 }
@@ -159,5 +161,40 @@ void trap()
 	{
 		g_eGameState = S_LOSEGAME;
 	}
+}
 
+void moveboulder()
+{
+	if (g_sChar.playerdir == 'u')
+	{
+		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ')
+		{
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] = 'ê';
+		}
+	}
+	if (g_sChar.playerdir == 'd')
+	{
+		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' ')
+		{
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] = 'ê';
+		}
+	}
+	if (g_sChar.playerdir == 'l')
+	{
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ')
+		{
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] = 'ê';
+		}
+	}
+	if (g_sChar.playerdir == 'r')
+	{
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ')
+		{
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] = 'ê';
+		}
+	}
 }
