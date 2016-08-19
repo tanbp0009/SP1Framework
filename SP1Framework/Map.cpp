@@ -72,7 +72,7 @@ void loadLevel()
 		GetMap("config/Level2.txt", 2);
 		GetMap("config/Level3.txt", 3);
 		GetMap("config/Level4.txt", 4);
-		GetMap("config/Lose page.txt",9);
+		GetMap("config/Game_Over.txt",9);
 		GetMap("config/Main_Menu.txt", 0);
 		GetMap("config/Title_Game.txt", 8);
 		mapSaved = true;
@@ -88,6 +88,7 @@ void loadLevel()
 		if (level == 9)
 		{
 			GetSavedMap(level);
+			g_eGameState = S_GAMEOVER;
 		}
 		if (level == 0)
 		{
@@ -113,10 +114,4 @@ void GetSavedMap(int Inlevel)
 			mapCurrent[setmapcoord.Y][setmapcoord.X] = savemap[Inlevel][setmapcoord.Y][setmapcoord.X];
 		}
 	}
-}
-void losepage()
-{
-	level = 9;
-	loadLevel();
-	SetMap();
 }

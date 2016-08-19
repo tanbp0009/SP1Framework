@@ -159,7 +159,8 @@ void trap()
 	}
 	if (g_sChar.lives == 0)
 	{
-		g_eGameState = S_LOSEGAME;
+		level = 9;
+		g_eGameState = S_LOADLEVEL;
 	}
 }
 

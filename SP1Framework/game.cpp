@@ -11,6 +11,7 @@ char buttondir;
 bool mapSaved;
 int level;
 int gmmc;
+int ggoc;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -40,14 +41,21 @@ void init( void )
 	level = 8;
 	g_sChar.lives = 3;
 	gmmc = 0;
+	ggoc = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
     g_dBounceTime = 0.0;
 
     // sets the initial state for the game
-    g_eGameState = S_SPLASHSCREEN;
-
+	if (g_eGameState == S_GAMEOVER)
+	{
+		level = 1;
+	}
+	else
+	{
+		g_eGameState = S_SPLASHSCREEN;
+	}
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
@@ -141,7 +149,7 @@ void render()
             break;
 		case S_LOADLEVEL: loadLevel();
 			break;
-		case S_LOSEGAME: losepage();
+		case S_GAMEOVER: renderGameOver();
 			break;
 		case S_MAINMENU: renderMainMenu();
 			break;
@@ -350,6 +358,43 @@ void renderMainMenu()
 	}
 }
 
+void renderGameOver()
+{
+	std::string Menu[2] = { "Yes", "No" };
+	COORD c = g_Console.getConsoleSize();
+	SetMap();
+	c.Y = 16;
+	c.X = c.X / 2 - 11;
+	g_Console.writeToBuffer(c, "Press <Space> to Select:", 0x03);
+	c.X = c.X / 2 + 20;
+	c.Y += 2;
+	if (g_abKeyPressed[K_LEFT])
+		ggoc = 0;
+	else if (g_abKeyPressed[K_RIGHT])
+		ggoc = 1;
+	switch (ggoc)
+	{
+	case 0:
+		g_Console.writeToBuffer(c, Menu[0], 0x05);
+		c.X = c.X / 2 + 27;
+		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		if (g_abKeyPressed[K_SPACE])
+		{
+			init();
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 1:
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
+		c.X = c.X / 2 + 23;
+		g_Console.writeToBuffer(c, Menu[1], 0x05);
+		if (g_abKeyPressed[K_SPACE])
+			g_bQuitGame = true;
+		break;
+	}
+
+}
+
 void renderTitle()
 {
 	SetMap();
@@ -449,8 +494,4 @@ void renderToScreen()
 {
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
-}
-void losegame()
-{
-	g_eGameState = S_LOSEGAME;
 }

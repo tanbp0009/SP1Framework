@@ -30,7 +30,7 @@ enum EGAMESTATES
     S_GAME,
 	S_MAINMENU,
 	S_LOADLEVEL,
-	S_LOSEGAME,
+	S_GAMEOVER,
     S_COUNT
 };
 
@@ -65,4 +65,6 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 void losegame();
 void renderMainMenu();
 void renderTitle();
+void GameOver();
+void renderGameOver();
 #endif // _GAME_H
