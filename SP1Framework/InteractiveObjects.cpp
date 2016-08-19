@@ -198,3 +198,12 @@ void moveboulder()
 		}
 	}
 }
+bool ice()
+{
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '/')
+	{
+		return true;
+	}
+	else
+		return false;
+}

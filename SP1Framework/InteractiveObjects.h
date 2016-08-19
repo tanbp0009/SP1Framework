@@ -14,3 +14,4 @@ void something();
 void nextlevel();
 void trap();
 void moveboulder();
+bool ice();
