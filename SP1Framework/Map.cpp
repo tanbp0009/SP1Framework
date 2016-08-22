@@ -134,3 +134,19 @@ void preloadLevel()
 	GetMap("config/Title_Game.txt", 8);
 	GetMap("config/Inventory.txt", 7);
 }
+
+COORD GetCharCoord(char InChar)
+{
+	COORD getcoord;
+	for (getcoord.Y = 0; getcoord.Y < 25; getcoord.Y++)
+	{
+		for (getcoord.X = 0; getcoord.X < 80; getcoord.X++)
+		{
+			if (mapCurrent[getcoord.Y][getcoord.X] == InChar)
+			{
+				return getcoord;
+			}
+		}
+	}
+	return getcoord;
+}

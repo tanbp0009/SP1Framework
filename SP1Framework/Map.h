@@ -12,3 +12,4 @@ void loadLevel();
 void savelevel(int Inlevel);
 void GetSavedMap(int Inlevel);
 void preloadLevel();
+COORD GetCharCoord(char InChar);

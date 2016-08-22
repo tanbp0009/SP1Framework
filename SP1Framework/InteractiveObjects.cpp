@@ -55,33 +55,18 @@ void interactobjectinfront()
 	}
 }
 
-int a = 0;
-int b = 0;
+COORD doorcoord;
 void door()
 {
+	if (doorcoord.X == NULL)
+		doorcoord = GetCharCoord(')');
+	if (mapCurrent[doorcoord.Y][doorcoord.X] == ')')
 	{
-		int y;
-		int x;
-		for (y = 0; y < 25; y++)
-		{
-			for (x = 0; x < 80; x++)
-			{
-				if (mapCurrent[y][x] == ')')
-				{
-					a = x;
-					b = y;
-					break;
-				}
-			}
-		}
+		mapCurrent[doorcoord.Y][doorcoord.X] = ' ';
 	}
-	if (mapCurrent[b][a] == ')')
+	else if (mapCurrent[doorcoord.Y][doorcoord.X] == ' ')
 	{
-		mapCurrent[b][a] = ' ';
-	}
-	else if (mapCurrent[b][a] == ' ')
-	{
-		mapCurrent[b][a] = ')';
+		mapCurrent[doorcoord.Y][doorcoord.X] = ')';
 	}
 }
 
