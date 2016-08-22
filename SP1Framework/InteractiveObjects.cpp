@@ -107,6 +107,12 @@ void nextlevel()
 			level = 4;
 			g_eGameState = S_LOADLEVEL;
 		}
+		if (ObjectPosition.Y == 0)
+		{
+			g_sChar.m_cLocation.Y = 23;
+			level = 5;
+			g_eGameState = S_LOADLEVEL;
+		}
 		break;
 	case 3:
 		if (ObjectPosition.X == 0)
