@@ -98,6 +98,7 @@ void getInput( void )
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_2] = isKeyPressed('2');
 	g_abKeyPressed[K_1] = isKeyPressed('1');
+	g_abKeyPressed[K_I] = isKeyPressed(0x49);
 }
 
 //--------------------------------------------------------------
@@ -153,6 +154,8 @@ void render()
 		case S_MAINMENU: renderMainMenu();
 			break;
 		case S_TITLE: renderTitle();
+			break;
+		case S_INVENTORY: renderInventory();
 			break;
     }
 
@@ -310,13 +313,23 @@ void processUserInput()
 {
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
-        g_bQuitGame = true;
+		g_bQuitGame = true;
+	if (g_abKeyPressed[K_I])
+	{
+		level = 7;
+		g_eGameState = S_LOADLEVEL;
+	}
 }
 
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
     g_Console.clearBuffer(0x0F);
+}
+
+void renderInventory()
+{
+	SetMap();
 }
 
 void renderMainMenu()
