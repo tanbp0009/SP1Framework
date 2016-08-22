@@ -11,6 +11,7 @@ char buttondir;
 int level;
 int gmmc;
 int ggoc;
+int oldlevel;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -310,13 +311,32 @@ void moveCharacter()
 }
 void processUserInput()
 {
+	bool bSomethingHappened = false;
+	if (g_dBounceTime > g_dElapsedTime)
+		return;
+	
+	
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
 		g_bQuitGame = true;
-	if (g_abKeyPressed[K_I])
+	if (g_abKeyPressed[K_I] && level != 7)
 	{
+		oldlevel = level;
 		level = 7;
 		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_I])
+	{
+		level = oldlevel;
+		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+
+	if (bSomethingHappened)
+	{
+		// set the bounce time to some time in the future to prevent accidental triggers
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 	}
 }
 
@@ -328,8 +348,11 @@ void clearScreen()
 
 void renderInventory()
 {
+
 	SetMap();
 	renderFramerate();
+	processUserInput();
+	
 }
 
 void renderMainMenu()
