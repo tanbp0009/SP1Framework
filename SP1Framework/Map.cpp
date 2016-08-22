@@ -75,7 +75,6 @@ void loadLevel()
 		GetMap("config/Game_Over.txt",9);
 		GetMap("config/Main_Menu.txt", 0);
 		GetMap("config/Title_Game.txt", 8);
-		GetMap("config/Inventory.txt", 7);
 		mapSaved = true;
 	}
 
@@ -100,11 +99,6 @@ void loadLevel()
 		{
 			GetSavedMap(level);
 			g_eGameState = S_TITLE;
-		}
-		if (level == 7)
-		{
-			GetSavedMap(level);
-			g_eGameState = S_INVENTORY;
 		}
 	}
 

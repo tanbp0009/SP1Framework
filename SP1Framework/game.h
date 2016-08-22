@@ -19,7 +19,6 @@ enum EKEYS
     K_SPACE,
 	K_2,
 	K_1,
-	K_I,
     K_COUNT
 };
 
@@ -32,7 +31,6 @@ enum EGAMESTATES
 	S_MAINMENU,
 	S_LOADLEVEL,
 	S_GAMEOVER,
-	S_INVENTORY,
     S_COUNT
 };
 
@@ -69,5 +67,4 @@ void renderMainMenu();
 void renderTitle();
 void GameOver();
 void renderGameOver();
-void renderInventory();
 #endif // _GAME_H
