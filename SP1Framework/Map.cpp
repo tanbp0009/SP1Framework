@@ -51,13 +51,7 @@ void SetMap()
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
-			case '±':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
-				break;
-			case '²':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
-				break;
-			case '°':
+			case '±':case '²':case '°':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			default:
@@ -82,42 +76,26 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (mapSaved == false)
+	if (level == 1 || level == 2 || level == 3 || level == 4 || level == 5)
 	{
-		GetMap("config/level1.txt", 1);
-		GetMap("config/Level2.txt", 2);
-		GetMap("config/Level3.txt", 3);
-		GetMap("config/Level4.txt", 4);
-		GetMap("config/Game_Over.txt",9);
-		GetMap("config/Main_Menu.txt", 0);
-		GetMap("config/Title_Game.txt", 8);
-		mapSaved = true;
+		GetSavedMap(level);
+		g_eGameState = S_GAME;
 	}
-
-	//else
+	if (level == 9)
 	{
-		if (level == 1 || level == 2 || level == 3 || level == 4 || level == 5)
-		{
-			GetSavedMap(level);
-			g_eGameState = S_GAME;
-		}
-		if (level == 9)
-		{
-			GetSavedMap(level);
-			g_eGameState = S_GAMEOVER;
-		}
-		if (level == 0)
-		{
-			GetSavedMap(level);
-			g_eGameState = S_MAINMENU;
-		}
-		if (level == 8)
-		{
-			GetSavedMap(level);
-			g_eGameState = S_TITLE;
-		}
+		GetSavedMap(level);
+		g_eGameState = S_GAMEOVER;
 	}
-
+	if (level == 0)
+	{
+		GetSavedMap(level);
+		g_eGameState = S_MAINMENU;
+	}
+	if (level == 8)
+	{
+		GetSavedMap(level);
+		g_eGameState = S_TITLE;
+	}
 }
 
 void GetSavedMap(int Inlevel)
@@ -130,4 +108,15 @@ void GetSavedMap(int Inlevel)
 			mapCurrent[setmapcoord.Y][setmapcoord.X] = savemap[Inlevel][setmapcoord.Y][setmapcoord.X];
 		}
 	}
+}
+
+void preloadLevel()
+{
+	GetMap("config/level1.txt", 1);
+	GetMap("config/Level2.txt", 2);
+	GetMap("config/Level3.txt", 3);
+	GetMap("config/Level4.txt", 4);
+	GetMap("config/Game_Over.txt", 9);
+	GetMap("config/Main_Menu.txt", 0);
+	GetMap("config/Title_Game.txt", 8);
 }
