@@ -37,16 +37,17 @@ void SetMap()
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			if (mapCurrent[setmapcoord.Y][setmapcoord.X] == 'ê')
+			switch (mapCurrent[setmapcoord.Y][setmapcoord.X])
 			{
+			case 'ê':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
-			}
-			if (mapCurrent[setmapcoord.Y][setmapcoord.X] == '¾')
-			{
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0F);
-			}
-			else
+				break;
+			case 'Ÿ':
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
+				break;
+			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+			}
 		}
 	}
 }
