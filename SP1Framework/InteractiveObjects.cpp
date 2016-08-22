@@ -52,6 +52,8 @@ void interactobjectinfront()
 		break;
 	case 'ê': moveboulder(); // gameplay logic when we are in the game
 		break;
+	case 'Ÿ': keys(); // gameplay logic when we are in the game
+		break;
 	}
 }
 
@@ -188,9 +190,13 @@ bool ice()
 	else
 		return false;
 }
-int k = 0;
+int k;
 int keys()
 {
+	if (k == NULL)
+	{
+		k = 0;
+	}
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
 	{
 		k++;

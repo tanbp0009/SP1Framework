@@ -142,24 +142,23 @@ void update(double dt)
 void render()
 {
     clearScreen();      // clears the current screen and draw from scratch 
-    switch (g_eGameState)
-    {
-        case S_SPLASHSCREEN: renderSplashScreen();
-            break;
-        case S_GAME: renderGame();
-            break;
-		case S_LOADLEVEL: loadLevel();
-			break;
-		case S_GAMEOVER: renderGameOver();
-			break;
-		case S_MAINMENU: renderMainMenu();
-			break;
-		case S_TITLE: renderTitle();
-			break;
-		case S_INVENTORY: renderInventory();
-			break;
-    }
-                         // renders debug information, frame rate, elapsed time, etc
+	switch (g_eGameState)
+	{
+	case S_SPLASHSCREEN: renderSplashScreen();
+		break;
+	case S_GAME: renderGame();
+		break;
+	case S_LOADLEVEL: loadLevel();
+		break;
+	case S_GAMEOVER: renderGameOver();
+		break;
+	case S_MAINMENU: renderMainMenu();
+		break;
+	case S_TITLE: renderTitle();
+		break;
+	case S_INVENTORY: renderInventory();
+		break;
+	}
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
 
@@ -321,6 +320,7 @@ void processUserInput()
 		g_bQuitGame = true;
 	if (g_abKeyPressed[K_I] && level != 7)
 	{
+		savelevel(level);
 		oldlevel = level;
 		level = 7;
 		g_eGameState = S_LOADLEVEL;
