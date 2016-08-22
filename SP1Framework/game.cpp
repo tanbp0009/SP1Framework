@@ -334,7 +334,9 @@ void renderInventory()
 
 void renderMainMenu()
 {
-	std::string Menu[2] = { "Start Your Adventure", "Exit" };
+	std::string Menu[2] = { " Start Your Adventure ", " Exit " };
+	std::string up = { "<Start Your Adventure>" };
+	std::string down = { "<Exit>" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
 	c.Y = 16;
@@ -349,7 +351,7 @@ void renderMainMenu()
 	switch (gmmc)
 	{
 	case 0:
-		g_Console.writeToBuffer(c, Menu[0], 0x05);
+		g_Console.writeToBuffer(c, up, 0x06);
 		c.Y += 2;
 		c.X = c.X / 2 + 23;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
@@ -363,7 +365,7 @@ void renderMainMenu()
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 2;
 		c.X = c.X / 2 + 23;
-		g_Console.writeToBuffer(c, Menu[1], 0x05);
+		g_Console.writeToBuffer(c, down, 0x06);
 		if (g_abKeyPressed[K_SPACE])
 			g_bQuitGame = true;
 		break;
@@ -372,13 +374,15 @@ void renderMainMenu()
 
 void renderGameOver()
 {
-	std::string Menu[2] = { "Yes", "No" };
+	std::string Menu[2] = { " Yes ", " No " };
+	std::string no = { "<No>" };
+	std::string yes = { "<Yes>" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
 	c.Y = 16;
-	c.X = c.X / 2 - 11;
-	g_Console.writeToBuffer(c, "Press <Space> to Select:", 0x03);
-	c.X = c.X / 2 + 20;
+	c.X = c.X / 2 + 11;
+	g_Console.writeToBuffer(c, "Continue?", 0x03);
+	c.X = c.X / 2 + 25;
 	c.Y += 2;
 	if (g_abKeyPressed[K_LEFT])
 		ggoc = 0;
@@ -387,8 +391,8 @@ void renderGameOver()
 	switch (ggoc)
 	{
 	case 0:
-		g_Console.writeToBuffer(c, Menu[0], 0x05);
-		c.X = c.X / 2 + 27;
+		g_Console.writeToBuffer(c, yes, 0x06);
+		c.X = c.X / 2 + 32;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -398,8 +402,8 @@ void renderGameOver()
 		break;
 	case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
-		c.X = c.X / 2 + 23;
-		g_Console.writeToBuffer(c, Menu[1], 0x05);
+		c.X = c.X / 2 + 32;
+		g_Console.writeToBuffer(c, no, 0x06);
 		if (g_abKeyPressed[K_SPACE])
 			g_bQuitGame = true;
 		break;
@@ -425,10 +429,10 @@ void renderSplashScreen()  // renders the splash screen
     g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
     c.Y += 1;
     c.X = g_Console.getConsoleSize().X / 2 - 20;
-    g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
+    g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x07);
     c.Y += 1;
     c.X = g_Console.getConsoleSize().X / 2 - 9;
-    g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
+    g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x07);
 }
 
 void renderGame()
