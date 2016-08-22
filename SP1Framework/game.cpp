@@ -8,7 +8,6 @@
 #include <sstream>
 
 char buttondir;
-bool mapSaved;
 int level;
 int gmmc;
 int ggoc;
@@ -37,7 +36,6 @@ extern char mapCurrent[25][80];
 void init( void )
 {
 	buttondir = '^';
-	mapSaved = false;
 	level = 8;
 	g_sChar.lives = 3;
 	gmmc = 0;

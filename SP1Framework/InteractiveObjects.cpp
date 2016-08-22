@@ -3,66 +3,55 @@
 extern char mapCurrent[25][80];
 extern SGameChar g_sChar;
 extern int level;
-extern bool mapSaved;
 extern EGAMESTATES g_eGameState;
 
 char objectinfront;
 COORD ObjectPosition;
 
-bool PlayerFacingObject()
+char GetObjectChar()
 {
 	ObjectPosition.X = 0;
 	ObjectPosition.Y = 0;
-	objectinfront = ' ';
+	char ch;
 	if (g_sChar.playerdir == 'u' && mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y-1;
-		objectinfront = mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X];
-		return true;
+		return ch = mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X];
 	}
 	if (g_sChar.playerdir == 'd' && mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y + 1;
-		objectinfront = mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X];
-		return true;
+		return ch = mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X];
 	}
 	if (g_sChar.playerdir == 'l' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X-1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
-		objectinfront = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1];
-		return true;
+		return ch = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1];
 	}
 	if (g_sChar.playerdir == 'r' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X + 1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
-		objectinfront = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1];
-		return true;
-	}
-	else
-	{
-		return false;
+		return ch = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1];
 	}
 }
 
 void interactobjectinfront()
 {
-	if (PlayerFacingObject() == true)
+
+	switch (GetObjectChar())
 	{
-		switch (objectinfront)
-		{
-		case 'o': door(); // game logic for the splash screen
-			break;
-		case 'Û': something(); // gameplay logic when we are in the game
-			break;
-		case 'D': nextlevel(); // gameplay logic when we are in the game
-			break;
-		case 'ê': moveboulder(); // gameplay logic when we are in the game
-			break;
-		}
+	case 'o': door(); // game logic for the splash screen
+		break;
+	case 'Û': something(); // gameplay logic when we are in the game
+		break;
+	case 'D': nextlevel(); // gameplay logic when we are in the game
+		break;
+	case 'ê': moveboulder(); // gameplay logic when we are in the game
+		break;
 	}
 }
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-bool PlayerFacingObject();
+char GetObjectChar();
 void interactobjectinfront();
 
 void door();

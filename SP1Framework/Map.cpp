@@ -4,7 +4,6 @@
 // defined in game.cpp
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
-extern bool mapSaved;
 extern int level;
 char savemap[10][25][80];
 char mapCurrent[25][80];
@@ -71,7 +70,6 @@ void savelevel(int Inlevel)
 			savemap[Inlevel][setmapcoord.Y][setmapcoord.X] = mapCurrent[setmapcoord.Y][setmapcoord.X];
 		}
 	}
-	mapSaved = true;
 }
 
 void loadLevel()
