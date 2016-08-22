@@ -59,7 +59,7 @@ void init( void )
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
-    g_Console.setConsoleFont(0, 16, L"Consolas");
+    g_Console.setConsoleFont(0, 16, L"Ariel");
 	preloadLevel();
 }
 
@@ -119,9 +119,11 @@ void getInput( void )
 void update(double dt)
 {
     // get the delta time
-    g_dElapsedTime += dt;
-    g_dDeltaTime = dt;
-
+	if (g_eGameState != S_GAMEOVER)
+	{
+		g_dElapsedTime += dt;
+		g_dDeltaTime = dt;
+	}
     switch (g_eGameState)
     {
         case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
@@ -400,10 +402,15 @@ void renderGameOver()
 	std::string Menu[2] = { " Yes ", " No " };
 	std::string no = { "<No>" };
 	std::string yes = { "<Yes>" };
+	std::stringstream score;
+	score.str() = "";
+	score << "Score : " << g_dElapsedTime << 's';
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
-	c.Y = 16;
+	c.Y = 22;
 	c.X = c.X / 2 + 11;
+	g_Console.writeToBuffer(c, score.str(), 0x03);
+	c.Y = 16;
 	g_Console.writeToBuffer(c, "Continue?", 0x03);
 	c.X = c.X / 2 + 25;
 	c.Y += 2;
@@ -463,6 +470,7 @@ void renderGame()
     //renderMap();        // renders the map to the buffer first
 	SetMap();
     renderCharacter();  // renders the character into the buffer
+	renderLives();
 }
 
 void renderMap()
@@ -529,12 +537,6 @@ void renderFramerate()
 	c.Y = 7;
 	g_Console.writeToBuffer(c, ss.str());
 
-	ss.str("");
-	ss << std::fixed << std::setprecision(3);
-	ss << g_sChar.lives << "x lives";
-	c.X = g_Console.getConsoleSize().X - 44;
-	c.Y = 13;
-	g_Console.writeToBuffer(c, ss.str());
     // displays the elapsed time
     ss.str("");
     ss << "Elapsed time : " << g_dElapsedTime << "secs";
@@ -546,4 +548,19 @@ void renderToScreen()
 {
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
+}
+void renderLives()
+{
+	COORD c;
+	std::ostringstream ss;
+	ss.str("");
+	ss << std::fixed << std::setprecision(3);
+	ss << "Lives :";
+	for (int i = 0; i < g_sChar.lives; i++)
+	{
+		ss << " Û";
+	}
+	c.X = 0;
+	c.Y = 0;
+	g_Console.writeToBuffer(c, ss.str(), 0xA4);
 }

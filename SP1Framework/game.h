@@ -70,4 +70,5 @@ void renderTitle();
 void GameOver();
 void renderGameOver();
 void renderInventory();
+void renderLives();
 #endif // _GAME_H
