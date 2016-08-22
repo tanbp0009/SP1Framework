@@ -131,6 +131,13 @@ void nextlevel()
 			level = 2;
 			g_eGameState = S_LOADLEVEL;
 		}
+	case 5:
+		if (ObjectPosition.Y == 24)
+		{
+			g_sChar.m_cLocation.Y = 1;
+			level = 2;
+			g_eGameState = S_LOADLEVEL;
+		}
 	}
 }
 void trap()
