@@ -188,3 +188,17 @@ bool ice()
 	else
 		return false;
 }
+int k = 0;
+int keys()
+{
+	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
+	{
+		k++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+	}
+	if (g_sChar.lives == 0)
+	{
+		k = 0;
+	}
+	return k;
+}

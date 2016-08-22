@@ -158,8 +158,7 @@ void render()
 		case S_INVENTORY: renderInventory();
 			break;
     }
-
-    renderFramerate();  // renders debug information, frame rate, elapsed time, etc
+                         // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
 
@@ -330,6 +329,7 @@ void clearScreen()
 void renderInventory()
 {
 	SetMap();
+	renderFramerate();
 }
 
 void renderMainMenu()
@@ -495,16 +495,29 @@ void renderFramerate()
     std::ostringstream ss;
     ss << std::fixed << std::setprecision(3);
     ss << 1.0 / g_dDeltaTime << "fps";
-    c.X = g_Console.getConsoleSize().X - 9;
-    c.Y = 0;
+    c.X = g_Console.getConsoleSize().X - 10;
+    c.Y = 1;
     g_Console.writeToBuffer(c, ss.str());
 
+	ss.str("");
+	ss << std::fixed << std::setprecision(3);
+	ss << keys() << "x keys";
+	c.X = g_Console.getConsoleSize().X - 43;
+	c.Y = 7;
+	g_Console.writeToBuffer(c, ss.str());
+
+	ss.str("");
+	ss << std::fixed << std::setprecision(3);
+	ss << g_sChar.lives << "x lives";
+	c.X = g_Console.getConsoleSize().X - 44;
+	c.Y = 13;
+	g_Console.writeToBuffer(c, ss.str());
     // displays the elapsed time
     ss.str("");
-    ss << g_dElapsedTime << "secs";
-    c.X = 0;
-    c.Y = 0;
-    g_Console.writeToBuffer(c, ss.str(), 0x59);
+    ss << "Elapsed time : " << g_dElapsedTime << "secs";
+    c.X = 1;
+    c.Y = 1;
+    g_Console.writeToBuffer(c, ss.str());
 }
 void renderToScreen()
 {

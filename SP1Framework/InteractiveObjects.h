@@ -15,3 +15,4 @@ void nextlevel();
 void trap();
 void moveboulder();
 bool ice();
+int keys();
