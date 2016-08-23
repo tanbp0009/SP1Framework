@@ -5,6 +5,7 @@ extern SGameChar g_sChar;
 extern int level;
 extern EGAMESTATES g_eGameState;
 
+int key;
 char objectinfront;
 COORD ObjectPosition;
 
@@ -197,21 +198,12 @@ bool ice()
 	else
 		return false;
 }
-int k;
 int keys()
 {
-	if (k == NULL)
-	{
-		k = 0;
-	}
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
 	{
-		k++;
+		key++;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 	}
-	if (g_sChar.lives == 0)
-	{
-		k = 0;
-	}
-	return k;
+	return key;
 }

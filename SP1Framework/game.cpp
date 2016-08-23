@@ -26,6 +26,7 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 Console g_Console(80, 25, "SP1 Framework");
 
 extern char mapCurrent[25][80];
+extern int key;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -41,6 +42,7 @@ void init( void )
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
+	key = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
