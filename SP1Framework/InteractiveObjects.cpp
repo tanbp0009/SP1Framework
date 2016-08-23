@@ -87,7 +87,7 @@ void nextlevel()
 		if (ObjectPosition.X == 79)
 		{
 			g_sChar.m_cLocation.X = 1;
-			level = 2;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
@@ -95,25 +95,25 @@ void nextlevel()
 		if (ObjectPosition.X == 0)
 		{
 			g_sChar.m_cLocation.X = 78;
-			level = 1;
+			level = 14;
 			g_eGameState = S_LOADLEVEL;
 		}
 		if (ObjectPosition.X == 79)
 		{
 			g_sChar.m_cLocation.X = 1;
-			level = 3;
+			level = 16;
 			g_eGameState = S_LOADLEVEL;
 		}
 		if (ObjectPosition.Y == 24)
 		{
 			g_sChar.m_cLocation.Y = 1;
-			level = 4;
+			level = 17;
 			g_eGameState = S_LOADLEVEL;
 		}
 		if (ObjectPosition.Y == 0)
 		{
 			g_sChar.m_cLocation.Y = 23;
-			level = 5;
+			level = 18;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
@@ -121,7 +121,7 @@ void nextlevel()
 		if (ObjectPosition.X == 0)
 		{
 			g_sChar.m_cLocation.X = 78;
-			level = 2;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
@@ -129,14 +129,14 @@ void nextlevel()
 		if (ObjectPosition.Y == 0)
 		{
 			g_sChar.m_cLocation.Y = 23;
-			level = 2;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 	case 5:
 		if (ObjectPosition.Y == 24)
 		{
 			g_sChar.m_cLocation.Y = 1;
-			level = 2;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 	}
@@ -149,7 +149,7 @@ void trap()
 	}
 	if (g_sChar.lives == 0)
 	{
-		level = 9;
+		level = 19;
 		g_eGameState = S_LOADLEVEL;
 	}
 }

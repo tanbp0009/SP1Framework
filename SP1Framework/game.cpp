@@ -38,7 +38,7 @@ extern int key;
 void init( void )
 {
 	buttondir = '^';
-	level = 8;
+	level = 0;
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
@@ -51,7 +51,7 @@ void init( void )
     // sets the initial state for the game
 	if (g_eGameState == S_GAMEOVER)
 	{
-		level = 1;
+		level = 14;
 	}
 	else
 	{
@@ -61,7 +61,7 @@ void init( void )
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
-    g_Console.setConsoleFont(0, 16, L"Ariel");
+    g_Console.setConsoleFont(0, 18, L"Raster");
 	preloadLevel();
 }
 
@@ -274,11 +274,11 @@ void processUserInput()
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
 		g_bQuitGame = true;
-	if (g_abKeyPressed[K_I] && level != 7)
+	if (g_abKeyPressed[K_I] && level != 2)
 	{
 		savelevel(level);
 		oldlevel = level;
-		level = 7;
+		level = 2;
 		g_eGameState = S_LOADLEVEL;
 		bSomethingHappened = true;
 	}
@@ -336,7 +336,7 @@ void renderMainMenu()
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
-			level = 1;
+			level = 14;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
@@ -400,7 +400,7 @@ void renderTitle()
 	SetMap();
 	if (g_dElapsedTime > 6.0) // wait for 3 seconds to switch to game mode, else do nothing
 	{
-		level = 0;
+		level = 1;
 		g_eGameState = S_LOADLEVEL;
 	}
 }
@@ -516,5 +516,5 @@ void renderLives()
 	}
 	c.X = 0;
 	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str(), 0xA4);
+	g_Console.writeToBuffer(c, ss.str(), 0x84);
 }

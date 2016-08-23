@@ -5,7 +5,7 @@
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 extern int level;
-char savemap[10][25][80];
+char savemap[20][25][80];
 char mapCurrent[25][80];
 
 void GetMap(std::string filelocation, int Inlevel)
@@ -38,6 +38,9 @@ void SetMap()
 		{
 			switch (mapCurrent[setmapcoord.Y][setmapcoord.X])
 			{
+			case '#':
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
+				break;
 			case 'ê':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
@@ -48,13 +51,16 @@ void SetMap()
 				if (level == 8)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x08);
 				break;
 			case '±':case '²':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case '°':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x03);
+				if (level == 3)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x03);
+				else
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case',':case'.':case'-':case'"':case'_':case'\\':case'=':case'|':case'/':case'l':case'\'':case'O':
 				if (level == 9)
@@ -62,8 +68,20 @@ void SetMap()
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
-			case '(':case ')': case 'o': case '%': case '*': case '^':
+			case '(': case '%': case '*': case '^':
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				break;
+			case ')':
+				if (level == 0 || level == 9)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				break;
+			case 'o':
+				if (level == 9 || level == 0)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
@@ -86,27 +104,27 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 1 || level == 2 || level == 3 || level == 4 || level == 5)
+	if (level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
 	}
-	if (level == 9)
+	if (level == 19)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAMEOVER;
 	}
-	if (level == 0)
+	if (level == 1)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_MAINMENU;
 	}
-	if (level == 8)
+	if (level == 0)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_TITLE;
 	}
-	if (level == 7)
+	if (level == 2)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_INVENTORY;
@@ -128,15 +146,15 @@ void GetSavedMap(int Inlevel)
 
 void preloadLevel()
 {
-	GetMap("config/level1.txt", 1);
-	GetMap("config/Level2.txt", 2);
-	GetMap("config/Level3.txt", 3);
-	GetMap("config/Level4.txt", 4);
-	GetMap("config/VaultRoom.txt", 5);
-	GetMap("config/Game_Over.txt", 9);
-	GetMap("config/Main_Menu.txt", 0);
-	GetMap("config/Title_Game.txt", 8);
-	GetMap("config/Inventory.txt", 7);
+	GetMap("config/Title_Game.txt", 0);
+	GetMap("config/Main_Menu.txt", 1);
+	GetMap("config/Inventory.txt", 2);
+	GetMap("config/Vault_Key_1.txt", 14);
+	GetMap("config/Vault_Connect.txt", 15);
+	GetMap("config/Vault_Key_3.txt", 16);
+	GetMap("config/Vault_Key_4.txt", 17);
+	GetMap("config/Vault_Room.txt", 18);
+	GetMap("config/Game_Over.txt", 19);
 }
 
 COORD GetCharCoord(char InChar)
