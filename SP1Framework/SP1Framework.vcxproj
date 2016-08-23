@@ -83,6 +83,7 @@
     <ClCompile Include="InteractiveObjects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="SaveFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="InteractiveObjects.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="SaveFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
