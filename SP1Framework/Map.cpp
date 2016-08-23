@@ -48,7 +48,7 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
 				break;
 			case 'Û':
-				if (level == 8)
+				if (level == 0)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x08);
@@ -57,13 +57,13 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case '°':
-				if (level == 3)
+				if (level == 16)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x03);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case',':case'.':case'-':case'"':case'_':case'\\':case'=':case'|':case'/':case'l':case'\'':case'O':
-				if (level == 9)
+				if (level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
@@ -72,13 +72,13 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
 			case ')':
-				if (level == 0 || level == 9)
+				if (level == 1 || level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			case 'o':
-				if (level == 9 || level == 0)
+				if (level == 19 || level == 1)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
@@ -151,8 +151,8 @@ void preloadLevel()
 	GetMap("config/Inventory.txt", 2);
 	GetMap("config/Vault_Key_1.txt", 14);
 	GetMap("config/Vault_Connect.txt", 15);
-	GetMap("config/Vault_Key_3.txt", 16);
-	GetMap("config/Vault_Key_4.txt", 17);
+	GetMap("config/Vault_Key_2.txt", 16);
+	GetMap("config/Vault_Key_3.txt", 17);
 	GetMap("config/Vault_Room.txt", 18);
 	GetMap("config/Game_Over.txt", 19);
 }

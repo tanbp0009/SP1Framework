@@ -83,7 +83,7 @@ void nextlevel()
 	savelevel(level);
 	switch (level)
 	{
-	case 1:
+	case 14:
 		if (ObjectPosition.X == 79)
 		{
 			g_sChar.m_cLocation.X = 1;
@@ -91,7 +91,7 @@ void nextlevel()
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-	case 2:
+	case 15:
 		if (ObjectPosition.X == 0)
 		{
 			g_sChar.m_cLocation.X = 78;
@@ -117,7 +117,7 @@ void nextlevel()
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-	case 3:
+	case 16:
 		if (ObjectPosition.X == 0)
 		{
 			g_sChar.m_cLocation.X = 78;
@@ -125,14 +125,14 @@ void nextlevel()
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-	case 4:
+	case 17:
 		if (ObjectPosition.Y == 0)
 		{
 			g_sChar.m_cLocation.Y = 23;
 			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
-	case 5:
+	case 18:
 		if (ObjectPosition.Y == 24)
 		{
 			g_sChar.m_cLocation.Y = 1;
