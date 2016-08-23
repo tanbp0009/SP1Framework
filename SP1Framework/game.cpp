@@ -193,21 +193,9 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == 'K')
 		{
 			//Beep(1440, 30);
+			ice_check();
 			ice();
-			if (ice() == true)
-			{
-				while (ice() == true)
-				{
-					g_sChar.m_cLocation.Y--;
-					trap();
-					bSomethingHappened = true;
-					if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '/')
-					{
-						break;
-					}
-				}
-			}
-			else if (ice() == false)
+			if (ice_check() == false)
 			{
 					g_sChar.m_cLocation.Y--;
 					trap();
@@ -221,21 +209,9 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '/' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == 'K')
 		{
 			//Beep(1440, 30);
+			ice_check();
 			ice();
-			if (ice() == true)
-			{
-				while (ice() == true)
-				{
-					g_sChar.m_cLocation.X--;
-					trap();
-					bSomethingHappened = true;
-					if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '/')
-					{
-						break;
-					}
-				}
-			}
-			else if (ice() == false)
+			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X--;
 				trap();
@@ -249,21 +225,9 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '/')
 		{
 			//Beep(1440, 30);
+			ice_check();
 			ice();
-			if (ice() == true)
-			{
-				while (ice() == true)
-				{
-					g_sChar.m_cLocation.Y++;
-					trap();
-					bSomethingHappened = true;
-					if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '/')
-					{
-						break;
-					}
-				}
-			}
-			else if (ice() == false)
+			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.Y++;
 				trap();
@@ -278,21 +242,9 @@ void moveCharacter()
 		{
 			//Beep(1440, 30);
 			
+			ice_check();
 			ice();
-			if (ice() == true)
-			{
-				while (ice() == true)
-				{
-					g_sChar.m_cLocation.X++;
-					trap();
-					bSomethingHappened = true;
-					if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '/')
-					{
-						break;
-					}
-				}
-			}
-			else if (ice() == false)
+			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X++;
 				trap();
