@@ -193,13 +193,13 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°')
 		{
 			//Beep(1440, 30);
-			ice_check();
 			if (ice_check() == false)
 			{
 					g_sChar.m_cLocation.Y--;
 					trap();
 			}
-			ice();
+			else
+				ice();
 			bSomethingHappened = true;
 		}
     }
@@ -209,13 +209,13 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°')
 		{
 			//Beep(1440, 30);
-			ice_check();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X--;
 				trap();
 			}
-			ice();
+			else
+				ice();
 			bSomethingHappened = true;
 		}
     }
@@ -225,13 +225,13 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°')
 		{
 			//Beep(1440, 30);
-			ice_check();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.Y++;
 				trap();
 			}
-			ice();
+			else
+				ice();
 			bSomethingHappened = true;
 		}
     }
@@ -241,14 +241,13 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°')
 		{
 			//Beep(1440, 30);
-			
-			ice_check();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X++;
 				trap();
 			}
-			ice();
+			else
+				ice();
 			bSomethingHappened = true;
 		}
     }

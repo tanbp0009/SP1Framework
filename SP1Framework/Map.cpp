@@ -110,6 +110,7 @@ void savelevel(int Inlevel)
 		break;
 	case 15:
 		filelocation = "save/Vault_Connect.txt";
+		break;
 	case 16:
 		filelocation = "save/Vault_Key_2.txt";
 		break;
@@ -169,14 +170,53 @@ void loadLevel()
 	}
 }
 
-void GetSavedMap(int Inlevel)
+void GetSavedMap(int Inlevel)	
 {
 	COORD setmapcoord;
-	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
+	std::string filelocation;
+	switch (Inlevel)
 	{
-		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
+	case 0:
+		filelocation = "config/Title_Game.txt";
+		break;
+	case 1:
+		filelocation = "config/Main_Menu.txt";
+		break;
+	case 2:
+		filelocation = "config/Inventory.txt";
+		break;
+	case 14:
+		filelocation = "save/Vault_Key_1.txt";
+		break;
+	case 15:
+		filelocation = "save/Vault_Connect.txt";
+		break;
+	case 16:
+		filelocation = "save/Vault_Key_2.txt";
+		break;
+	case 17:
+		filelocation = "save/Vault_Key_3.txt";
+		break;
+	case 18:
+		filelocation = "save/Vault_Room.txt";
+		break;
+	case 19:
+		filelocation = "config/Game_Over.txt";
+		break;
+	}
+	char ch;
+	int row = 0;
+	int col = 0;
+
+	std::fstream fin(filelocation, std::fstream::in);
+	while (fin >> std::noskipws >> ch)
+	{
+		mapCurrent[row][col] = ch;
+		col++;
+		if (col == 81)
 		{
-			mapCurrent[setmapcoord.Y][setmapcoord.X] = savemap[Inlevel][setmapcoord.Y][setmapcoord.X];
+			col = 0;
+			row++;
 		}
 	}
 }
