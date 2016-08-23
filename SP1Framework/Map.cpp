@@ -8,7 +8,6 @@ extern SGameChar g_sChar;
 extern int level;
 char savemap[20][25][80];
 char mapCurrent[25][80];
-char mapCurrent2[25][80];
 char fogmap[20][25][80];
 char fogmap2[20][25][80];
 
@@ -36,6 +35,7 @@ void SetMap()
 {
 	loadLevel();
 	COORD setmapcoord;
+	memset(fogmap2, ' ', sizeof(fogmap2[0][0][0]) * (25 * 80));
 
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
 	{
@@ -44,52 +44,52 @@ void SetMap()
 			switch (mapCurrent[setmapcoord.Y][setmapcoord.X])
 			{
 			case '#':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x04);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case 'ê':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x06);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
 			case 'Ÿ':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x0E);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
 				break;
 			case 'Û':
 				if (level == 0)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x04);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x08);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x08);
 				break;
 			case '±':case '²':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x04);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case '°':
 				if (level == 16)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x03);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x03);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x04);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
 			case',':case'.':case'-':case'"':case'_':case'\\':case'=':case'|':case'/':case'l':case'\'':case'O':
 				if (level == 19)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x04);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x0A);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			case '(': case '%': case '*': case '^':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x06);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
 			case ')':
 				if (level == 1 || level == 19)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x06);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x0A);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			case 'o':
 				if (level == 19 || level == 1)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x06);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
-					g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x0A);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			default:
-				g_Console.writeToBuffer(setmapcoord, mapCurrent2[setmapcoord.Y][setmapcoord.X], 0x0A);
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 			}
 		}
 	}
@@ -147,16 +147,16 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 14 || /*level == 15 || */level == 16 || level == 17 || level == 18)
+	if (/*level == 14 || level == 15 || */level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
 	}
-	/*if (level == 15)
+	if (level == 14 || level == 15)
 	{
 		GetFogMap(level);
 		g_eGameState = S_GAME;
-	}*/
+	}
 	if (level == 19)
 	{
 		GetSavedMap(level);
@@ -195,7 +195,7 @@ void GetFogMap(int Inlevel)
 	{
 		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
 		{
-			mapCurrent2[setmapcoord.Y][setmapcoord.X] = fogmap[Inlevel][setmapcoord.Y][setmapcoord.X];
+			mapCurrent[setmapcoord.Y][setmapcoord.X] = fogmap[Inlevel][setmapcoord.Y][setmapcoord.X];
 		}
 	}
 }
