@@ -191,7 +191,7 @@ void moveboulder()
 }
 bool ice_check()
 {
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
 	{
 		return true;
 	}
@@ -211,10 +211,13 @@ void ice_up()
 {
 	while (ice_check() == true)
 	{
-		g_sChar.m_cLocation.Y--;
-		trap();
-		ice_check();
-		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '°')
+		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#')
+		{
+			g_sChar.m_cLocation.Y--;
+			trap();
+			ice_check();
+		}
+		else
 		{
 			break;
 		}
@@ -224,23 +227,29 @@ void ice_down()
 {
 	while (ice_check() == true)
 	{
-		g_sChar.m_cLocation.Y++;
-		trap();
-		ice_check();
-		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '°')
+		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#')
+		{
+			g_sChar.m_cLocation.Y++;
+			trap();
+			ice_check();
+		}
+		else
 		{
 			break;
 		}
-	}
+	};
 }
 void ice_left()
 {
 	while (ice_check() == true)
 	{
-		g_sChar.m_cLocation.X--;
-		trap();
-		ice_check();
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '°')
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#')
+		{
+			g_sChar.m_cLocation.X--;
+			trap();
+			ice_check();
+		}
+		else
 		{
 			break;
 		}
@@ -250,10 +259,13 @@ void ice_right()
 {
 	while (ice_check() == true)
 	{
-		g_sChar.m_cLocation.X++;
-		trap();
-		ice_check();
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '°')
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#')
+		{
+			g_sChar.m_cLocation.X++;
+			trap();
+			ice_check();
+		}
+		else
 		{
 			break;
 		}
