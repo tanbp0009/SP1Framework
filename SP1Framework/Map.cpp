@@ -92,13 +92,50 @@ void SetMap()
 
 void savelevel(int Inlevel)
 {
-	COORD setmapcoord;
-	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
+	std::string filelocation;
+
+	switch (Inlevel)
 	{
-		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
+	case 0:
+		filelocation = "save/Title_Game.txt";
+		break;
+	case 1:
+		filelocation = "save/Main_Menu.txt";
+		break;
+	case 2:
+		filelocation = "save/Inventory.txt";
+		break;
+	case 14:
+		filelocation = "save/Vault_Key_1.txt";
+		break;
+	case 15:
+		filelocation = "save/Vault_Connect.txt";
+	case 16:
+		filelocation = "save/Vault_Key_2.txt";
+		break;
+	case 17:
+		filelocation = "save/Vault_Key_3.txt";
+		break;
+	case 18:
+		filelocation = "save/Vault_Room.txt";
+		break;
+	case 19:
+		filelocation = "save/Game_Over.txt";
+		break;
+	}
+
+	std::ofstream myfile(filelocation);
+	if (myfile.is_open())
+	{
+		for (int i = 0; i < 25; i++)
 		{
-			savemap[Inlevel][setmapcoord.Y][setmapcoord.X] = mapCurrent[setmapcoord.Y][setmapcoord.X];
+			for (int j = 0; j < 80; j++)
+			{
+				myfile << mapCurrent[i][j];
+			}
+			myfile << "\n";
 		}
+		myfile.close();
 	}
 }
 
