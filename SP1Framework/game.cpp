@@ -194,12 +194,12 @@ void moveCharacter()
 		{
 			//Beep(1440, 30);
 			ice_check();
-			ice();
 			if (ice_check() == false)
 			{
 					g_sChar.m_cLocation.Y--;
 					trap();
 			}
+			ice();
 			bSomethingHappened = true;
 		}
     }
@@ -210,12 +210,12 @@ void moveCharacter()
 		{
 			//Beep(1440, 30);
 			ice_check();
-			ice();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X--;
 				trap();
 			}
+			ice();
 			bSomethingHappened = true;
 		}
     }
@@ -226,12 +226,12 @@ void moveCharacter()
 		{
 			//Beep(1440, 30);
 			ice_check();
-			ice();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.Y++;
 				trap();
 			}
+			ice();
 			bSomethingHappened = true;
 		}
     }
@@ -243,12 +243,12 @@ void moveCharacter()
 			//Beep(1440, 30);
 			
 			ice_check();
-			ice();
 			if (ice_check() == false)
 			{
 				g_sChar.m_cLocation.X++;
 				trap();
 			}
+			ice();
 			bSomethingHappened = true;
 		}
     }

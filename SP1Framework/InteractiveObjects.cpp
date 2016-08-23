@@ -213,6 +213,7 @@ void ice_up()
 	{
 		g_sChar.m_cLocation.Y--;
 		trap();
+		ice_check();
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '°')
 		{
 			break;
@@ -225,6 +226,7 @@ void ice_down()
 	{
 		g_sChar.m_cLocation.Y++;
 		trap();
+		ice_check();
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '°')
 		{
 			break;
@@ -237,6 +239,7 @@ void ice_left()
 	{
 		g_sChar.m_cLocation.X--;
 		trap();
+		ice_check();
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '°')
 		{
 			break;
@@ -249,6 +252,7 @@ void ice_right()
 	{
 		g_sChar.m_cLocation.X++;
 		trap();
+		ice_check();
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '°')
 		{
 			break;
