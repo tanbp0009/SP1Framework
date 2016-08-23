@@ -9,7 +9,7 @@
 
 char buttondir;
 int level;
-int gmmc;
+int gmmc = 0;
 int ggoc;
 int oldlevel;
 
@@ -269,7 +269,6 @@ void processUserInput()
 	if (g_dBounceTime > g_dElapsedTime)
 		return;
 	
-	
     // quits the game if player hits the escape key
     if (g_abKeyPressed[K_ESCAPE])
 		g_bQuitGame = true;
@@ -312,8 +311,10 @@ void renderInventory()
 
 void renderMainMenu()
 {
-	std::string Menu[2] = { " Start Your Adventure ", " Exit " };
-	std::string up = { "<Start Your Adventure>" };
+	bool bSomethingHappened = false;
+	std::string Menu[3] = { " Start New Adventure ", " Continue Old Adventure " , " Exit " };
+	std::string up = { "<Start New Adventure>" };
+	std::string center = { "<Continue Old Adventure>" };
 	std::string down = { "<Exit>" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
@@ -322,31 +323,102 @@ void renderMainMenu()
 	g_Console.writeToBuffer(c, "Press <Space> to Select:", 0x03);
 	c.X = c.X / 2 + 16;
 	c.Y += 2;
-	if (g_abKeyPressed[K_UP])
-		gmmc = 0;
-	else if (g_abKeyPressed[K_DOWN])
-		gmmc = 1;
+
 	switch (gmmc)
 	{
 	case 0:
 		g_Console.writeToBuffer(c, up, 0x06);
-		c.Y += 2;
-		c.X = c.X / 2 + 23;
+		c.Y += 1;
+		c.X = c.X / 2 + 13;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 22;
+		g_Console.writeToBuffer(c, Menu[2], 0x07);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
+		if (g_abKeyPressed[K_UP])
+		{
+			bSomethingHappened = true;
+			gmmc = 0;
+		}
+		if (g_abKeyPressed[K_DOWN])
+		{
+			bSomethingHappened = true;
+			gmmc = 1;
+		}
 		if (g_abKeyPressed[K_SPACE])
 		{
+			bSomethingHappened = true;
 			level = 14;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-	case 1:
+		case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
-		c.Y += 2;
-		c.X = c.X / 2 + 23;
-		g_Console.writeToBuffer(c, down, 0x06);
+		c.Y += 1;
+		c.X = c.X / 2 + 13;
+		g_Console.writeToBuffer(c, center, 0x06);
+		c.Y += 1;
+		c.X = c.X / 2 + 22;
+		g_Console.writeToBuffer(c, Menu[2], 0x07);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
+		if (g_abKeyPressed[K_UP])
+		{
+			bSomethingHappened = true;
+			gmmc = 0;
+		}
+		if (g_abKeyPressed[K_DOWN])
+		{
+			bSomethingHappened = true;
+			gmmc = 2;
+		}
 		if (g_abKeyPressed[K_SPACE])
-			g_bQuitGame = true;
+		{
+			bSomethingHappened = true;
+			level = 14;
+			g_eGameState = S_LOADLEVEL;
+		}
 		break;
+		case 2:
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 13;
+		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 22;
+		g_Console.writeToBuffer(c, down, 0x06);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
+		if (g_abKeyPressed[K_UP])
+		{
+			bSomethingHappened = true;
+			gmmc = 1;
+		}
+		if (g_abKeyPressed[K_DOWN])
+		{
+			bSomethingHappened = true;
+			gmmc = 2;
+		}
+		if (g_abKeyPressed[K_SPACE])
+		{
+			bSomethingHappened = true;
+			g_bQuitGame = true;
+		}
+		break;
+	}
+
+	if (bSomethingHappened)
+	{
+		// set the bounce time to some time in the future to prevent accidental triggers
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+		//bSomethingHappened = false;
 	}
 }
 

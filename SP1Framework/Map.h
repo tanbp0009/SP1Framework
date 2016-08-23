@@ -10,6 +10,7 @@ void GetMap(std::string filelocation, int Inlevel);
 void SetMap();
 void loadLevel();
 void savelevel(int Inlevel);
+void GetFogMap(int Inlevel);
 void GetSavedMap(int Inlevel);
 void preloadLevel();
 COORD GetCharCoord(char InChar);
