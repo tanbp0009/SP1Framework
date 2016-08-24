@@ -7,32 +7,36 @@ extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
 extern int level;
+extern int gmmc;
 char savemap[20][25][80];
 char mapCurrent[25][80];
 
-void GetMap(std::string filelocation, int Inlevel)
+void GetNewMap(std::string filelocation)
 {
-	char ch;
-	int row = 0;
-	int col = 0;
+	std::string fileaffix = "config/";
+	fileaffix += filelocation;
+	std::ifstream infile(fileaffix);
+	fileaffix = "save/";
+	fileaffix += filelocation;
+	std::ofstream outfile(fileaffix);
+	std::string content = "";
+	int i;
 
-	std::fstream fin(filelocation, std::fstream::in);
-	while (fin >> std::noskipws >> ch)
-	{
-		savemap[Inlevel][row][col] = ch;
-		//	g_Console.writeToBuffer(v, ch, 0x0A);
-		col++;
-		if (col == 81)
-		{
-			col = 0;
-			row++;
-		}
-	}
+	for (i = 0; infile.eof() != true; i++) // get content of infile
+		content += infile.get();
+
+	i--;
+	content.erase(content.end() - 1);     // erase last character
+
+	infile.close();
+
+	outfile << content;                 // output
+	outfile.close();
 }
 
 void SetMap()
 {
-	loadLevel();
+	//loadLevel();
 	COORD setmapcoord;
 
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
@@ -145,16 +149,16 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (/*level == 14 || level == 15 || */level == 16 || level == 17 || level == 18)
+	if (level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
 	}
-	if (level == 14 || level == 15)
-	{
-		GetFogMap(level);
-		g_eGameState = S_GAME;
-	}
+	//if (level == 14 || level == 15)
+	//{
+	//	GetFogMap(level);
+	//	g_eGameState = S_GAME;
+	//}
 	if (level == 19)
 	{
 		GetSavedMap(level);
@@ -228,17 +232,18 @@ void GetSavedMap(int Inlevel)
 	}
 }
 
-void preloadLevel()
+void NewLevel()
 {
-	GetMap("config/Title_Game.txt", 0);
-	GetMap("config/Main_Menu.txt", 1);
-	GetMap("config/Inventory.txt", 2);
-	GetMap("config/Vault_Key_1.txt", 14);
-	GetMap("config/Vault_Connect.txt", 15);
-	GetMap("config/Vault_Key_2.txt", 16);
-	GetMap("config/Vault_Key_3.txt", 17);
-	GetMap("config/Vault_Room.txt", 18);
-	GetMap("config/Game_Over.txt", 19);
+	GetNewMap("Title_Game.txt");
+	GetNewMap("Main_Menu.txt");
+	GetNewMap("Inventory.txt");
+	GetNewMap("Vault_Key_1.txt");
+	GetNewMap("Vault_Connect.txt");
+	GetNewMap("Vault_Key_2.txt");
+	GetNewMap("Vault_Key_3.txt");
+	GetNewMap("Vault_Room.txt");
+	GetNewMap("Game_Over.txt");
+
 }
 
 COORD GetCharCoord(char InChar)

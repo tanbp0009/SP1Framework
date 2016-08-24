@@ -62,7 +62,6 @@ void init( void )
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 18, L"Raster");
-	preloadLevel();
 }
 
 //--------------------------------------------------------------
@@ -350,6 +349,7 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
+			NewLevel();
 			bSomethingHappened = true;
 			level = 14;
 			g_eGameState = S_LOADLEVEL;
@@ -464,6 +464,7 @@ void renderGameOver()
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
+			NewLevel();
 			init();
 			g_eGameState = S_LOADLEVEL;
 		}

@@ -6,10 +6,10 @@
 #include <string>
 #include <vector>
 
-void GetMap(std::string filelocation, int Inlevel);
+void GetNewMap(std::string filelocation);
 void SetMap();
 void loadLevel();
 void savelevel(int Inlevel);
 void GetSavedMap(int Inlevel);
-void preloadLevel();
+void NewLevel();
 COORD GetCharCoord(char InChar);
