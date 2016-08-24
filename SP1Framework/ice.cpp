@@ -11,12 +11,15 @@ void ice_up()
 		trap();
 		fallingfloor();
 		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#')
+		{
+			g_sChar.m_cLocation.Y--;
+			trap();
+			fallingfloor();
+		}
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '°')
 		{
-			if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '#')
-			{
-				break;
-			}
+			break;
 		}
 	};
 }
@@ -28,12 +31,15 @@ void ice_down()
 		trap();
 		fallingfloor();
 		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#')
+		{
+			g_sChar.m_cLocation.Y++;
+			trap();
+			fallingfloor();
+		}
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '°')
 		{
-			if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '#')
-			{
-				break;
-			}
+			break;
 		}
 	}
 }
@@ -45,12 +51,15 @@ void ice_left()
 		trap();
 		fallingfloor();
 		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#')
+		{
+			g_sChar.m_cLocation.X--;
+			trap();
+			fallingfloor();
+		}
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '°')
 		{
-			if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '#')
-			{
-				break;
-			}
+			break;
 		}
 	}
 }
@@ -62,12 +71,15 @@ void ice_right()
 		trap();
 		fallingfloor();
 		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#')
+		{
+			g_sChar.m_cLocation.X++;
+			trap();
+			fallingfloor();
+		}
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '°')
 		{
-			if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '#')
-			{
-				break;
-			}
+			break;
 		}
 	}
 }

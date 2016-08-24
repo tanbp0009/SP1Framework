@@ -17,3 +17,4 @@ void moveboulder();
 bool ice_check();
 void keys();
 void teletospawn();
+void healthpack();

@@ -57,6 +57,8 @@ void interactobjectinfront()
 		break;
 	case 'è': teletospawn(); // gameplay logic when we are in the game
 		break;
+	case '¤': healthpack(); // gameplay logic when we are in the game
+		break;
 	}
 }
 
@@ -197,13 +199,16 @@ void moveboulder()
 
 bool ice_check()
 {
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] != ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] != ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] != ' ' || mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] != ' ')
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
 	{
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
+
 void keys()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
@@ -222,4 +227,15 @@ void teletospawn()
 	saveChar(g_sChar);
 	level = 15;
 	g_eGameState = S_LOADLEVEL;
+}
+void healthpack()
+{
+	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '¤')
+	{
+		if (g_sChar.lives != 3)
+		{
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			g_sChar.lives++;
+		}
+	}
 }
