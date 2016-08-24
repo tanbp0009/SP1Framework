@@ -35,7 +35,6 @@ void SetMap()
 {
 	loadLevel();
 	COORD setmapcoord;
-	memset(fogmap2, ' ', sizeof(fogmap2[0][0][0]) * (25 * 80));
 
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
 	{
