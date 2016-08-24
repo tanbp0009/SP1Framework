@@ -75,7 +75,15 @@ void door()
 		mapCurrent[doorcoord.Y][doorcoord.X] = ')';
 	}
 }
-
+COORD door2coord;
+void door2()
+{
+	door2coord = GetCharCoord('(');
+	if (mapCurrent[door2coord.Y][door2coord.X] == '(')
+	{
+		mapCurrent[door2coord.Y][door2coord.X] = ' ';
+	}
+}
 void something()
 {
 	mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
@@ -150,15 +158,16 @@ void moveboulder()
 {
 	if (g_sChar.playerdir == 'u')
 	{
-		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ')
+		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] = 'ê';
+			
 		}
 	}
 	if (g_sChar.playerdir == 'd')
 	{
-		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' ')
+		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' '|| mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] = 'ê';
@@ -166,21 +175,26 @@ void moveboulder()
 	}
 	if (g_sChar.playerdir == 'l')
 	{
-		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ')
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
+			{
+				door2();
+			}
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] = 'ê';
 		}
 	}
 	if (g_sChar.playerdir == 'r')
 	{
-		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ')
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] = 'ê';
 		}
 	}
 }
+
 bool ice_check()
 {
 	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] != ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] != ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] != ' ' || mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] != ' ')

@@ -10,6 +10,7 @@ char GetObjectChar();
 void interactobjectinfront();
 
 void door();
+void door2();
 void something();
 void nextlevel();
 void moveboulder();
