@@ -141,18 +141,7 @@ void nextlevel()
 		}
 	}
 }
-void trap()
-{
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
-	{
-		g_sChar.lives--;
-	}
-	if (g_sChar.lives == 0)
-	{
-		level = 19;
-		g_eGameState = S_LOADLEVEL;
-	}
-}
+
 
 void moveboulder()
 {

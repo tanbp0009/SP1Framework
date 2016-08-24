@@ -4,6 +4,7 @@
 #include "Framework\timer.h"
 #include "Map.h"
 #include "InteractiveObjects.h"
+#include "walkover.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;

@@ -84,6 +84,7 @@
     <ClCompile Include="InteractiveObjects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="walkover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fog.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="InteractiveObjects.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="walkover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
