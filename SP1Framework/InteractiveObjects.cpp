@@ -91,6 +91,7 @@ void something()
 void nextlevel()
 {
 	savelevel(level);
+	saveChar(g_sChar);
 	switch (level)
 	{
 	case 14:
@@ -218,6 +219,7 @@ void teletospawn()
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
 
 	savelevel(level);
+	saveChar(g_sChar);
 	level = 15;
 	g_eGameState = S_LOADLEVEL;
 }

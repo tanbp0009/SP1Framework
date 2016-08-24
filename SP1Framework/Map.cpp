@@ -131,7 +131,7 @@ void savelevel(int Inlevel)
 		break;
 	}
 
-	/*std::ofstream myfile(filelocation);
+	std::ofstream myfile(filelocation);
 	if (myfile.is_open())
 	{
 		for (int i = 0; i < 25; i++)
@@ -143,7 +143,7 @@ void savelevel(int Inlevel)
 			myfile << "\n";
 		}
 		myfile.close();
-	}*/
+	}
 }
 
 void loadLevel()

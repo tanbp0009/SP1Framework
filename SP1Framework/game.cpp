@@ -275,11 +275,14 @@ void processUserInput()
 		return;
 	
     // quits the game if player hits the escape key
-    if (g_abKeyPressed[K_ESCAPE])
+	if (g_abKeyPressed[K_ESCAPE])
+	{
+		saveChar(g_sChar);
+		savelevel(level);
 		g_bQuitGame = true;
+	}
 	if (g_abKeyPressed[K_I] && level != 2)
 	{
-		savelevel(level);
 		oldlevel = level;
 		level = 2;
 		g_eGameState = S_LOADLEVEL;
@@ -360,16 +363,9 @@ void renderMainMenu()
 			bSomethingHappened = true;
 			level = 15;
 			g_eGameState = S_LOADLEVEL;
-
-			/*
-			
-			(Start new game) write reset level code here
-			
-			
-			*/
 		}
 		break;
-		case 1:
+	case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
@@ -393,12 +389,12 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
+			g_sChar = loadChar(g_sChar);
 			bSomethingHappened = true;
-			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-		case 2:
+	case 2:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
