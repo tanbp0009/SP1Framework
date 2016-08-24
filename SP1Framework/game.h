@@ -4,6 +4,9 @@
 #include "Framework\timer.h"
 #include "Map.h"
 #include "InteractiveObjects.h"
+#include "walkover.h"
+#include "ice.h"
+#include "charData.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -43,6 +46,7 @@ struct SGameChar
     bool  m_bActive;
 	char playerdir;
 	int lives;
+	int keys;
 };
 
 
@@ -71,4 +75,5 @@ void GameOver();
 void renderGameOver();
 void renderInventory();
 void renderLives();
+void renderitems();
 #endif // _GAME_H

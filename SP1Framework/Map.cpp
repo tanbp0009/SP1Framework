@@ -1,41 +1,42 @@
 #include "Map.h"
 
-
 // defined in game.cpp
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
 extern int level;
-char savemap[20][25][80];
-char mapCurrent[25][80];
+extern int gmmc;
 char fogmap[20][25][80];
-char fogmap2[20][25][80];
+char mapCurrent[25][80];
+char fogwrap[20][25][25];
 
-void GetMap(std::string filelocation, int Inlevel)
+
+void GetNewMap(std::string filelocation)
 {
-	char ch;
-	int row = 0;
-	int col = 0;
+	std::string fileaffix = "config/";
+	fileaffix += filelocation;
+	std::ifstream infile(fileaffix);
+	fileaffix = "save/";
+	fileaffix += filelocation;
+	std::ofstream outfile(fileaffix);
+	std::string content = "";
+	int i;
 
-	std::fstream fin(filelocation, std::fstream::in);
-	while (fin >> std::noskipws >> ch)
-	{
-		savemap[Inlevel][row][col] = ch;
-		//	g_Console.writeToBuffer(v, ch, 0x0A);
-		col++;
-		if (col == 81)
-		{
-			col = 0;
-			row++;
-		}
-	}
+	for (i = 0; infile.eof() != true; i++) // get content of infile
+		content += infile.get();
+
+	i--;
+	content.erase(content.end() - 1);     // erase last character
+
+	infile.close();
+
+	outfile << content;                 // output
+	outfile.close();
 }
 
 void SetMap()
 {
-	loadLevel();
 	COORD setmapcoord;
-	memset(fogmap2, ' ', sizeof(fogmap2[0][0][0]) * (25 * 80));
 
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
 	{
@@ -154,7 +155,8 @@ void loadLevel()
 	}
 	if (level == 14 || level == 15)
 	{
-		GetFogMap(level);
+		GetSavedMap(level);
+		getfog(level);
 		g_eGameState = S_GAME;
 	}
 	if (level == 19)
@@ -179,27 +181,24 @@ void loadLevel()
 
 	}
 }
-
-void GetFogMap(int Inlevel)
+//-------------------------------------------------------------
+/*void getfog(int Inlevel)
 {
 	COORD setmapcoord;
-	memset(fogmap, ' ', sizeof(fogmap[0][0][0]) * (25 * 80)); // set blank array
-	for (int VarY = g_sChar.m_cLocation.Y - 1; VarY <= g_sChar.m_cLocation.Y + 1; VarY++) // player Y range
-	{
-		for (int VarX = g_sChar.m_cLocation.X - 1; VarX <= g_sChar.m_cLocation.X + 1; VarX++) // player x range
+	COORD playerpos = g_sChar.m_cLocation;
+	memset(fogwrap, ' ', sizeof(fogwrap[0][0][0]) * (25 * 80));
+	for (int y = playerpos.Y - 1; y < playerpos.Y + 1; y++)
+		for (int x = playerpos.X - 1; x < playerpos.X + 1; x++)
 		{
-			fogmap[Inlevel][VarY][VarX] = savemap[Inlevel][VarY][VarX]; // set fog map's Player Y and X range to be map's Player's 
+			fogwrap[Inlevel][y][x] = fogmap[Inlevel][y][x];
 		}
-	}
 	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
-	{
-		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
+		for (setmapcoord.X = 0; setmapcoord.X < 25; setmapcoord.X++)
 		{
-			mapCurrent[setmapcoord.Y][setmapcoord.X] = fogmap[Inlevel][setmapcoord.Y][setmapcoord.X];
+			mapCurrent[setmapcoord.Y][setmapcoord.X] = fogwrap[Inlevel][setmapcoord.Y][setmapcoord.X];
 		}
-	}
-}
-
+}*/
+//-------------------------------------------------------------
 void GetSavedMap(int Inlevel)	
 {
 	std::string filelocation;
@@ -240,6 +239,7 @@ void GetSavedMap(int Inlevel)
 	std::fstream fin(filelocation, std::fstream::in);
 	while (fin >> std::noskipws >> ch)
 	{
+		fogmap[Inlevel][row][col] = ch;
 		mapCurrent[row][col] = ch;
 		col++;
 		if (col == 81)
@@ -250,17 +250,18 @@ void GetSavedMap(int Inlevel)
 	}
 }
 
-void preloadLevel()
+void NewLevel()
 {
-	GetMap("config/Title_Game.txt", 0);
-	GetMap("config/Main_Menu.txt", 1);
-	GetMap("config/Inventory.txt", 2);
-	GetMap("config/Vault_Key_1.txt", 14);
-	GetMap("config/Vault_Connect.txt", 15);
-	GetMap("config/Vault_Key_2.txt", 16);
-	GetMap("config/Vault_Key_3.txt", 17);
-	GetMap("config/Vault_Room.txt", 18);
-	GetMap("config/Game_Over.txt", 19);
+	GetNewMap("Title_Game.txt");
+	GetNewMap("Main_Menu.txt");
+	GetNewMap("Inventory.txt");
+	GetNewMap("Vault_Key_1.txt");
+	GetNewMap("Vault_Connect.txt");
+	GetNewMap("Vault_Key_2.txt");
+	GetNewMap("Vault_Key_3.txt");
+	GetNewMap("Vault_Room.txt");
+	GetNewMap("Game_Over.txt");
+
 }
 
 COORD GetCharCoord(char InChar)

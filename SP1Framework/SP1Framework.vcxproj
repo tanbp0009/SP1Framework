@@ -80,16 +80,22 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="ice.cpp" />
     <ClCompile Include="InteractiveObjects.cpp" />
+    <ClCompile Include="charData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="walkover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="ice.h" />
     <ClInclude Include="InteractiveObjects.h" />
+    <ClInclude Include="charData.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="walkover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

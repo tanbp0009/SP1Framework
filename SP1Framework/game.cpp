@@ -2,14 +2,16 @@
 //
 //
 #include "game.h"
+#include "walkover.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "ice.h"
 
 char buttondir;
 int level;
-int gmmc = 0;
+int gmmc;
 int ggoc;
 int oldlevel;
 
@@ -26,7 +28,6 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 Console g_Console(80, 25, "SP1 Framework");
 
 extern char mapCurrent[25][80];
-extern int key;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -42,7 +43,7 @@ void init( void )
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
-	key = 0;
+	g_sChar.keys = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -62,7 +63,6 @@ void init( void )
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 18, L"Raster");
-	preloadLevel();
 }
 
 //--------------------------------------------------------------
@@ -187,24 +187,27 @@ void moveCharacter()
 
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
-    if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
-    {
+	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
+	{
 		g_sChar.playerdir = 'u';
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°')
 		{
 			//Beep(1440, 30);
 			if (ice_check() == false)
 			{
-					g_sChar.m_cLocation.Y--;
-					trap();
+				g_sChar.m_cLocation.Y--;
+				trap();
+				fallingfloor();
 			}
 			else
+			{
 				ice();
+			}
 			bSomethingHappened = true;
 		}
-    }
-    if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
-    {
+	}
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+	{
 		g_sChar.playerdir = 'l';
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°')
 		{
@@ -213,14 +216,17 @@ void moveCharacter()
 			{
 				g_sChar.m_cLocation.X--;
 				trap();
+				fallingfloor();
 			}
 			else
+			{
 				ice();
+			}
 			bSomethingHappened = true;
 		}
-    }
-    if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
-    {
+	}
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+	{
 		g_sChar.playerdir = 'd';
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°')
 		{
@@ -229,14 +235,17 @@ void moveCharacter()
 			{
 				g_sChar.m_cLocation.Y++;
 				trap();
+				fallingfloor();
 			}
 			else
+			{
 				ice();
+			}
 			bSomethingHappened = true;
 		}
-    }
-    if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
-    {
+	}
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+	{
 		g_sChar.playerdir = 'r';
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°')
 		{
@@ -245,12 +254,15 @@ void moveCharacter()
 			{
 				g_sChar.m_cLocation.X++;
 				trap();
+				fallingfloor();
 			}
 			else
+			{
 				ice();
+			}
 			bSomethingHappened = true;
 		}
-    }
+	}
     if (g_abKeyPressed[K_SPACE])
     {
 		interactobjectinfront();
@@ -270,8 +282,12 @@ void processUserInput()
 		return;
 	
     // quits the game if player hits the escape key
-    if (g_abKeyPressed[K_ESCAPE])
+	if (g_abKeyPressed[K_ESCAPE])
+	{
+		saveChar(g_sChar);
+		savelevel(level);
 		g_bQuitGame = true;
+	}
 	if (g_abKeyPressed[K_I] && level != 2)
 	{
 		savelevel(level);
@@ -305,6 +321,7 @@ void renderInventory()
 
 	SetMap();
 	renderFramerate();
+	renderitems();
 	processUserInput();
 	
 }
@@ -350,12 +367,13 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
+			NewLevel();
 			bSomethingHappened = true;
-			level = 14;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-		case 1:
+	case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
@@ -379,12 +397,12 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
+			g_sChar = loadChar(g_sChar);
 			bSomethingHappened = true;
-			level = 14;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
-		case 2:
+	case 2:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
@@ -410,6 +428,7 @@ void renderMainMenu()
 		{
 			bSomethingHappened = true;
 			g_bQuitGame = true;
+			// exit game.
 		}
 		break;
 	}
@@ -451,6 +470,7 @@ void renderGameOver()
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
+			NewLevel();
 			init();
 			g_eGameState = S_LOADLEVEL;
 		}
@@ -555,13 +575,6 @@ void renderFramerate()
     c.Y = 1;
     g_Console.writeToBuffer(c, ss.str());
 
-	ss.str("");
-	ss << std::fixed << std::setprecision(3);
-	ss << keys() << "x keys";
-	c.X = g_Console.getConsoleSize().X - 43;
-	c.Y = 7;
-	g_Console.writeToBuffer(c, ss.str());
-
     // displays the elapsed time
     ss.str("");
     ss << "Elapsed time : " << g_dElapsedTime << "secs";
@@ -588,4 +601,16 @@ void renderLives()
 	c.X = 0;
 	c.Y = 0;
 	g_Console.writeToBuffer(c, ss.str(), 0x84);
+}
+
+void renderitems()
+{
+	std::ostringstream ss;
+	COORD c;
+	ss.str("");
+	ss << std::fixed << std::setprecision(3);
+	ss << g_sChar.keys << "x key(s)";
+	c.X = g_Console.getConsoleSize().X - 43;
+	c.Y = 7;
+	g_Console.writeToBuffer(c, ss.str());
 }

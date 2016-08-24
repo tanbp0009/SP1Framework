@@ -6,11 +6,11 @@
 #include <string>
 #include <vector>
 
-void GetMap(std::string filelocation, int Inlevel);
+void GetNewMap(std::string filelocation);
 void SetMap();
 void loadLevel();
 void savelevel(int Inlevel);
-void GetFogMap(int Inlevel);
 void GetSavedMap(int Inlevel);
-void preloadLevel();
+void NewLevel();
+void getfog(int Inlevel);
 COORD GetCharCoord(char InChar);

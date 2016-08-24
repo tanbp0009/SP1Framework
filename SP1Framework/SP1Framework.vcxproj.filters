@@ -39,6 +39,15 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="walkover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="charData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -54,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="walkover.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="charData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

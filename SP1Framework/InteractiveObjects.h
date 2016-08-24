@@ -10,14 +10,11 @@ char GetObjectChar();
 void interactobjectinfront();
 
 void door();
+void door2();
 void something();
 void nextlevel();
-void trap();
 void moveboulder();
 bool ice_check();
-void ice_up();
-void ice_down();
-void ice_left();
-void ice_right();
-void ice();
-int keys();
+void keys();
+void teletospawn();
+void healthpack();

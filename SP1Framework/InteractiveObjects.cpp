@@ -1,11 +1,11 @@
 #include "InteractiveObjects.h"
 
+extern Console g_Console;
 extern char mapCurrent[25][80];
 extern SGameChar g_sChar;
 extern int level;
 extern EGAMESTATES g_eGameState;
 
-int key;
 char objectinfront;
 COORD ObjectPosition;
 
@@ -55,6 +55,10 @@ void interactobjectinfront()
 		break;
 	case 'Ÿ': keys(); // gameplay logic when we are in the game
 		break;
+	case 'è': teletospawn(); // gameplay logic when we are in the game
+		break;
+	case '¤': healthpack(); // gameplay logic when we are in the game
+		break;
 	}
 }
 
@@ -72,7 +76,15 @@ void door()
 		mapCurrent[doorcoord.Y][doorcoord.X] = ')';
 	}
 }
-
+COORD door2coord;
+void door2()
+{
+	door2coord = GetCharCoord('(');
+	if (mapCurrent[door2coord.Y][door2coord.X] == '(')
+	{
+		mapCurrent[door2coord.Y][door2coord.X] = ' ';
+	}
+}
 void something()
 {
 	mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
@@ -81,6 +93,7 @@ void something()
 void nextlevel()
 {
 	savelevel(level);
+	saveChar(g_sChar);
 	switch (level)
 	{
 	case 14:
@@ -141,32 +154,22 @@ void nextlevel()
 		}
 	}
 }
-void trap()
-{
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
-	{
-		g_sChar.lives--;
-	}
-	if (g_sChar.lives == 0)
-	{
-		level = 19;
-		g_eGameState = S_LOADLEVEL;
-	}
-}
+
 
 void moveboulder()
 {
 	if (g_sChar.playerdir == 'u')
 	{
-		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ')
+		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] = 'ê';
+			
 		}
 	}
 	if (g_sChar.playerdir == 'd')
 	{
-		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' ')
+		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' '|| mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] = 'ê';
@@ -174,122 +177,65 @@ void moveboulder()
 	}
 	if (g_sChar.playerdir == 'l')
 	{
-		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ')
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
+			{
+				door2();
+			}
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] = 'ê';
 		}
 	}
 	if (g_sChar.playerdir == 'r')
 	{
-		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ')
+		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == 'P')
 		{
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] = 'ê';
 		}
 	}
 }
+
 bool ice_check()
 {
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
 	{
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
-int keys()
+
+void keys()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
 	{
-		key++;
+		g_sChar.keys++;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 	}
-	return key;
 }
-void ice_up()
+
+void teletospawn()
 {
-	while (ice_check() == true)
-	{
-		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°' )
-		{
-			g_sChar.m_cLocation.Y--;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
-		}
-	};
+	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
+	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+
+	savelevel(level);
+	saveChar(g_sChar);
+	level = 15;
+	g_eGameState = S_LOADLEVEL;
 }
-void ice_down()
+void healthpack()
 {
-	while (ice_check() == true)
+	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '¤')
 	{
-		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°')
+		if (g_sChar.lives != 3)
 		{
-			g_sChar.m_cLocation.Y++;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
-		}
-	};
-}
-void ice_left()
-{
-	while (ice_check() == true)
-	{
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°')
-		{
-			g_sChar.m_cLocation.X--;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-void ice_right()
-{
-	while (ice_check() == true)
-	{
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°')
-		{
-			g_sChar.m_cLocation.X++;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-void ice()
-{
-	if (ice_check() == true)
-	{
-		if (g_sChar.playerdir == 'u')
-		{
-			ice_up();
-		}
-		if (g_sChar.playerdir == 'd')
-		{
-			ice_down();
-		}
-		if (g_sChar.playerdir == 'l')
-		{
-			ice_left();
-		}
-		if (g_sChar.playerdir == 'r')
-		{
-			ice_right();
+			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+			g_sChar.lives++;
 		}
 	}
 }
