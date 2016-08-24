@@ -9,7 +9,7 @@
 
 char buttondir;
 int level;
-int gmmc = 0;
+int gmmc;
 int ggoc;
 int oldlevel;
 
