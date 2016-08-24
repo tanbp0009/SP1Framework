@@ -180,7 +180,7 @@ void moveboulder()
 }
 bool ice_check()
 {
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] != ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] != ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] != ' ' || mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] != ' ')
 	{
 		return true;
 	}
@@ -200,15 +200,16 @@ void ice_up()
 {
 	while (ice_check() == true)
 	{
-		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°' )
+		g_sChar.m_cLocation.Y--;
+		trap();
+		fallingfloor();
+		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '°')
 		{
-			g_sChar.m_cLocation.Y--;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
+			if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != '#')
+			{
+				break;
+			}
 		}
 	};
 }
@@ -216,31 +217,33 @@ void ice_down()
 {
 	while (ice_check() == true)
 	{
-		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°')
+		g_sChar.m_cLocation.Y++;
+		trap();
+		fallingfloor();
+		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '°')
 		{
-			g_sChar.m_cLocation.Y++;
-			trap();
-			ice_check();
+			if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != '#')
+			{
+				break;
+			}
 		}
-		else
-		{
-			break;
-		}
-	};
+	}
 }
 void ice_left()
 {
 	while (ice_check() == true)
 	{
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°')
+		g_sChar.m_cLocation.X--;
+		trap();
+		fallingfloor();
+		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '°')
 		{
-			g_sChar.m_cLocation.X--;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
+			if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != '#')
+			{
+				break;
+			}
 		}
 	}
 }
@@ -248,15 +251,16 @@ void ice_right()
 {
 	while (ice_check() == true)
 	{
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°')
+		g_sChar.m_cLocation.X++;
+		trap();
+		fallingfloor();
+		ice_check();
+		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '°')
 		{
-			g_sChar.m_cLocation.X++;
-			trap();
-			ice_check();
-		}
-		else
-		{
-			break;
+			if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != '#')
+			{
+				break;
+			}
 		}
 	}
 }
