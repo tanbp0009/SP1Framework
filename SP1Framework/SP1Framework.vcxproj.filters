@@ -45,6 +45,9 @@
     <ClCompile Include="walkover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ice.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="walkover.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ice.h">
+      <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

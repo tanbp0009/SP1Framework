@@ -1,0 +1,9 @@
+#include "game.h"
+#include "Framework\console.h"
+#include <iostream>
+#include "InteractiveObjects.h"
+void ice_up();
+void ice_down();
+void ice_left();
+void ice_right();
+void ice();

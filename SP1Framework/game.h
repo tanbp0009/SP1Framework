@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "InteractiveObjects.h"
 #include "walkover.h"
+#include "ice.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;

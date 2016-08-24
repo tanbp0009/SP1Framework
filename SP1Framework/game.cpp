@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "ice.h"
 
 char buttondir;
 int level;
