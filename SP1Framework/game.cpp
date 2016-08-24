@@ -353,6 +353,13 @@ void renderMainMenu()
 			bSomethingHappened = true;
 			level = 14;
 			g_eGameState = S_LOADLEVEL;
+
+			/*
+			
+			(Start new game) write reset level code here
+			
+			
+			*/
 		}
 		break;
 		case 1:
@@ -382,6 +389,11 @@ void renderMainMenu()
 			bSomethingHappened = true;
 			level = 14;
 			g_eGameState = S_LOADLEVEL;
+			/*
+			
+			(Load old game) write load level code here
+			
+			*/
 		}
 		break;
 		case 2:
@@ -410,6 +422,7 @@ void renderMainMenu()
 		{
 			bSomethingHappened = true;
 			g_bQuitGame = true;
+			// exit game.
 		}
 		break;
 	}
