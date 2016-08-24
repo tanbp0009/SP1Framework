@@ -290,6 +290,7 @@ void processUserInput()
 	}
 	if (g_abKeyPressed[K_I] && level != 2)
 	{
+		savelevel(level);
 		oldlevel = level;
 		level = 2;
 		g_eGameState = S_LOADLEVEL;
