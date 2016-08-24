@@ -45,6 +45,7 @@ struct SGameChar
     bool  m_bActive;
 	char playerdir;
 	int lives;
+	int keys;
 };
 
 
@@ -73,4 +74,5 @@ void GameOver();
 void renderGameOver();
 void renderInventory();
 void renderLives();
+void renderitems();
 #endif // _GAME_H

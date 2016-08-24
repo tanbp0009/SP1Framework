@@ -6,7 +6,6 @@ extern SGameChar g_sChar;
 extern int level;
 extern EGAMESTATES g_eGameState;
 
-int key;
 char objectinfront;
 COORD ObjectPosition;
 
@@ -204,14 +203,13 @@ bool ice_check()
 	else
 		return false;
 }
-int keys()
+void keys()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
 	{
-		key++;
+		g_sChar.keys++;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 	}
-	return key;
 }
 
 void teletospawn()

@@ -28,7 +28,6 @@ double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger k
 Console g_Console(80, 25, "SP1 Framework");
 
 extern char mapCurrent[25][80];
-extern int key;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -44,7 +43,7 @@ void init( void )
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
-	key = 0;
+	g_sChar.keys = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -311,6 +310,7 @@ void renderInventory()
 
 	SetMap();
 	renderFramerate();
+	renderitems();
 	processUserInput();
 	
 }
@@ -571,13 +571,6 @@ void renderFramerate()
     c.Y = 1;
     g_Console.writeToBuffer(c, ss.str());
 
-	ss.str("");
-	ss << std::fixed << std::setprecision(3);
-	ss << keys() << "x keys";
-	c.X = g_Console.getConsoleSize().X - 43;
-	c.Y = 7;
-	g_Console.writeToBuffer(c, ss.str());
-
     // displays the elapsed time
     ss.str("");
     ss << "Elapsed time : " << g_dElapsedTime << "secs";
@@ -604,4 +597,16 @@ void renderLives()
 	c.X = 0;
 	c.Y = 0;
 	g_Console.writeToBuffer(c, ss.str(), 0x84);
+}
+
+void renderitems()
+{
+	std::ostringstream ss;
+	COORD c;
+	ss.str("");
+	ss << std::fixed << std::setprecision(3);
+	ss << g_sChar.keys << "x key(s)";
+	c.X = g_Console.getConsoleSize().X - 43;
+	c.Y = 7;
+	g_Console.writeToBuffer(c, ss.str());
 }

@@ -15,5 +15,5 @@ void something();
 void nextlevel();
 void moveboulder();
 bool ice_check();
-int keys();
+void keys();
 void teletospawn();
