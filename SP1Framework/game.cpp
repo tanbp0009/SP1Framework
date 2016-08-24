@@ -358,7 +358,7 @@ void renderMainMenu()
 		{
 			NewLevel();
 			bSomethingHappened = true;
-			level = 14;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
 
 			/*
@@ -394,13 +394,8 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_SPACE])
 		{
 			bSomethingHappened = true;
-			level = 14;
+			level = 15;
 			g_eGameState = S_LOADLEVEL;
-			/*
-			
-			(Load old game) write load level code here
-			
-			*/
 		}
 		break;
 		case 2:

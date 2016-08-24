@@ -1,5 +1,6 @@
 #include "InteractiveObjects.h"
 
+extern Console g_Console;
 extern char mapCurrent[25][80];
 extern SGameChar g_sChar;
 extern int level;
@@ -54,6 +55,8 @@ void interactobjectinfront()
 	case 'ê': moveboulder(); // gameplay logic when we are in the game
 		break;
 	case 'Ÿ': keys(); // gameplay logic when we are in the game
+		break;
+	case 'è': teletospawn(); // gameplay logic when we are in the game
 		break;
 	}
 }
@@ -195,4 +198,14 @@ int keys()
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 	}
 	return key;
+}
+
+void teletospawn()
+{
+	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
+	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+
+	savelevel(level);
+	level = 15;
+	g_eGameState = S_LOADLEVEL;
 }
