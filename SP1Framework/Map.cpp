@@ -6,10 +6,10 @@ extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
 extern int level;
 extern int gmmc;
-//char savemap[20][25][80];
+char fogmap[20][25][80];
 char mapCurrent[25][80];
-//char fogmap[25][80];
-//char fogmap2[25][80];
+char fogwrap[20][25][25];
+
 
 void GetNewMap(std::string filelocation)
 {
@@ -148,16 +148,17 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
+	if (/*level == 14 || level == 15 || */level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
 	}
-	/*if (level == 14 || level == 15)
+	if (level == 14 || level == 15)
 	{
-		GetFogMap(level);
+		GetSavedMap(level);
+		getfog(level);
 		g_eGameState = S_GAME;
-	}*/
+	}
 	if (level == 19)
 	{
 		GetSavedMap(level);
@@ -180,32 +181,24 @@ void loadLevel()
 
 	}
 }
-
-//void GetFogMap(int level)
-//{
-//	COORD setmapcoord;
-//	memset(fogmap, ' ', sizeof(fogmap[0][0]) * (25 * 80)); // set blank array
-//	for (int VarY = g_sChar.m_cLocation.Y - 1; VarY <= g_sChar.m_cLocation.Y + 1; VarY++) // player Y range
-//	{
-//		for (int VarX = g_sChar.m_cLocation.X - 1; VarX <= g_sChar.m_cLocation.X + 1; VarX++) // player x range
-//		{
-//			fogmap[VarY][VarX] = mapCurrent[VarY][VarX]; // set fog map's Player Y and X range to be map's Player's 
-//		}
-//	}
-//	mapCurrent[25][80] = fogmap[25][80];
-//	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
-//	{
-//		for (setmapcoord.X = 0; setmapcoord.X < 80; setmapcoord.X++)
-//		{
-//
-//			if (fogmap[setmapcoord.Y][setmapcoord.X] = ' ')
-//				break;
-//			else
-//				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x08);
-//		}
-//	}
-//}
-
+//-------------------------------------------------------------
+/*void getfog(int Inlevel)
+{
+	COORD setmapcoord;
+	COORD playerpos = g_sChar.m_cLocation;
+	memset(fogwrap, ' ', sizeof(fogwrap[0][0][0]) * (25 * 80));
+	for (int y = playerpos.Y - 1; y < playerpos.Y + 1; y++)
+		for (int x = playerpos.X - 1; x < playerpos.X + 1; x++)
+		{
+			fogwrap[Inlevel][y][x] = fogmap[Inlevel][y][x];
+		}
+	for (setmapcoord.Y = 0; setmapcoord.Y < 25; setmapcoord.Y++)
+		for (setmapcoord.X = 0; setmapcoord.X < 25; setmapcoord.X++)
+		{
+			mapCurrent[setmapcoord.Y][setmapcoord.X] = fogwrap[Inlevel][setmapcoord.Y][setmapcoord.X];
+		}
+}*/
+//-------------------------------------------------------------
 void GetSavedMap(int Inlevel)	
 {
 	std::string filelocation;
@@ -246,6 +239,7 @@ void GetSavedMap(int Inlevel)
 	std::fstream fin(filelocation, std::fstream::in);
 	while (fin >> std::noskipws >> ch)
 	{
+		fogmap[Inlevel][row][col] = ch;
 		mapCurrent[row][col] = ch;
 		col++;
 		if (col == 81)
