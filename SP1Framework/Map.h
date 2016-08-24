@@ -12,4 +12,5 @@ void loadLevel();
 void savelevel(int Inlevel);
 void GetSavedMap(int Inlevel);
 void NewLevel();
+void GetFogMap(int level);
 COORD GetCharCoord(char InChar);
