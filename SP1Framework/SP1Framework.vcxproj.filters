@@ -39,9 +39,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Fog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="walkover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Fog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="walkover.h">
