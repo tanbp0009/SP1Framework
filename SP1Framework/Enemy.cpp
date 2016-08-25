@@ -12,27 +12,27 @@ void enemyPathing()
 {
 	if (g_dEnemyBounceTime < g_dElapsedTime)
 	{
-		if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y <= 5 &&
-			g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y >= -5 &&
-			g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X <= 5 &&
-			g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X >= -5)
+		if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y <= 8 &&
+			g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y >= -8 &&
+			g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X <= 8 &&
+			g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X >= -8)
 		{
-			if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y < 5 && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y > 0)
+			if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y <= 8 && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y > 0)
 			{
 				g_sEnemy.m_cLocation.Y++;
 				g_sEnemy.m_bActive = false;
 			}
-			if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y > -5  && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y < 0)
+			if (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y >= -8  && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y < 0)
 			{
 				g_sEnemy.m_cLocation.Y--;
 				g_sEnemy.m_bActive = false;
 			}
-			if (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X < 5 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X > 0)
+			if (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X <= 8 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X > 0)
 			{
 				g_sEnemy.m_cLocation.X++;
 				g_sEnemy.m_bActive = false;
 			}
-			if (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X > -5 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X < 0)
+			if (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X >= -8 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X < 0)
 			{
 				g_sEnemy.m_cLocation.X--;
 				g_sEnemy.m_bActive = false;
@@ -57,7 +57,7 @@ void enemyCollision()
 	if (g_sChar.m_cLocation.X == g_sEnemy.m_cLocation.X && g_sChar.m_cLocation.Y == g_sEnemy.m_cLocation.Y && g_dEnemyDamageTime < g_dElapsedTime)
 	{
 		g_sChar.lives--;
-		g_dEnemyDamageTime = g_dElapsedTime + 0.3; // 125ms should be enough
+		g_dEnemyDamageTime = g_dElapsedTime + 0.4; // give player damage immunity
 		g_sEnemy.m_bActive = true;
 	}
 }
