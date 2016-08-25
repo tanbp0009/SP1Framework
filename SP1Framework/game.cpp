@@ -173,6 +173,8 @@ void render()
 		break;
 	case S_INSTRUCTION: renderInstruction();
 		break;
+	case S_WIN: renderWin();
+		break;
 	/*case S_BLACKROOM: renderBlackRoom();
 		break;*/
 	}
@@ -646,6 +648,12 @@ void renderInstruction()
 	SetMap();
 	renderFramerate();
 	processUserInput();
+}
+
+void renderWin()
+{
+	SetMap();
+
 }
 //-------------------------------------------------------
 //void renderBlackRoom()

@@ -41,6 +41,7 @@ enum EGAMESTATES
     S_COUNT,
 	S_INSTRUCTION,
 	S_BLACKROOM,
+	S_WIN,
 };
 
 // struct for the game character
@@ -82,4 +83,5 @@ void renderLives();
 void renderitems();
 void renderInstruction();
 void renderBlackRoom();
+void renderWin();
 #endif // _GAME_H

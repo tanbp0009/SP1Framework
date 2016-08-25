@@ -62,9 +62,12 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+			case 'Ü':
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
+				break;
 			case 'Û':
 				if (level == 0)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
 				else if (level == 13)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else
@@ -129,6 +132,12 @@ void SetMap()
 			//	g_sEnemy.m_cLocation = setmapcoord;
 			//	g_Console.writeToBuffer(setmapcoord, " ", 0x00);
 			//	break;
+			case 'ß':
+				if (level == 0)
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
+				else
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 			}
@@ -153,6 +162,9 @@ void savelevel(int Inlevel)
 		break;
 	case 3:
 		filelocation = "save/Instruction.txt";
+		break;
+	case 4:
+		filelocation = "config/Win.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -242,6 +254,9 @@ void GetSavedMap(int Inlevel)
 	case 3:
 		filelocation = "config/Instruction.txt";
 		break;
+	case 4:
+		filelocation = "config/Win.txt";
+		break;
 	case 13:
 		filelocation = "save/Light.txt";
 		break;
@@ -294,4 +309,5 @@ void NewLevel()
 	GetNewMap("Vault_Room.txt");
 	GetNewMap("Game_Over.txt");
 	GetNewMap("Light.txt");
+	GetNewMap("Win.txt");
 }
