@@ -53,9 +53,19 @@ void SetMap()
 			case 'Ÿ':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
 				break;
+			case '§':
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
+				break;
+			case 'è':
+				if (level == 13)
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
+				else
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 			case 'Û':
 				if (level == 0)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
+				else if (level == 13)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x08);
 				break;
@@ -89,6 +99,8 @@ void SetMap()
 			case ')':
 				if (level == 1 || level == 3 || level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else if (level == 13)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else
 				{
 					doorcoord = setmapcoord;
@@ -174,7 +186,7 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
+	if (level == 13 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
@@ -225,6 +237,9 @@ void GetSavedMap(int Inlevel)
 	case 3:
 		filelocation = "config/Instruction.txt";
 		break;
+	case 13:
+		filelocation = "save/Light.txt";
+		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
 		break;
@@ -273,5 +288,5 @@ void NewLevel()
 	GetNewMap("Vault_Key_3.txt");
 	GetNewMap("Vault_Room.txt");
 	GetNewMap("Game_Over.txt");
-
+	GetNewMap("Light.txt");
 }

@@ -38,7 +38,8 @@ enum EGAMESTATES
 	S_GAMEOVER,
 	S_INVENTORY,
     S_COUNT,
-	S_INSTRUCTION
+	S_INSTRUCTION,
+	S_BLACKROOM,
 };
 
 // struct for the game character
@@ -79,4 +80,5 @@ void renderInventory();
 void renderLives();
 void renderitems();
 void renderInstruction();
+void renderBlackRoom();
 #endif // _GAME_H

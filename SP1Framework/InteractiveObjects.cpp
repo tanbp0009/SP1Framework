@@ -7,6 +7,7 @@ extern int level;
 extern EGAMESTATES g_eGameState;
 extern COORD doorcoord;
 extern COORD door2coord;
+//extern int brnum;
 
 char objectinfront;
 COORD ObjectPosition;
@@ -62,6 +63,8 @@ void interactobjectinfront()
 		break;
 	case '¤': healthpack(); // gameplay logic when we are in the game
 		break;
+	//case '§': lightswitch();
+	//	break;
 	}
 }
 
@@ -266,3 +269,13 @@ void movement_interaction()
 		teleport();
 	}
 }
+
+//void lightswitch()
+//{
+//	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '§')
+//	{
+//		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+//		brnum += 1;
+//	}
+//}
+
