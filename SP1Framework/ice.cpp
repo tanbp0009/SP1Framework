@@ -35,9 +35,10 @@ void ice_movement_loop()
 	while (ice_check() == true)
 	{
 		ice_movement();
-		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#')
+		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°')
 		{
 			ice_movement();
+			ice_check();
 		}
 		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] != '°')
 		{
