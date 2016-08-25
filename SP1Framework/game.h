@@ -81,5 +81,4 @@ void renderLives();
 void renderitems();
 void renderInstruction();
 void renderBlackRoom();
-void VaultRoomPuzzleDoor();
 #endif // _GAME_H
