@@ -5,9 +5,12 @@ extern char mapCurrent[25][80];
 extern SGameChar g_sChar;
 extern int level;
 extern EGAMESTATES g_eGameState;
+extern COORD doorcoord;
+extern COORD door2coord;
 
 char objectinfront;
 COORD ObjectPosition;
+
 
 char GetObjectChar()
 {
@@ -62,11 +65,8 @@ void interactobjectinfront()
 	}
 }
 
-COORD doorcoord;
 void door()
 {
-	if (doorcoord.X == NULL)
-		doorcoord = GetCharCoord(')');
 	if (mapCurrent[doorcoord.Y][doorcoord.X] == ')')
 	{
 		mapCurrent[doorcoord.Y][doorcoord.X] = ' ';
@@ -76,14 +76,10 @@ void door()
 		mapCurrent[doorcoord.Y][doorcoord.X] = ')';
 	}
 }
-COORD door2coord;
+
 void door2()
 {
-	door2coord = GetCharCoord('(');
-	if (mapCurrent[door2coord.Y][door2coord.X] == '(')
-	{
-		mapCurrent[door2coord.Y][door2coord.X] = ' ';
-	}
+	mapCurrent[door2coord.Y][door2coord.X] = ' ';
 }
 void something()
 {

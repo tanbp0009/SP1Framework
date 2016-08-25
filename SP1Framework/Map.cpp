@@ -7,6 +7,8 @@ extern SGameChar g_sChar;
 extern int level;
 extern int gmmc;
 char mapCurrent[25][80];
+COORD doorcoord;
+COORD door2coord;
 
 
 void GetNewMap(std::string filelocation)
@@ -72,14 +74,26 @@ void SetMap()
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
-			case '(': case '%': case '*': case '^':
+			case '%': case '*': case '^':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				break;
+			case '(':
+				if (level == 1)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else
+				{
+					door2coord = setmapcoord;
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				}
 				break;
 			case ')':
 				if (level == 1 || level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
+				{
+					doorcoord = setmapcoord;
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				}
 				break;
 			case 'o':
 				if (level == 19 || level == 1)
@@ -236,20 +250,4 @@ void NewLevel()
 	GetNewMap("Vault_Room.txt");
 	GetNewMap("Game_Over.txt");
 
-}
-
-COORD GetCharCoord(char InChar)
-{
-	COORD getcoord;
-	for (getcoord.Y = 0; getcoord.Y < 25; getcoord.Y++)
-	{
-		for (getcoord.X = 0; getcoord.X < 80; getcoord.X++)
-		{
-			if (mapCurrent[getcoord.Y][getcoord.X] == InChar)
-			{
-				return getcoord;
-			}
-		}
-	}
-	return getcoord;
 }

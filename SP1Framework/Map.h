@@ -13,4 +13,3 @@ void savelevel(int Inlevel);
 void GetSavedMap(int Inlevel);
 void NewLevel();
 void getfog(int Inlevel);
-COORD GetCharCoord(char InChar);
