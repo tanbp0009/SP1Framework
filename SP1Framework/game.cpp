@@ -193,8 +193,11 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 void gameplay()            // gameplay logic
 {
-	enemyPathing();
-	enemyCollision();
+	if (level == 15)
+	{
+		enemyPathing();
+		enemyCollision();
+	}
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
