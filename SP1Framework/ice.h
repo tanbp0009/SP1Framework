@@ -6,4 +6,5 @@ void ice_up();
 void ice_down();
 void ice_left();
 void ice_right();
-void ice();
+void ice_movement_loop();
+void ice_movement();

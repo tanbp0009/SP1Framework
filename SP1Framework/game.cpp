@@ -205,7 +205,7 @@ void moveCharacter()
 			}
 			else
 			{
-				ice();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
@@ -225,7 +225,7 @@ void moveCharacter()
 			}
 			else
 			{
-				ice();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
@@ -245,7 +245,7 @@ void moveCharacter()
 			}
 			else
 			{
-				ice();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
@@ -265,7 +265,7 @@ void moveCharacter()
 			}
 			else
 			{
-				ice();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
