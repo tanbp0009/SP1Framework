@@ -4,6 +4,7 @@
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
+extern SGameEnemy g_sEnemy;
 extern int level;
 extern int gmmc;
 char mapCurrent[25][80];
@@ -124,6 +125,10 @@ void SetMap()
 					}
 				}
 				break;
+			//case '™':
+			//	g_sEnemy.m_cLocation = setmapcoord;
+			//	g_Console.writeToBuffer(setmapcoord, " ", 0x00);
+			//	break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 			}
