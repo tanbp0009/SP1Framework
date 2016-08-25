@@ -31,6 +31,7 @@ Console g_Console(80, 25, "SP1 Framework");
 extern char mapCurrent[25][80];
 extern SGameEnemy g_sEnemy;
 extern double g_dEnemyBounceTime;
+extern double g_dEnemyDamageTime;
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -50,6 +51,7 @@ void init( void )
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
 	g_dEnemyBounceTime = 0;
+	g_dEnemyDamageTime = 0;
 	g_sEnemy.m_cLocation.X = 40;
 	g_sEnemy.m_cLocation.Y = 1;
 
@@ -190,6 +192,7 @@ void splashScreenWait()    // waits for time to pass in splash screen
 void gameplay()            // gameplay logic
 {
 	enemyPathing();
+	enemyCollision();
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.

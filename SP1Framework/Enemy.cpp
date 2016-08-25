@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
 double g_dEnemyBounceTime;
+double g_dEnemyDamageTime;
 SGameEnemy g_sEnemy;
 
 extern SGameChar g_sChar;
@@ -49,4 +50,14 @@ void enemyPathing()
 void renderEnemy()
 {
 	g_Console.writeToBuffer(g_sEnemy.m_cLocation, '™', 0x0C);
+}
+
+void enemyCollision()
+{
+	if (g_sChar.m_cLocation.X == g_sEnemy.m_cLocation.X && g_sChar.m_cLocation.Y == g_sEnemy.m_cLocation.Y && g_dEnemyDamageTime < g_dElapsedTime)
+	{
+		g_sChar.lives--;
+		g_dEnemyDamageTime = g_dElapsedTime + 0.3; // 125ms should be enough
+		g_sEnemy.m_bActive = true;
+	}
 }

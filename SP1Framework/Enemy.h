@@ -12,3 +12,4 @@ struct SGameEnemy
 
 void enemyPathing();
 void renderEnemy();
+void enemyCollision();
