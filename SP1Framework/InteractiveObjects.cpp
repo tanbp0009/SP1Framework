@@ -201,18 +201,6 @@ void moveboulder()
 	}
 }
 
-bool ice_check()
-{
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 void keys()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
