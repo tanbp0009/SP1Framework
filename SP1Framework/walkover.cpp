@@ -25,3 +25,11 @@ void fallingfloor()
 		mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] = 'X';
 	}
 }
+void teleport()
+{
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '0')
+	{
+		g_sChar.m_cLocation.Y -= 3;
+	}
+
+}

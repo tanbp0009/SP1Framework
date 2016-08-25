@@ -8,3 +8,4 @@
 
 void trap();
 void fallingfloor();
+void teleport();
