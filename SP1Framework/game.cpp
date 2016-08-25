@@ -102,6 +102,7 @@ void getInput( void )
 	g_abKeyPressed[K_2] = isKeyPressed('2');
 	g_abKeyPressed[K_1] = isKeyPressed('1');
 	g_abKeyPressed[K_I] = isKeyPressed(0x49);
+	g_abKeyPressed[K_H] = isKeyPressed(0x48);
 }
 
 //--------------------------------------------------------------
@@ -161,6 +162,8 @@ void render()
 	case S_TITLE: renderTitle();
 		break;
 	case S_INVENTORY: renderInventory();
+		break;
+	case S_INSTRUCTION: renderInstruction();
 		break;
 	}
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -297,6 +300,20 @@ void processUserInput()
 		bSomethingHappened = true;
 	}
 	else if (g_abKeyPressed[K_I])
+	{
+		level = oldlevel;
+		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+	if (g_abKeyPressed[K_H] && level != 3)
+	{
+		savelevel(level);
+		oldlevel = level;
+		level = 3;
+		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_H])
 	{
 		level = oldlevel;
 		g_eGameState = S_LOADLEVEL;
@@ -613,4 +630,10 @@ void renderitems()
 	c.X = g_Console.getConsoleSize().X - 43;
 	c.Y = 7;
 	g_Console.writeToBuffer(c, ss.str());
+}
+void renderInstruction()
+{
+	SetMap();
+	renderFramerate();
+	processUserInput();
 }

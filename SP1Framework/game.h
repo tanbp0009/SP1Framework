@@ -23,7 +23,8 @@ enum EKEYS
 	K_2,
 	K_1,
 	K_I,
-    K_COUNT
+    K_COUNT,
+	K_H
 };
 
 // Enumeration for the different screen states
@@ -36,7 +37,8 @@ enum EGAMESTATES
 	S_LOADLEVEL,
 	S_GAMEOVER,
 	S_INVENTORY,
-    S_COUNT
+    S_COUNT,
+	S_INSTRUCTION
 };
 
 // struct for the game character
@@ -76,4 +78,5 @@ void renderGameOver();
 void renderInventory();
 void renderLives();
 void renderitems();
+void renderInstruction();
 #endif // _GAME_H

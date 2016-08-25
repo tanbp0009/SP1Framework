@@ -78,7 +78,7 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
 			case '(':
-				if (level == 1)
+				if (level == 1 || level == 3)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 				{
@@ -87,7 +87,7 @@ void SetMap()
 				}
 				break;
 			case ')':
-				if (level == 1 || level == 19)
+				if (level == 1 || level == 3 || level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 				{
@@ -96,7 +96,7 @@ void SetMap()
 				}
 				break;
 			case 'o':
-				if (level == 19 || level == 1)
+				if (level == 19 || level == 1 || level == 3)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
@@ -122,6 +122,9 @@ void savelevel(int Inlevel)
 		break;
 	case 2:
 		filelocation = "save/Inventory.txt";
+		break;
+	case 3:
+		filelocation = "save/Instruction.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -186,6 +189,12 @@ void loadLevel()
 		g_eGameState = S_INVENTORY;
 
 	}
+	if (level == 3)
+	{
+		GetSavedMap(level);
+		g_eGameState = S_INSTRUCTION;
+
+	}
 }
 
 void GetSavedMap(int Inlevel)	
@@ -201,6 +210,9 @@ void GetSavedMap(int Inlevel)
 		break;
 	case 2:
 		filelocation = "config/Inventory.txt";
+		break;
+	case 3:
+		filelocation = "config/Instruction.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -243,6 +255,7 @@ void NewLevel()
 	GetNewMap("Title_Game.txt");
 	GetNewMap("Main_Menu.txt");
 	GetNewMap("Inventory.txt");
+	GetNewMap("Instruction.txt");
 	GetNewMap("Vault_Key_1.txt");
 	GetNewMap("Vault_Connect.txt");
 	GetNewMap("Vault_Key_2.txt");
