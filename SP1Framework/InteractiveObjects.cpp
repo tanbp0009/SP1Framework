@@ -122,11 +122,14 @@ void nextlevel()
 			level = 17;
 			g_eGameState = S_LOADLEVEL;
 		}
-		if (ObjectPosition.Y == 0)
+		if (g_sChar.keys == 3)
 		{
-			g_sChar.m_cLocation.Y = 23;
-			level = 18;
-			g_eGameState = S_LOADLEVEL;
+			if (ObjectPosition.Y == 0)
+			{
+				g_sChar.m_cLocation.Y = 23;
+				level = 18;
+				g_eGameState = S_LOADLEVEL;
+			}
 		}
 		break;
 	case 16:
@@ -145,12 +148,12 @@ void nextlevel()
 			g_eGameState = S_LOADLEVEL;
 		}
 	case 18:
-		if (ObjectPosition.Y == 24)
-		{
-			g_sChar.m_cLocation.Y = 1;
-			level = 15;
-			g_eGameState = S_LOADLEVEL;
-		}
+			if (ObjectPosition.Y == 24)
+			{
+				g_sChar.m_cLocation.Y = 1;
+				level = 15;
+				g_eGameState = S_LOADLEVEL;
+			}
 	}
 }
 
