@@ -96,10 +96,21 @@ void SetMap()
 				}
 				break;
 			case 'o':
-				if (level == 19 || level == 1 || level == 3)
+				if (level == 19 || level == 1)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				if (level == 3)
+				{
+					if (setmapcoord.Y < 16)
+					{
+						g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+					}
+					else
+					{
+						g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+					}
+				}
 				break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
