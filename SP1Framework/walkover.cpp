@@ -22,13 +22,6 @@ void fallingfloor()
 {
 	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '/')
 	{
-		mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] = 'Û';
-	}
-}
-void portal()
-{
-	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '0')
-	{
-		mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] += 0;
+		mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] = 'X';
 	}
 }

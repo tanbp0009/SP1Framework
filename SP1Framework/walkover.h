@@ -8,4 +8,3 @@
 
 void trap();
 void fallingfloor();
-void portal();
