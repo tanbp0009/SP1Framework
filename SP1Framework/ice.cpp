@@ -10,22 +10,22 @@ void ice_movement()
 	if (g_sChar.playerdir == 'u')
 	{
 		a = -1;
-		movement();
+		movement_interaction();
 	}
 	if (g_sChar.playerdir == 'd')
 	{
 		a = 1;
-		movement();
+		movement_interaction();
 	}
 	if (g_sChar.playerdir == 'l')
 	{
 		b = -1;
-		movement();
+		movement_interaction();
 	}
 	if (g_sChar.playerdir == 'r')
 	{
 		b = 1;
-		movement();
+		movement_interaction();
 	}
 }
 void ice_movement_loop()

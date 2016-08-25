@@ -235,7 +235,7 @@ void healthpack()
 		}
 	}
 }
-void movement()
+void movement_interaction()
 {
 	if (g_sChar.playerdir == 'u')
 	{
@@ -265,8 +265,4 @@ void movement()
 		fallingfloor();
 		teleport();
 	}
-}
-void movement_interaction()
-{
-
 }
