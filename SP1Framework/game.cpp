@@ -13,6 +13,7 @@ char buttondir;
 int level;
 int gmmc;
 int ggoc;
+int ws;
 //int brnum;
 int oldlevel;
 
@@ -47,6 +48,7 @@ void init( void )
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
+	ws = 0;
 	/*brnum = 0;*/
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
@@ -656,7 +658,39 @@ void renderInstruction()
 void renderWin()
 {
 	SetMap();
-
+	std::string Menu[2] = { " Yes ", " No " };
+	std::string Y = { "<Yes>" };
+	std::string N = { "<No" };
+	COORD c = g_Console.getConsoleSize();
+	c.Y = 12;
+	c.X = 68;
+	g_Console.writeToBuffer(c, "Restart?", 0x84);
+	c.Y += 4;
+	c.X = 71;
+	if (g_abKeyPressed[K_UP])
+		ws = 0;
+	else if (g_abKeyPressed[K_DOWN])
+		ws = 1;
+	switch (ws)
+	{
+		g_Console.writeToBuffer(c, Y, 0x06);
+		c.Y += 2;
+		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		if (g_abKeyPressed[K_SPACE])
+		{
+			NewLevel();
+			init();
+			g_eGameState = S_MAINMENU;
+		}
+		break;
+	case 1:
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
+		c.Y += 2;
+		g_Console.writeToBuffer(c, N, 0x06);
+		if (g_abKeyPressed[K_SPACE])
+			g_bQuitGame = true;
+		break;
+	}
 }
 //-------------------------------------------------------
 //void renderBlackRoom()

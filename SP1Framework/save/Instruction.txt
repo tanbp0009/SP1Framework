@@ -6,11 +6,13 @@
 |  |___|___|  /____  >|__|  |__|  |____/ \___  >__| |__|\____/|___|  /____  >  |
 |            \/     \/                        \/                    \/     \/  |
 |                                                                              |
-| You have three lives. You are supposed to go through 3 rooms with different  |
-| challenges to collect the three keys to the Vault room where treasure awaits |
-|        Traps - '#'   Healthpack - ''   Pressure plate - ''  Door - ''        |
-|                 Keys - ''    Boulder - ''      Fallen Object -               |
-|             Teleporter - ''    Button - ''       Treasure - ''               |
+|     Travel down the Manutmul Pyramid and obtain the Treasure of Tatumuki     |
+|                                                                              |
+|      Spikes - '#'   Healthpack - '¤'   Pressure plate - ''  Door - 'D'       |
+|              Keys - 'Ÿ'    Boulder - 'ê'      Weak Floors -'/'               |
+|            Teleporter - 'è'    Button - 'o'       Treasure - 'ß'             |
+|                                                                              |
+|                                                                              |
 |         __________                                         __________        |
 |        /\____;;___\                                       /\____;;___\       |
 |       | /         /                                      | /         /       |
@@ -20,6 +22,4 @@
 |      % \ | %  ))   |                                    % \ | %  ))   |      |
 |      %  \|%________|                                    %  \|%________|      |
 |       %%%%                                               %%%%                |
-|                                                                              |
-|                                                                              |
 ================================================================================
