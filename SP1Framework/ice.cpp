@@ -46,7 +46,7 @@ void ice_movement_loop()
 	{
 		ice_movement();
 		movement_interaction();
-		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] != '°' && (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#'))
+		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] != '°' && (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°'))
 		{
 			break;
 		}
