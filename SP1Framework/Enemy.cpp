@@ -1,9 +1,12 @@
 #include "Enemy.h"
+#include "InteractiveObjects.h"
+#include "game.h"
 
 double g_dEnemyBounceTime;
 double g_dEnemyDamageTime;
 SGameEnemy g_sEnemy;
-
+extern EGAMESTATES g_eGameState;
+extern int level;
 extern SGameChar g_sChar;
 extern double g_dElapsedTime;
 extern Console g_Console;
@@ -59,5 +62,10 @@ void enemyCollision()
 		g_sChar.lives--;
 		g_dEnemyDamageTime = g_dElapsedTime + 0.3; // 125ms should be enough
 		g_sEnemy.m_bActive = true;
+	}
+	if (g_sChar.lives == 0)
+	{
+		level = 19;
+		g_eGameState = S_LOADLEVEL;
 	}
 }
