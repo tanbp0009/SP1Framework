@@ -52,7 +52,7 @@ void init( void )
     // sets the initial state for the game
 	if (g_eGameState == S_GAMEOVER)
 	{
-		level = 14;
+		level = 15;
 	}
 	else
 	{
