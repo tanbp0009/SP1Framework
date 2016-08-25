@@ -287,8 +287,12 @@ void processUserInput()
     // quits the game if player hits the escape key
 	if (g_abKeyPressed[K_ESCAPE])
 	{
-		saveChar(g_sChar);
 		savelevel(level);
+		if (level == 3 || level == 2)
+		{
+			level = oldlevel;
+		}
+		saveChar(g_sChar);
 		g_bQuitGame = true;
 	}
 	if (g_abKeyPressed[K_I] && level != 2)
