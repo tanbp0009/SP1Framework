@@ -10,30 +10,22 @@ void ice_movement()
 	if (g_sChar.playerdir == 'u')
 	{
 		a = -1;
-		g_sChar.m_cLocation.Y--;
-		trap();
-		fallingfloor();
+		movement();
 	}
 	if (g_sChar.playerdir == 'd')
 	{
 		a = 1;
-		g_sChar.m_cLocation.Y++;
-		trap();
-		fallingfloor();
+		movement();
 	}
 	if (g_sChar.playerdir == 'l')
 	{
 		b = -1;
-		g_sChar.m_cLocation.X--;
-		trap();
-		fallingfloor();
+		movement();
 	}
 	if (g_sChar.playerdir == 'r')
 	{
 		b = 1;
-		g_sChar.m_cLocation.X++;
-		trap();
-		fallingfloor();
+		movement();
 	}
 }
 void ice_movement_loop()
@@ -52,8 +44,4 @@ void ice_movement_loop()
 			break;
 		}
 	};
-}
-void ice()
-{
-	ice_movement_loop();
 }

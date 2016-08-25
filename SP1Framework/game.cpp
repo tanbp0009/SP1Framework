@@ -198,10 +198,7 @@ void moveCharacter()
 			//Beep(1440, 30);
 			if (ice_check() == false)
 			{
-				g_sChar.m_cLocation.Y--;
-				trap();
-				fallingfloor();
-				teleport();
+				movement_interaction();
 			}
 			else
 			{
@@ -218,10 +215,7 @@ void moveCharacter()
 			//Beep(1440, 30);
 			if (ice_check() == false)
 			{
-				g_sChar.m_cLocation.X--;
-				trap();
-				fallingfloor();
-				teleport();
+				movement_interaction();
 			}
 			else
 			{
@@ -238,10 +232,7 @@ void moveCharacter()
 			//Beep(1440, 30);
 			if (ice_check() == false)
 			{
-				g_sChar.m_cLocation.Y++;
-				trap();
-				fallingfloor();
-				teleport();
+				movement_interaction();
 			}
 			else
 			{
@@ -258,10 +249,7 @@ void moveCharacter()
 			//Beep(1440, 30);
 			if (ice_check() == false)
 			{
-				g_sChar.m_cLocation.X++;
-				trap();
-				fallingfloor();
-				teleport();
+				movement_interaction();
 			}
 			else
 			{

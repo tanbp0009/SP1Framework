@@ -235,3 +235,38 @@ void healthpack()
 		}
 	}
 }
+void movement()
+{
+	if (g_sChar.playerdir == 'u')
+	{
+		g_sChar.m_cLocation.Y--;
+		trap();
+		fallingfloor();
+		teleport();
+	}
+	if (g_sChar.playerdir == 'd')
+	{
+		g_sChar.m_cLocation.Y++;
+		trap();
+		fallingfloor();
+		teleport();
+	}
+	if (g_sChar.playerdir == 'l')
+	{
+		g_sChar.m_cLocation.X--;
+		trap();
+		fallingfloor();
+		teleport();
+	}
+	if (g_sChar.playerdir == 'r')
+	{
+		g_sChar.m_cLocation.X++;
+		trap();
+		fallingfloor();
+		teleport();
+	}
+}
+void movement_interaction()
+{
+
+}

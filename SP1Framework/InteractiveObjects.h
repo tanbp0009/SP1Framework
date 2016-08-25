@@ -18,3 +18,5 @@ bool ice_check();
 void keys();
 void teletospawn();
 void healthpack();
+void movement();
+void movement_interaction();
