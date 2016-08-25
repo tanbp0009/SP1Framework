@@ -63,6 +63,8 @@ void interactobjectinfront()
 		break;
 	case '¤': healthpack(); // gameplay logic when we are in the game
 		break;
+	case '-': VaultRoomPuzzleDoor();
+		break;
 	//case '§': lightswitch();
 	//	break;
 	}
@@ -282,3 +284,21 @@ void movement_interaction()
 //	}
 //}
 
+void VaultRoomPuzzleDoor()
+{
+	int floortrue = 0;
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < 80; j++)
+		{
+			if (mapCurrent[i][j] == '/')
+			{
+				floortrue++;
+			}
+		}
+	}
+	if (floortrue == 40 || floortrue == 0)
+	{
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+	}
+}
