@@ -21,19 +21,19 @@ bool ice_check()
 }
 void ice_movement()
 {
-	if (g_sChar.playerdir == 'u')
+	if (g_sChar.playerdir == '^')
 	{
 		a = -1;
 	}
-	if (g_sChar.playerdir == 'd')
+	if (g_sChar.playerdir == 'v')
 	{
 		a = 1;
 	}
-	if (g_sChar.playerdir == 'l')
+	if (g_sChar.playerdir == '<')
 	{
 		b = -1;
 	}
-	if (g_sChar.playerdir == 'r')
+	if (g_sChar.playerdir == '>')
 	{
 		b = 1;
 	}

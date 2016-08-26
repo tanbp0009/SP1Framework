@@ -18,25 +18,25 @@ char GetObjectChar()
 	ObjectPosition.X = 0;
 	ObjectPosition.Y = 0;
 	char ch;
-	if (g_sChar.playerdir == 'u' && mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != ' ')
+	if (g_sChar.playerdir == '^' && mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y-1;
 		return ch = mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X];
 	}
-	if (g_sChar.playerdir == 'd' && mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != ' ')
+	if (g_sChar.playerdir == 'v' && mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y + 1;
 		return ch = mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X];
 	}
-	if (g_sChar.playerdir == 'l' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != ' ')
+	if (g_sChar.playerdir == '<' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X-1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
 		return ch = mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1];
 	}
-	if (g_sChar.playerdir == 'r' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != ' ')
+	if (g_sChar.playerdir == '>' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] != ' ')
 	{
 		ObjectPosition.X = g_sChar.m_cLocation.X + 1;
 		ObjectPosition.Y = g_sChar.m_cLocation.Y;
@@ -164,7 +164,7 @@ void nextlevel()
 
 void moveboulder()
 {
-	if (g_sChar.playerdir == 'u')
+	if (g_sChar.playerdir == '^')
 	{
 		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == 'P')
 		{
@@ -173,7 +173,7 @@ void moveboulder()
 			
 		}
 	}
-	if (g_sChar.playerdir == 'd')
+	if (g_sChar.playerdir == 'v')
 	{
 		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' '|| mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == 'P')
 		{
@@ -181,7 +181,7 @@ void moveboulder()
 			mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] = 'ê';
 		}
 	}
-	if (g_sChar.playerdir == 'l')
+	if (g_sChar.playerdir == '<')
 	{
 		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
 		{
@@ -193,7 +193,7 @@ void moveboulder()
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] = 'ê';
 		}
 	}
-	if (g_sChar.playerdir == 'r')
+	if (g_sChar.playerdir == '>')
 	{
 		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == 'P')
 		{
@@ -235,28 +235,28 @@ void healthpack()
 }
 void movement_interaction()
 {
-	if (g_sChar.playerdir == 'u')
+	if (g_sChar.playerdir == '^')
 	{
 		g_sChar.m_cLocation.Y--;
 		trap();
 		fallingfloor();
 		teleport();
 	}
-	if (g_sChar.playerdir == 'd')
+	if (g_sChar.playerdir == 'v')
 	{
 		g_sChar.m_cLocation.Y++;
 		trap();
 		fallingfloor();
 		teleport();
 	}
-	if (g_sChar.playerdir == 'l')
+	if (g_sChar.playerdir == '<')
 	{
 		g_sChar.m_cLocation.X--;
 		trap();
 		fallingfloor();
 		teleport();
 	}
-	if (g_sChar.playerdir == 'r')
+	if (g_sChar.playerdir == '>')
 	{
 		g_sChar.m_cLocation.X++;
 		trap();
