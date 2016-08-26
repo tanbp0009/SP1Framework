@@ -79,7 +79,6 @@ void init( void )
 	}
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
-    g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 18, L"Raster");
 }
@@ -291,7 +290,6 @@ void moveCharacter()
     if (g_abKeyPressed[K_SPACE])
     {
 		interactobjectinfront();
-        g_sChar.m_bActive = !g_sChar.m_bActive;
         bSomethingHappened = true;
     }
     if (bSomethingHappened)
@@ -583,12 +581,8 @@ void renderMap()
 void renderCharacter()
 {
     // Draw the location of the character
-    WORD charColor = 0x0C;
+    WORD charColor = 0x0A;
 
-    if (g_sChar.m_bActive)
-    {
-        charColor = 0x0A;
-    }
     g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.playerdir, charColor);
 }
 

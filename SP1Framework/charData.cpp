@@ -36,7 +36,6 @@ struct SGameChar loadChar(struct SGameChar g_sChar)
 		level = std::stoi(line);
 		myfile.close();
 	}
-	g_sChar.m_bActive = true;
 	return g_sChar;
 }
 
