@@ -44,20 +44,21 @@ void ice_movement_loop()
 	b = 0;
 	while (ice_check() == true)
 	{
-		ice_movement();
-		movement_interaction();
-		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ')
-		{
-			break;
-		}
-		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#' || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°'))
-		{
+			ice_movement();
 			movement_interaction();
-			ice_check();
-		}
-		if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] != '°' && (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°'))
-		{
-			break;
-		}
+			if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ')
+			{
+				break;
+			}
+			if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#' || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°'))
+			{
+				movement_interaction();
+				ice_check();
+			}
+			if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
+			{
+				movement_interaction();
+				break;
+			}
 	};
 }
