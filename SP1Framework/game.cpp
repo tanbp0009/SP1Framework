@@ -660,25 +660,34 @@ void renderInstruction()
 
 void renderWin()
 {
-	SetMap();
+	bool bSomethingHappened = false;
 	std::string Menu[2] = { " Yes ", " No " };
-	std::string Y = { "<Yes>" };
-	std::string N = { "<No" };
+	std::string no = { "<No>" };
+	std::string yes = { "<Yes>" };
+	std::stringstream score;
 	COORD c = g_Console.getConsoleSize();
+	SetMap();
 	c.Y = 12;
 	c.X = 68;
-	g_Console.writeToBuffer(c, "Restart?", 0x84);
+	g_Console.writeToBuffer(c, score.str(), 0x03);
+	c.Y = 16;
+	g_Console.writeToBuffer(c, "Restart?", 0x03);
 	c.Y += 4;
 	c.X = 71;
-	if (g_abKeyPressed[K_UP])
+	if (g_abKeyPressed[K_LEFT])
 		ws = 0;
-	else if (g_abKeyPressed[K_DOWN])
+	else if (g_abKeyPressed[K_RIGHT])
 		ws = 1;
 	switch (ws)
 	{
-		g_Console.writeToBuffer(c, Y, 0x06);
-		c.Y += 2;
+	case 0:
+		g_Console.writeToBuffer(c, yes, 0x06);
+		c.X = c.X / 2 + 32;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
 		if (g_abKeyPressed[K_SPACE])
 		{
 			NewLevel();
@@ -688,11 +697,21 @@ void renderWin()
 		break;
 	case 1:
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
-		c.Y += 2;
-		g_Console.writeToBuffer(c, N, 0x06);
+		c.X = c.X / 2 + 32;
+		g_Console.writeToBuffer(c, no, 0x06);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
 		if (g_abKeyPressed[K_SPACE])
 			g_bQuitGame = true;
 		break;
+	}
+	if (bSomethingHappened)
+	{
+		// set the bounce time to some time in the future to prevent accidental triggers
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+		//bSomethingHappened = false;
 	}
 }
 //-------------------------------------------------------

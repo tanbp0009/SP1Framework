@@ -297,6 +297,7 @@ void crown()
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] = 'ß')
 	{
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
-		g_eGameState = S_WIN;
+		level = 4;
+		g_eGameState = S_LOADLEVEL;
 	}
 }

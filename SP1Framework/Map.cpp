@@ -164,7 +164,7 @@ void savelevel(int Inlevel)
 		filelocation = "save/Instruction.txt";
 		break;
 	case 4:
-		filelocation = "config/Win.txt";
+		filelocation = "save/Win.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -184,9 +184,7 @@ void savelevel(int Inlevel)
 	case 19:
 		filelocation = "save/Game_Over.txt";
 		break;
-	case 20:
-		filelocation = "save/Win.txt";
-		break;
+
 	}
 
 	std::ofstream myfile(filelocation);
@@ -238,7 +236,7 @@ void loadLevel()
 		g_eGameState = S_INSTRUCTION;
 
 	}
-	if (level == 20)
+	if (level == 4)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_WIN;
@@ -286,9 +284,6 @@ void GetSavedMap(int Inlevel)
 		break;
 	case 19:
 		filelocation = "config/Game_Over.txt";
-		break;
-	case 20:
-		filelocation = "save/Win.txt";
 		break;
 	}
 	char ch;
