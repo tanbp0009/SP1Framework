@@ -9,7 +9,6 @@
 #include <sstream>
 #include "ice.h"
 
-char buttondir;
 int level;
 int gmmc;
 int ggoc;
@@ -50,13 +49,13 @@ void init( void )
 	nameActive = false;
 	nameBounceTime = 0;
 	name = "          ";
-	buttondir = '^';
 	level = 0;
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
 	ws = 0;
 	/*brnum = 0;*/
+	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
 	g_dEnemyBounceTime = 0;
@@ -220,96 +219,68 @@ void moveCharacter()
     // providing a beep sound whenver we shift the character
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
-		g_sChar.playerdir = 'u';
+		g_sChar.playerdir = '^';
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '0')
 		{
 			//Beep(1440, 30);
-			if (level == 16)
+			if (ice_check() == false)
 			{
-				if (ice_check() == false)
-				{
-					movement_interaction();
-				}
-				else
-				{
-					ice_movement_loop();
-				}
+				movement_interaction();
 			}
 			else
 			{
-				movement_interaction();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
 	}
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		g_sChar.playerdir = 'l';
+		g_sChar.playerdir = '<';
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '/' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '0')
 		{
 			//Beep(1440, 30);
-			if (level == 16)
+			if (ice_check() == false)
 			{
-				if (ice_check() == false)
-				{
-					movement_interaction();
-				}
-				else
-				{
-					ice_movement_loop();
-				}
+				movement_interaction();
 			}
 			else
 			{
-				movement_interaction();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
 	}
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
-		g_sChar.playerdir = 'd';
+		g_sChar.playerdir = 'v';
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '0')
 		{
 			//Beep(1440, 30);
-			if (level == 16)
+			if (ice_check() == false)
 			{
-				if (ice_check() == false)
-				{
-					movement_interaction();
-				}
-				else
-				{
-					ice_movement_loop();
-				}
+				movement_interaction();
 			}
 			else
 			{
-				movement_interaction();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
 	}
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		g_sChar.playerdir = 'r';
+		g_sChar.playerdir = '>';
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '/' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '0')
 		{
 			//Beep(1440, 30);
-			if (level == 16)
+			if (ice_check() == false)
 			{
-				if (ice_check() == false)
-				{
-					movement_interaction();
-				}
-				else
-				{
-					ice_movement_loop();
-				}
+				movement_interaction();
 			}
 			else
 			{
-				movement_interaction();
+				ice_movement_loop();
 			}
 			bSomethingHappened = true;
 		}
@@ -615,23 +586,7 @@ void renderCharacter()
     {
         charColor = 0x0A;
     }
-	if (g_sChar.playerdir == 'u')
-	{
-		buttondir = '^';
-	}
-	if (g_sChar.playerdir == 'd')
-	{
-		buttondir = 'v';
-	}
-	if (g_sChar.playerdir == 'l')
-	{
-		buttondir = '<';
-	}
-	if (g_sChar.playerdir == 'r')
-	{
-		buttondir = '>';
-	}
-    g_Console.writeToBuffer(g_sChar.m_cLocation, buttondir, charColor);
+    g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.playerdir, charColor);
 }
 
 void renderFramerate()
