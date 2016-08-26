@@ -65,6 +65,8 @@ void interactobjectinfront()
 		break;
 	case '-': VaultRoomPuzzleDoor();
 		break;
+	case 'ß': crown();
+		break;
 	//case '§': lightswitch();
 	//	break;
 	}
@@ -288,5 +290,13 @@ void VaultRoomPuzzleDoor()
 	if (floortrue == 40 || floortrue == 0)
 	{
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+	}
+}
+void crown()
+{
+	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] = 'ß')
+	{
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		g_eGameState = S_WIN;
 	}
 }

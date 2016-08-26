@@ -20,4 +20,5 @@ void teletospawn();
 void healthpack();
 void movement_interaction();
 void VaultRoomPuzzleDoor();
+void crown();
 //void lightswitch();
