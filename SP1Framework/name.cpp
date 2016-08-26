@@ -6,6 +6,8 @@ int numberOfChar;
 extern double g_dElapsedTime;
 bool nameActive;
 extern Console g_Console;
+extern int level;
+extern EGAMESTATES g_eGameState;
 
 void enterName()
 {
@@ -37,6 +39,12 @@ void enterName()
 		// set the bounce time to some time in the future to prevent accidental triggers
 		nameBounceTime = g_dElapsedTime + 0.3; // 125ms should be enough
 		nameActive = true;
+	}
+	if (isKeyPressed(VK_RETURN) && numberOfChar != 0)
+	{
+		NewLevel();
+		level = 15;
+		g_eGameState = S_LOADLEVEL;
 	}
 	g_Console.writeToBuffer(c, name, 0x0F);
 }

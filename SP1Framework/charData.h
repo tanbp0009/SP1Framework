@@ -6,3 +6,4 @@
 
 void saveChar(struct SGameChar g_sChar);
 struct SGameChar loadChar(struct SGameChar g_sChar);
+int getNumberOfSaveFile();

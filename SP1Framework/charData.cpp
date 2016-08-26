@@ -3,7 +3,7 @@ extern int level;
 
 void saveChar(struct SGameChar g_sChar)
 {
-	std::ofstream myfile("save/Save_Data.txt");
+	std::ofstream myfile("save/Save_Data1.txt");
 	if (myfile.is_open())
 	{
 		myfile << g_sChar.playerdir << "\n";
@@ -19,7 +19,7 @@ void saveChar(struct SGameChar g_sChar)
 struct SGameChar loadChar(struct SGameChar g_sChar)
 {
 	std::string line;
-	std::ifstream myfile("save/Save_Data.txt");
+	std::ifstream myfile("save/Save_Data1.txt");
 	if (myfile.is_open())
 	{
 		getline(myfile, line);
@@ -38,4 +38,20 @@ struct SGameChar loadChar(struct SGameChar g_sChar)
 	}
 	g_sChar.m_bActive = true;
 	return g_sChar;
+}
+
+int getNumberOfSaveFile()
+{
+	int numberOfSaveFiles = 0;
+	std::string filename = "save/Save_Data";
+	for (int i = 0; i < 4; i++)
+	{
+		filename += char(i);
+		filename += ".txt";
+		if (std::ifstream(filename))
+		{
+			numberOfSaveFiles++;
+		}
+	}
+	return numberOfSaveFiles;
 }
