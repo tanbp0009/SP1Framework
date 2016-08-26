@@ -672,13 +672,13 @@ void renderWin()
 	std::stringstream score;
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
-	c.Y = 12;
-	c.X = 68;
+	c.Y = 10;
+	c.X = 62;
 	g_Console.writeToBuffer(c, score.str(), 0x03);
 	c.Y = 16;
 	g_Console.writeToBuffer(c, "Restart?", 0x03);
 	c.Y += 4;
-	c.X = 71;
+	c.X = 68;
 	if (g_abKeyPressed[K_LEFT])
 		ws = 0;
 	else if (g_abKeyPressed[K_RIGHT])
@@ -686,9 +686,9 @@ void renderWin()
 	switch (ws)
 	{
 	case 0:
-		g_Console.writeToBuffer(c, yes, 0x06);
-		c.X = c.X / 2 + 32;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		c.X = 60;
+		g_Console.writeToBuffer(c, yes, 0x06);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
@@ -701,9 +701,9 @@ void renderWin()
 		}
 		break;
 	case 1:
-		g_Console.writeToBuffer(c, Menu[0], 0x07);
-		c.X = c.X / 2 + 32;
-		g_Console.writeToBuffer(c, no, 0x06);
+		g_Console.writeToBuffer(c, no, 0x07);
+		c.X = 60;
+		g_Console.writeToBuffer(c, Menu[0], 0x06);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
