@@ -9,7 +9,6 @@
 #include <sstream>
 #include "ice.h"
 
-char buttondir;
 int level;
 int gmmc;
 int ggoc;
@@ -50,13 +49,13 @@ void init( void )
 	nameActive = false;
 	nameBounceTime = 0;
 	name = "          ";
-	buttondir = '^';
 	level = 0;
 	g_sChar.lives = 3;
 	gmmc = 0;
 	ggoc = 0;
 	ws = 0;
 	/*brnum = 0;*/
+	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
 	g_dEnemyBounceTime = 0;
@@ -587,22 +586,6 @@ void renderCharacter()
     {
         charColor = 0x0A;
     }
-	//if (g_sChar.playerdir == 'u')
-	//{
-	//	buttondir = '^';
-	//}
-	//if (g_sChar.playerdir == 'd')
-	//{
-	//	buttondir = 'v';
-	//}
-	//if (g_sChar.playerdir == 'l')
-	//{
-	//	buttondir = '<';
-	//}
-	//if (g_sChar.playerdir == 'r')
-	//{
-	//	buttondir = '>';
-	//}
     g_Console.writeToBuffer(g_sChar.m_cLocation, g_sChar.playerdir, charColor);
 }
 
