@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <sstream>
 #include "ice.h"
+#include "name.h"
 
 int level;
 int gmmc;
@@ -184,6 +185,8 @@ void render()
 	case S_INSTRUCTION: renderInstruction();
 		break;
 	case S_WIN: renderWin();
+		break;
+	case S_NAME: enterName();
 		break;
 	/*case S_BLACKROOM: renderBlackRoom();
 		break;*/
@@ -406,7 +409,7 @@ void renderMainMenu()
 		{
 			NewLevel();
 			bSomethingHappened = true;
-			level = 15;
+			level = 5;
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;

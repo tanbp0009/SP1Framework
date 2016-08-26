@@ -9,10 +9,10 @@ extern Console g_Console;
 
 void enterName()
 {
-
-	COORD c;
-	c.Y = 2;
-	c.X = 1;
+	SetMap();
+	COORD c = g_Console.getConsoleSize();
+	c.Y = 13;
+	c.X = c.X / 2 - 9;
 	if (nameBounceTime < g_dElapsedTime)
 	{
 		if (isKeyPressed(VK_BACK) && numberOfChar !=0)

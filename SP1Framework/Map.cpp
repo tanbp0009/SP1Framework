@@ -87,9 +87,11 @@ void SetMap()
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
-			case',':case'.':case'-':case'"':case'_':case'\\':case'=':case'|':case'/':case'l':case'\'':case'O':
+			case',':case'.':case'"':case'_':case'\\':case'=':case'|':case'/':case'l':case'\'':case'O':
 				if (level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
+				else if (level == 5)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06); 
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
@@ -101,6 +103,8 @@ void SetMap()
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else if (level == 4)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x05);
+				else if (level == 5)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 				{
 					door2coord = setmapcoord;
@@ -114,6 +118,8 @@ void SetMap()
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else if (level == 4)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x05);
+				else if (level == 5)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 				{
 					doorcoord = setmapcoord;
@@ -146,14 +152,32 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
 				else if (level == 4)
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else if (level == 5)
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06); 
 				else
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 				case '<': case '>':
 				if (level == 4)
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0D);
+				else if (level == 5)
+				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				break;
+				case '-':
+				if (level == 19)
+						g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
+				else if (level == 5)
+						g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				break;
+				case '`': case '~': case ':':
+				if (level == 5)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
@@ -182,6 +206,9 @@ void savelevel(int Inlevel)
 		break;
 	case 4:
 		filelocation = "save/Win.txt";
+		break;
+	case 5:
+		filelocation = "save/Name.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -259,6 +286,11 @@ void loadLevel()
 		g_eGameState = S_WIN;
 
 	}
+	if (level == 5)
+	{
+		GetSavedMap(level);
+		g_eGameState = S_NAME;
+	}
 }
 
 void GetSavedMap(int Inlevel)	
@@ -280,6 +312,9 @@ void GetSavedMap(int Inlevel)
 		break;
 	case 4:
 		filelocation = "config/Win.txt";
+		break;
+	case 5:
+		filelocation = "config/Name.txt";
 		break;
 	case 13:
 		filelocation = "save/Light.txt";
@@ -334,4 +369,5 @@ void NewLevel()
 	GetNewMap("Game_Over.txt");
 	GetNewMap("Light.txt");
 	GetNewMap("Win.txt");
+	GetNewMap("Name.txt");
 }
