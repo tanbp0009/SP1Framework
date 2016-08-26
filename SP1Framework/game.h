@@ -8,6 +8,7 @@
 #include "ice.h"
 #include "charData.h"
 #include "Enemy.h"
+#include "name.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -84,4 +85,5 @@ void renderitems();
 void renderInstruction();
 void renderBlackRoom();
 void renderWin();
+void enterName();
 #endif // _GAME_H

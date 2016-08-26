@@ -33,7 +33,10 @@ extern char mapCurrent[25][80];
 extern SGameEnemy g_sEnemy;
 extern double g_dEnemyBounceTime;
 extern double g_dEnemyDamageTime;
-
+extern double nameBounceTime;
+extern bool nameActive;
+extern std::string name;
+extern int numberOfChar;
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
 //            Initialize variables, allocate memory, load data from file, etc. 
@@ -43,6 +46,10 @@ extern double g_dEnemyDamageTime;
 //--------------------------------------------------------------
 void init( void )
 {
+	numberOfChar = 0;
+	nameActive = false;
+	nameBounceTime = 0;
+	name = "          ";
 	buttondir = '^';
 	level = 0;
 	g_sChar.lives = 3;
@@ -113,8 +120,8 @@ void getInput( void )
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_2] = isKeyPressed('2');
 	g_abKeyPressed[K_1] = isKeyPressed('1');
-	g_abKeyPressed[K_I] = isKeyPressed(0x49);
-	g_abKeyPressed[K_H] = isKeyPressed(0x48);
+	g_abKeyPressed[K_I] = isKeyPressed(73);
+	g_abKeyPressed[K_H] = isKeyPressed(72);
 }
 
 //--------------------------------------------------------------
@@ -352,12 +359,10 @@ void clearScreen()
 
 void renderInventory()
 {
-
 	SetMap();
 	renderFramerate();
 	renderitems();
 	processUserInput();
-	
 }
 
 void renderMainMenu()

@@ -86,6 +86,7 @@
     <ClCompile Include="charData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="name.cpp" />
     <ClCompile Include="walkover.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,7 @@
     <ClInclude Include="InteractiveObjects.h" />
     <ClInclude Include="charData.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="name.h" />
     <ClInclude Include="walkover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

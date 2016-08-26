@@ -1,6 +1,4 @@
 #include "Enemy.h"
-#include "InteractiveObjects.h"
-#include "game.h"
 
 double g_dEnemyBounceTime;
 double g_dEnemyDamageTime;
