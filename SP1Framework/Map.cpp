@@ -6,7 +6,7 @@ extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
 extern SGameEnemy g_sEnemy;
 extern int level;
-extern int gmmc;
+extern int selection;
 char mapCurrent[25][80];
 COORD doorcoord;
 COORD door2coord;

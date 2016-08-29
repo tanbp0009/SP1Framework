@@ -11,9 +11,7 @@
 #include "name.h"
 
 int level;
-int gmmc;
-int ggoc;
-int ws;
+int selection;
 int oldlevel;
 
 double  g_dElapsedTime;
@@ -51,9 +49,7 @@ void init( void )
 	name = "          ";
 	level = 0;
 	g_sChar.lives = 3;
-	gmmc = 0;
-	ggoc = 0;
-	ws = 0;
+	selection = 0;
 	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
@@ -377,7 +373,7 @@ void renderMainMenu()
 	g_Console.writeToBuffer(c, "Press <Space> to Select:", 0x03);
 	c.X = c.X / 2 + 16;
 	c.Y += 2;
-	switch (gmmc)
+	switch (selection)
 	{
 	case 0:
 		g_Console.writeToBuffer(c, arrow[0], 0x06);
@@ -397,12 +393,12 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_UP])
 		{
 			bSomethingHappened = true;
-			gmmc = 0;
+			selection = 0;
 		}
 		if (g_abKeyPressed[K_DOWN])
 		{
 			bSomethingHappened = true;
-			gmmc = 1;
+			selection = 1;
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -430,12 +426,12 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_UP])
 		{
 			bSomethingHappened = true;
-			gmmc = 0;
+			selection = 0;
 		}
 		if (g_abKeyPressed[K_DOWN])
 		{
 			bSomethingHappened = true;
-			gmmc = 2;
+			selection = 2;
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -463,12 +459,12 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_UP])
 		{
 			bSomethingHappened = true;
-			gmmc = 1;
+			selection = 1;
 		}
 		if (g_abKeyPressed[K_DOWN])
 		{
 			bSomethingHappened = true;
-			gmmc = 3;
+			selection = 3;
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -495,12 +491,12 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_UP])
 		{
 			bSomethingHappened = true;
-			gmmc = 2;
+			selection = 2;
 		}
 		if (g_abKeyPressed[K_DOWN])
 		{
 			bSomethingHappened = true;
-			gmmc = 3;
+			selection = 3;
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
@@ -537,10 +533,10 @@ void renderGameOver()
 	c.X = c.X / 2 + 25;
 	c.Y += 2;
 	if (g_abKeyPressed[K_LEFT])
-		ggoc = 0;
+		selection = 0;
 	else if (g_abKeyPressed[K_RIGHT])
-		ggoc = 1;
-	switch (ggoc)
+		selection = 1;
+	switch (selection)
 	{
 	case 0:
 		g_Console.writeToBuffer(c, yes, 0x06);
@@ -700,10 +696,10 @@ void renderWin()
 	c.Y += 4;
 	c.X = 68;
 	if (g_abKeyPressed[K_LEFT])
-		ws = 0;
+		selection = 0;
 	else if (g_abKeyPressed[K_RIGHT])
-		ws = 1;
-	switch (ws)
+		selection = 1;
+	switch (selection)
 	{
 	case 0:
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
