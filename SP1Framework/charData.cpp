@@ -1,10 +1,12 @@
 #include "charData.h"
 extern int level;
+extern EGAMESTATES g_eGameState;
 extern Console g_Console;
 extern int selection;
 extern double g_dBounceTime;
 extern double g_dElapsedTime;
 extern bool g_abKeyPressed[K_COUNT];
+extern int playernum;
 
 void saveChar(struct SGameChar g_sChar)
 {
@@ -63,7 +65,7 @@ int getNumberOfSaveFile()
 	return numberOfSaveFiles;
 }
 
-void renderSaveFile()
+void renderSaveFile(struct SGameChar g_sChar)
 {
 	bool bSomethingHappened = false;
 	SetMap();
@@ -205,6 +207,34 @@ void renderSaveFile()
 			if (selection == 2)
 			{
 				selection = 3;
+			}
+		}
+		if (g_abKeyPressed[K_SPACE])
+		{
+			switch (selection)
+			{
+			case 0:
+				playernum = 0;
+				loadChar(g_sChar);
+				g_eGameState = S_LOADLEVEL;
+				break;
+			case 1:
+				playernum = 1;
+				loadChar(g_sChar);
+				g_eGameState = S_LOADLEVEL;
+				break;
+			case 2:
+				playernum = 2;
+				loadChar(g_sChar);
+				g_eGameState = S_LOADLEVEL;
+				break;
+			case 3:
+				playernum = 3;
+				loadChar(g_sChar);
+				g_eGameState = S_LOADLEVEL;
+				break;
+
+
 			}
 		}
 	}
