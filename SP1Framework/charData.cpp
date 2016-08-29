@@ -6,6 +6,7 @@ void saveChar(struct SGameChar g_sChar)
 	std::ofstream myfile("save/Save_Data1.txt");
 	if (myfile.is_open())
 	{
+		myfile << g_sChar.name << "\n";
 		myfile << g_sChar.playerdir << "\n";
 		myfile << g_sChar.m_cLocation.Y << "\n";
 		myfile << g_sChar.m_cLocation.X << "\n";
@@ -22,6 +23,8 @@ struct SGameChar loadChar(struct SGameChar g_sChar)
 	std::ifstream myfile("save/Save_Data1.txt");
 	if (myfile.is_open())
 	{
+		getline(myfile, line);
+		g_sChar.name = line;
 		getline(myfile, line);
 		g_sChar.playerdir = line[0];
 		getline(myfile, line);

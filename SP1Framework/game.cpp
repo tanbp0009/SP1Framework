@@ -315,7 +315,7 @@ void processUserInput()
 		saveChar(g_sChar);
 		g_bQuitGame = true;
 	}
-	if (g_abKeyPressed[K_I] && level != 2)
+	if (g_abKeyPressed[K_I] && level != 2 && level != 3)
 	{
 		savelevel(level);
 		oldlevel = level;
@@ -329,7 +329,7 @@ void processUserInput()
 		g_eGameState = S_LOADLEVEL;
 		bSomethingHappened = true;
 	}
-	if (g_abKeyPressed[K_H] && level != 3)
+	if (g_abKeyPressed[K_H] && level != 3 && level !=2)
 	{
 		savelevel(level);
 		oldlevel = level;

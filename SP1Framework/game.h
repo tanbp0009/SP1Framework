@@ -50,6 +50,7 @@ enum EGAMESTATES
 // struct for the game character
 struct SGameChar
 {
+	std::string name;
     COORD m_cLocation;
     bool  m_bActive;
 	char playerdir;
