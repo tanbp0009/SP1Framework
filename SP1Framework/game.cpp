@@ -187,6 +187,8 @@ void render()
 		break;
 	case S_NAME: enterName();
 		break;
+	case S_LOADSAVE: renderSaveFile();
+		break;
 	}
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
@@ -437,7 +439,8 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
-			g_sChar = loadChar(g_sChar);
+			level = 6;
+			//g_sChar = loadChar(g_sChar);
 			bSomethingHappened = true;
 			g_eGameState = S_LOADLEVEL;
 		}

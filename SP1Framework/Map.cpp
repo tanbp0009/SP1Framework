@@ -207,19 +207,19 @@ void savelevel(int Inlevel)
 	case 5:
 		filelocation = "save/Name.txt";
 		break;
-	case 6:
+	case 7:
 		filelocation = "save/Light_01.txt";
 		break;
-	case 7:
+	case 8:
 		filelocation = "save/Light_02.txt";
 		break;
-	case 8:
+	case 9:
 		filelocation = "save/Light_03.txt";
 		break;
-	case 9:
+	case 10:
 		filelocation = "save/Light_04.txt";
 		break;
-	case 10:
+	case 11:
 		filelocation = "save/Light_05.txt";
 		break;
 	case 14:
@@ -260,7 +260,7 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 6 || level == 7 || level == 8 || level == 9 || level == 10 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
+	if (level == 7 || level == 8 || level == 9 || level == 10 || level == 11 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
@@ -303,6 +303,11 @@ void loadLevel()
 		GetSavedMap(level);
 		g_eGameState = S_NAME;
 	}
+	if (level == 6)
+	{
+		GetSavedMap(level);
+		g_eGameState = S_LOADSAVE;
+	}
 }
 
 void GetSavedMap(int Inlevel)	
@@ -329,18 +334,21 @@ void GetSavedMap(int Inlevel)
 		filelocation = "config/Name.txt";
 		break;
 	case 6:
-		filelocation = "save/Light_01.txt";
+		filelocation = "config/Load_Save_File.txt";
 		break;
 	case 7:
-		filelocation = "save/Light_02.txt";
+		filelocation = "save/Light_01.txt";
 		break;
 	case 8:
-		filelocation = "save/Light_03.txt";
+		filelocation = "save/Light_02.txt";
 		break;
 	case 9:
-		filelocation = "save/Light_04.txt";
+		filelocation = "save/Light_03.txt";
 		break;
 	case 10:
+		filelocation = "save/Light_04.txt";
+		break;
+	case 11:
 		filelocation = "save/Light_05.txt";
 		break;
 	case 14:
@@ -398,4 +406,5 @@ void NewLevel()
 	GetNewMap("Game_Over.txt");
 	GetNewMap("Win.txt");
 	GetNewMap("Name.txt");
+	GetNewMap("Load_Save_File.txt");
 }

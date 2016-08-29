@@ -45,6 +45,7 @@ enum EGAMESTATES
 	S_BLACKROOM,
 	S_WIN,
 	S_NAME,
+	S_LOADSAVE,
 };
 
 // struct for the game character

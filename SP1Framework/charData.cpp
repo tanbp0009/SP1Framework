@@ -1,9 +1,10 @@
 #include "charData.h"
 extern int level;
+extern Console g_Console;
 
 void saveChar(struct SGameChar g_sChar)
 {
-	std::ofstream myfile("save/Save_Data1.txt");
+	std::ofstream myfile("save/Save_Data.txt");
 	if (myfile.is_open())
 	{
 		myfile << g_sChar.name << "\n";
@@ -20,7 +21,7 @@ void saveChar(struct SGameChar g_sChar)
 struct SGameChar loadChar(struct SGameChar g_sChar)
 {
 	std::string line;
-	std::ifstream myfile("save/Save_Data1.txt");
+	std::ifstream myfile("save/Save_Data.txt");
 	if (myfile.is_open())
 	{
 		getline(myfile, line);
@@ -56,4 +57,74 @@ int getNumberOfSaveFile()
 		}
 	}
 	return numberOfSaveFiles;
+}
+
+void renderSaveFile()
+{
+	SetMap();
+
+	COORD c;
+	c.X = 15;
+	c.Y = 12;
+	std::ifstream myfile1("save/save1/Save_Data.txt");
+	if (myfile1.is_open())
+	{
+		std::string line;
+		getline(myfile1, line);
+
+		g_Console.writeToBuffer(c, line, 0x03);
+	}
+	else
+	{
+		g_Console.writeToBuffer(c, "Empty File", 0x03);
+	}
+
+	c.X = 55;
+	std::ifstream myfile2("save/save2/Save_Data.txt");
+	if (myfile2.is_open())
+	{
+		std::string line;
+		getline(myfile2, line);
+
+		g_Console.writeToBuffer(c, line, 0x03);
+	}
+	else
+	{
+		g_Console.writeToBuffer(c, "Empty File", 0x03);
+	}
+
+	c.X = 15;
+	c.Y = 18;
+	std::ifstream myfile3("save/save3/Save_Data.txt");
+	if (myfile3.is_open())
+	{
+		std::string line;
+		getline(myfile3, line);
+
+		g_Console.writeToBuffer(c, line, 0x03);
+	}
+	else
+	{
+		g_Console.writeToBuffer(c, "Empty File", 0x03);
+	}
+
+	c.X = 55;
+	std::ifstream myfile4("save/save4/Save_Data.txt");
+	if (myfile4.is_open())
+	{
+		std::string line;
+		getline(myfile4, line);
+
+		g_Console.writeToBuffer(c, line, 0x03);
+	}
+	else
+	{
+		g_Console.writeToBuffer(c, "Empty File", 0x03);
+	}
+}
+
+bool checkFile(const char *fileName)
+{
+	std::ifstream infile(fileName);
+	return infile.good();
 }
