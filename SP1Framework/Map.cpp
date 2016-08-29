@@ -54,14 +54,9 @@ void SetMap()
 			case 'Ÿ':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
 				break;
-			case '§':
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
-				break;
 			case 'è':
-				if (level == 13)
-				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
-				else
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				break;
 			case 'Ü':
 				if (level == 4)
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
@@ -71,8 +66,6 @@ void SetMap()
 			case 'Û':
 				if (level == 0)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
-				else if (level == 13)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else if (level == 4)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else
@@ -99,7 +92,7 @@ void SetMap()
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				break;
 			case '(':
-				if (level == 1 || level == 3)
+				if (level == 1)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 				else if (level == 4)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x05);
@@ -112,10 +105,8 @@ void SetMap()
 				}
 				break;
 			case ')':
-				if (level == 1 || level == 3 || level == 19)
+				if (level == 1 || level == 19)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
-				else if (level == 13)
-					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
 				else if (level == 4)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x05);
 				else if (level == 5)
@@ -179,6 +170,12 @@ void SetMap()
 				else
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				break;
+				case '§':
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0E);
+					break;
+				case '+':
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
+					break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 			}
@@ -209,6 +206,21 @@ void savelevel(int Inlevel)
 		break;
 	case 5:
 		filelocation = "save/Name.txt";
+		break;
+	case 6:
+		filelocation = "save/Light_01.txt";
+		break;
+	case 7:
+		filelocation = "save/Light_02.txt";
+		break;
+	case 8:
+		filelocation = "save/Light_03.txt";
+		break;
+	case 9:
+		filelocation = "save/Light_04.txt";
+		break;
+	case 10:
+		filelocation = "save/Light_05.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -248,7 +260,7 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
-	if (level == 13 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
+	if (level == 6 || level == 7 || level == 8 || level == 9 || level == 10 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
 		g_eGameState = S_GAME;
@@ -316,8 +328,20 @@ void GetSavedMap(int Inlevel)
 	case 5:
 		filelocation = "config/Name.txt";
 		break;
-	case 13:
-		filelocation = "save/Light.txt";
+	case 6:
+		filelocation = "save/Light_01.txt";
+		break;
+	case 7:
+		filelocation = "save/Light_02.txt";
+		break;
+	case 8:
+		filelocation = "save/Light_03.txt";
+		break;
+	case 9:
+		filelocation = "save/Light_04.txt";
+		break;
+	case 10:
+		filelocation = "save/Light_05.txt";
 		break;
 	case 14:
 		filelocation = "save/Vault_Key_1.txt";
@@ -361,13 +385,17 @@ void NewLevel()
 	GetNewMap("Main_Menu.txt");
 	GetNewMap("Inventory.txt");
 	GetNewMap("Instruction.txt");
+	GetNewMap("Light_01.txt");
+	GetNewMap("Light_02.txt");
+	GetNewMap("Light_03.txt");
+	GetNewMap("Light_04.txt");
+	GetNewMap("Light_05.txt");
 	GetNewMap("Vault_Key_1.txt");
 	GetNewMap("Vault_Connect.txt");
 	GetNewMap("Vault_Key_2.txt");
 	GetNewMap("Vault_Key_3.txt");
 	GetNewMap("Vault_Room.txt");
 	GetNewMap("Game_Over.txt");
-	GetNewMap("Light.txt");
 	GetNewMap("Win.txt");
 	GetNewMap("Name.txt");
 }

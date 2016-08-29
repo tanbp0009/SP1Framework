@@ -21,4 +21,4 @@ void healthpack();
 void movement_interaction();
 void VaultRoomPuzzleDoor();
 void crown();
-//void lightswitch();
+void lightswitch();

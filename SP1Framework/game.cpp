@@ -14,7 +14,6 @@ int level;
 int gmmc;
 int ggoc;
 int ws;
-//int brnum;
 int oldlevel;
 
 double  g_dElapsedTime;
@@ -55,7 +54,6 @@ void init( void )
 	gmmc = 0;
 	ggoc = 0;
 	ws = 0;
-	/*brnum = 0;*/
 	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
 	g_sEnemy.m_bActive = false;
@@ -151,6 +149,8 @@ void update(double dt)
             break;
         case S_GAME: gameplay(); // gameplay logic when we are in the game
             break;
+		case S_BLACKROOM: gameplay();
+			break;
     }
 }
 //--------------------------------------------------------------
@@ -187,8 +187,6 @@ void render()
 		break;
 	case S_NAME: enterName();
 		break;
-	/*case S_BLACKROOM: renderBlackRoom();
-		break;*/
 	}
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
@@ -699,183 +697,3 @@ void renderWin()
 		//bSomethingHappened = false;
 	}
 }
-//-------------------------------------------------------
-//void renderBlackRoom()
-//{
-//	COORD c = g_Console.getConsoleSize();
-//	SetMap();
-//	switch (brnum)
-//	{
-//	case 0:
-//		c.Y = 10;
-//		c.X = 35;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛ  ÛÛÛÛ ÛÛÛ   Û Û Û ÛÛÛÛ  Û ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û        Û  Û  Û Û Û Û   ÛÛÛ   ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û        ÛÛ Û ÛÛ       Û     ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "            ÛÛÛ  ÛÛÛÛÛ ÛÛÛÛÛ  Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û        ÛÛ Û    Û         ÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û        Û  Û ÛÛÛÛ ÛÛÛÛÛÛÛ Û   ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛ  ÛÛÛÛ ÛÛ Û ÛÛ Û     ÛÛÛ ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "                   Û  §      ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛ Û ÛÛ Û     Û Û Û ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "      Û    ÛÛ ÛÛÛÛ ÛÛÛ ÛÛÛ Û ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "  Û  ÛÛÛ Û Û    ÛÛ     Û   Û  Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, " ÛÛÛ  Û  Û Û ÛÛ ÛÛÛÛÛÛ ÛÛÛÛÛÛ  ", 0x07);
-//		lightswitch();
-//		break;
-//	case 1:
-//		c.Y = 0;
-//		c.X = 50;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛÛ Û ÛÛ           Û Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û        ÛÛÛ ÛÛÛÛÛ Û    §  Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "      ÛÛÛÛÛÛ     Û     Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û Û ÛÛ   ÛÛÛ ÛÛÛÛÛÛÛ ÛÛÛ ÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û   Û ÛÛÛÛ         ÛÛÛ   Û Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û Û Û Û  ÛÛÛÛÛÛÛ  ÛÛ Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, " ÛÛÛo Û   ÛÛ  Û  ÛÛ  Û ÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û Û Û ÛÛÛ  ÛÛÛ  ÛÛ         Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "  Û Û Û ÛÛÛÛ  Û  ÛÛÛ     ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û Û Û   ÛÛÛ            Û   Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û       Û     ÛÛ ÛÛÛ ÛÛÛÛÛ Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "  ÛÛÛÛÛ ÛÛÛÛÛ  Û     Û       Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "  Û         ÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛ ÛÛÛÛÛÛÛ Û     Û      ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, " ÛÛ Û     ÛÛÛ ÛÛÛ Û ÛÛÛÛ ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "    Û         ÛÛ  Û  ÛÛ      Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, " ÛÛ Û     Û Û Û  ÛÛÛ  ÛÛ ÛÛ ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛ ÛÛÛ ÛÛÛ Û ÛÛ  Û  ÛÛÛ ÛÛ ÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, " ÛÛ     Û   Û  ÛÛ   ÛÛ    Û ÛÛ", 0x07);
-//		lightswitch();
-//		break;
-//	case 2:
-//		c.Y = 0;
-//		c.X = 0;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û          Û      Û   Û     Û Û           Û Û ÛÛÛ Û ÛÛÛ Û ÛÛ           Û Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛÛÛÛÛÛÛ Û ÛÛÛÛ Û Û Û ÛÛÛ Û   ÛÛÛÛ ÛÛÛÛ   Û   Û Û Û        ÛÛÛ ÛÛÛÛÛ Û       Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û  Û   Û   Û      Û Û     Û Û    Û Û    Û ÛÛÛ         ÛÛÛÛÛÛ     Û     Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û ÛÛÛÛ ÛÛÛÛÛ ÛÛ Û Û Û ÛÛÛ Û ÛÛÛÛÛÛ ÛÛÛÛÛÛ     Û Û Û Û ÛÛ   ÛÛÛ ÛÛÛÛÛÛÛ ÛÛÛ ÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û   Û    Û    Û   Û       Û   Û Û    ÛÛ   ÛÛÛ   Û   Û ÛÛÛÛ         ÛÛÛ   Û Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛ ÛÛ ÛÛ Û ÛÛ ÛÛÛ ÛÛÛ ÛÛÛ   Û     Û  ÛÛ  Û    Û Û Û Û Û Û  ÛÛÛÛÛÛÛ  ÛÛ Û     Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û    Û     Û   Û       ÛÛ  ÛÛ ÛÛÛÛ ÛÛÛÛ ÛÛÛÛ    ÛÛÛo Û   ÛÛ  Û  ÛÛ  Û ÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛ ÛÛ ÛÛÛ  §  ÛÛÛ ÛÛÛ ÛÛÛ Û   Û  Û            Û Û Û Û Û Û ÛÛÛ  ÛÛÛ  ÛÛ         Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û       Û     Û   Û   Û Û   ÛÛÛ ÛÛ ÛÛÛÛ  ÛÛÛÛ ÛÛÛ   Û Û Û ÛÛÛÛ  Û  ÛÛÛ     ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛ Û ÛÛ ÛÛ Û ÛÛ ÛÛÛÛÛ ÛÛÛ ÛÛÛ   Û  Û        Û  Û  Û Û Û Û   ÛÛÛ            Û   Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û  Û    Û Û                  Û ÛÛ        ÛÛ Û ÛÛ       Û     ÛÛ ÛÛÛ ÛÛÛÛÛ Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛ  ÛÛÛÛÛÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛ              ÛÛÛ  ÛÛÛÛÛ ÛÛÛÛÛ  Û     Û       Û", 0x07);
-//		lightswitch();
-//		break;
-//	case 3:
-//		c.Y = 0;
-//		c.X = 0;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û          Û      Û   Û    ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û          Û      Û   Û    ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û  Û   Û   Û      Û Û    ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û ÛÛÛÛ ÛÛÛÛÛ ÛÛ Û Û Û ÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û Û   Û    Û    Û   Û      ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛ ÛÛ ÛÛ Û ÛÛ ÛÛÛ ÛÛÛ ÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û    Û     Û   Û       Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û    Û     Û   Û       Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û       Û     Û   Û   Û Û  ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛ Û ÛÛ ÛÛ Û ÛÛ ÛÛÛÛÛ ÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û  Û    Û Û             ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛ  ÛÛÛÛÛÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û       Û                  ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛ ÛÛÛÛ Û ÛÛ ÛÛÛÛÛÛÛ ÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û       Û                 Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛ ÛÛ ÛÛÛ ÛÛÛÛÛ ÛÛÛÛÛÛÛ Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û            ÛÛ Û Û     Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û ÛÛ ÛÛÛÛÛ Û ÛÛ Û    §    Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û  Û Û   Û Û    Û Û     Û Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛ Û Û Û Û ÛÛÛ ÛÛ ÛÛÛÛÛÛÛ Û", 0x07);
-//		lightswitch();
-//		break;
-//	case 4:
-//		c.Y = 17;
-//		c.X = 18;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛ Û Û           ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û     Û ÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "        Û      Û      ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "Û     Û Û  Û  ÛÛÛ  Û  ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛ Û ÛÛÛ  Û  ÛÛÛ ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "           Û  ÛÛ ÛÛÛÛÛ", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛ Û è Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "           Û         Û", 0x07);
-//		c.Y += 1;
-//		g_Console.writeToBuffer(c, "ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ", 0x07);
-//		lightswitch();
-//		break;
-//	}
-//}
-//-------------------------------------------------------
