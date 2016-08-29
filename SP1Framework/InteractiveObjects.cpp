@@ -7,6 +7,7 @@ extern int level;
 extern EGAMESTATES g_eGameState;
 extern COORD doorcoord;
 extern COORD door2coord;
+//extern int brnum;
 
 char objectinfront;
 COORD ObjectPosition;
@@ -66,8 +67,8 @@ void interactobjectinfront()
 		break;
 	case 'ß': crown();
 		break;
-	case '§': lightswitch();
-		break;
+	//case '§': lightswitch();
+	//	break;
 	}
 }
 
@@ -264,15 +265,14 @@ void movement_interaction()
 	}
 }
 
-void lightswitch()
-{
-	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '§')
-	{
-		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
-		level += 1;
-		g_eGameState = S_LOADLEVEL;
-	}
-}
+//void lightswitch()
+//{
+//	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '§')
+//	{
+//		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+//		brnum += 1;
+//	}
+//}
 
 void VaultRoomPuzzleDoor()
 {

@@ -86,6 +86,7 @@ void renderInventory();
 void renderLives();
 void renderitems();
 void renderInstruction();
+void renderBlackRoom();
 void renderWin();
 void enterName();
 #endif // _GAME_H

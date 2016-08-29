@@ -43,7 +43,7 @@ void enterName()
 	if (isKeyPressed(VK_RETURN) && numberOfChar != 0)
 	{
 		NewLevel();
-		level = 6;
+		level = 15;
 		g_eGameState = S_LOADLEVEL;
 	}
 	g_Console.writeToBuffer(c, name, 0x0F);
