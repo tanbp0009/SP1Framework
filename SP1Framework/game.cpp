@@ -13,6 +13,7 @@
 int level;
 int selection;
 int oldlevel;
+int playernum;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -43,6 +44,7 @@ extern int numberOfChar;
 //--------------------------------------------------------------
 void init( void )
 {
+	playernum = 1;
 	numberOfChar = 0;
 	nameActive = false;
 	nameBounceTime = 0;
@@ -183,7 +185,7 @@ void render()
 		break;
 	case S_NAME: enterName();
 		break;
-	case S_LOADSAVE: renderSaveFile();
+	case S_LOADSAVE: renderSaveFile(g_sChar);
 		break;
 	}
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -303,7 +305,7 @@ void processUserInput()
     // quits the game if player hits the escape key
 	if (g_abKeyPressed[K_ESCAPE])
 	{
-		savelevel(level);
+		savelevel(level, std::to_string(playernum));
 		if (level == 3 || level == 2)
 		{
 			level = oldlevel;
@@ -313,7 +315,7 @@ void processUserInput()
 	}
 	if (g_abKeyPressed[K_I] && level != 2 && level != 3)
 	{
-		savelevel(level);
+		savelevel(level, std::to_string(playernum));
 		oldlevel = level;
 		level = 2;
 		g_eGameState = S_LOADLEVEL;
@@ -327,7 +329,7 @@ void processUserInput()
 	}
 	if (g_abKeyPressed[K_H] && level != 3 && level !=2)
 	{
-		savelevel(level);
+		savelevel(level, std::to_string(playernum));
 		oldlevel = level;
 		level = 3;
 		g_eGameState = S_LOADLEVEL;
@@ -402,7 +404,6 @@ void renderMainMenu()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
-			NewLevel();
 			bSomethingHappened = true;
 			level = 5;
 			g_eGameState = S_LOADLEVEL;

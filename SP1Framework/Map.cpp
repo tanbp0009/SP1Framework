@@ -1,6 +1,7 @@
 #include "Map.h"
 
 // defined in game.cpp
+extern int playernum;
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
@@ -17,7 +18,7 @@ void GetNewMap(std::string filelocation)
 	std::string fileaffix = "config/";
 	fileaffix += filelocation;
 	std::ifstream infile(fileaffix);
-	fileaffix = "save/";
+	fileaffix = "save/save1/";
 	fileaffix += filelocation;
 	std::ofstream outfile(fileaffix);
 	std::string content = "";
@@ -183,64 +184,63 @@ void SetMap()
 	}
 }
 
-void savelevel(int Inlevel)
+void savelevel(int Inlevel, std::string filedir)
 {
-	std::string filelocation;
-
+	std::string filelocation = "save/save1";
+	filelocation += filedir;
 	switch (Inlevel)
 	{
 	case 0:
-		filelocation = "save/Title_Game.txt";
+		filelocation += "/Title_Game.txt";
 		break;
 	case 1:
-		filelocation = "save/Main_Menu.txt";
+		filelocation += "/Main_Menu.txt";
 		break;
 	case 2:
-		filelocation = "save/Inventory.txt";
+		filelocation += "/Inventory.txt";
 		break;
 	case 3:
-		filelocation = "save/Instruction.txt";
+		filelocation += "/Instruction.txt";
 		break;
 	case 4:
-		filelocation = "save/Win.txt";
+		filelocation += "/Win.txt";
 		break;
 	case 5:
-		filelocation = "save/Name.txt";
+		filelocation += "/Name.txt";
 		break;
 	case 7:
-		filelocation = "save/Light_01.txt";
+		filelocation += "/Light_01.txt";
 		break;
 	case 8:
-		filelocation = "save/Light_02.txt";
+		filelocation += "/Light_02.txt";
 		break;
 	case 9:
-		filelocation = "save/Light_03.txt";
+		filelocation += "/Light_03.txt";
 		break;
 	case 10:
-		filelocation = "save/Light_04.txt";
+		filelocation += "/Light_04.txt";
 		break;
 	case 11:
-		filelocation = "save/Light_05.txt";
+		filelocation += "/Light_05.txt";
 		break;
 	case 14:
-		filelocation = "save/Vault_Key_1.txt";
+		filelocation += "/Vault_Key_1.txt";
 		break;
 	case 15:
-		filelocation = "save/Vault_Connect.txt";
+		filelocation += "/Vault_Connect.txt";
 		break;
 	case 16:
-		filelocation = "save/Vault_Key_2.txt";
+		filelocation += "/Vault_Key_2.txt";
 		break;
 	case 17:
-		filelocation = "save/Vault_Key_3.txt";
+		filelocation += "/Vault_Key_3.txt";
 		break;
 	case 18:
-		filelocation = "save/Vault_Room.txt";
+		filelocation += "/Vault_Room.txt";
 		break;
 	case 19:
-		filelocation = "save/Game_Over.txt";
+		filelocation += "/Game_Over.txt";
 		break;
-
 	}
 
 	std::ofstream myfile(filelocation);
@@ -263,55 +263,55 @@ void loadLevel()
 	selection = 0;
 	if (level == 7 || level == 8 || level == 9 || level == 10 || level == 11 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_GAME;
 	}
 	if (level == 19)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_GAMEOVER;
 	}
 	if (level == 1)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_MAINMENU;
 	}
 	if (level == 0)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_TITLE;
 	}
 	if (level == 2)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_INVENTORY;
 
 	}
 	if (level == 3)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_INSTRUCTION;
 
 	}
 	if (level == 4)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_WIN;
 
 	}
 	if (level == 5)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_NAME;
 	}
 	if (level == 6)
 	{
-		GetSavedMap(level);
+		GetSavedMap(level, std::to_string(playernum));
 		g_eGameState = S_LOADSAVE;
 	}
 }
 
-void GetSavedMap(int Inlevel)	
+void GetSavedMap(int Inlevel, std::string filedir)	
 {
 	std::string filelocation;
 	switch (Inlevel)
@@ -338,34 +338,54 @@ void GetSavedMap(int Inlevel)
 		filelocation = "config/Load_Save_File.txt";
 		break;
 	case 7:
-		filelocation = "save/Light_01.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Light_01.txt";
 		break;
 	case 8:
-		filelocation = "save/Light_02.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Light_02.txt";
 		break;
 	case 9:
-		filelocation = "save/Light_03.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Light_03.txt";
 		break;
 	case 10:
-		filelocation = "save/Light_04.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Light_04.txt";
 		break;
 	case 11:
-		filelocation = "save/Light_05.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Light_05.txt";
 		break;
 	case 14:
-		filelocation = "save/Vault_Key_1.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Vault_Key_1.txt";
 		break;
 	case 15:
-		filelocation = "save/Vault_Connect.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Vault_Connect.txt";
 		break;
 	case 16:
-		filelocation = "save/Vault_Key_2.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Vault_Key_2.txt";
 		break;
 	case 17:
-		filelocation = "save/Vault_Key_3.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Vault_Key_3.txt";
 		break;
 	case 18:
-		filelocation = "save/Vault_Room.txt";
+		filelocation = "save/save";
+		filelocation += filedir;
+		filelocation += "/Vault_Room.txt";
 		break;
 	case 19:
 		filelocation = "config/Game_Over.txt";
@@ -390,6 +410,7 @@ void GetSavedMap(int Inlevel)
 
 void NewLevel()
 {
+	GetNewMap("Save_Data.txt");
 	GetNewMap("Title_Game.txt");
 	GetNewMap("Main_Menu.txt");
 	GetNewMap("Inventory.txt");

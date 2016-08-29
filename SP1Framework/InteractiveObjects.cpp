@@ -7,6 +7,7 @@ extern int level;
 extern EGAMESTATES g_eGameState;
 extern COORD doorcoord;
 extern COORD door2coord;
+extern int playernum;
 
 char objectinfront;
 COORD ObjectPosition;
@@ -94,7 +95,7 @@ void something()
 
 void nextlevel()
 {
-	savelevel(level);
+	savelevel(level, std::to_string(playernum));
 	saveChar(g_sChar);
 	switch (level)
 	{
@@ -216,7 +217,7 @@ void teletospawn()
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
 
-	savelevel(level);
+	savelevel(level, std::to_string(playernum));
 	saveChar(g_sChar);
 	level = 15;
 	g_eGameState = S_LOADLEVEL;
