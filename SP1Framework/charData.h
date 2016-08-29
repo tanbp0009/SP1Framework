@@ -4,8 +4,8 @@
 #include <fstream>
 #include <string>
 
-void saveChar(struct SGameChar g_sChar);
-struct SGameChar loadChar(struct SGameChar g_sChar);
+void saveChar(struct SGameChar Ing_sChar, std::string filedir);
+struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir);
 int getNumberOfSaveFile();
-void renderSaveFile(struct SGameChar g_sChar);
+void renderSaveFile(struct SGameChar Ing_sChar);
 bool checkFile(const char * fileName);

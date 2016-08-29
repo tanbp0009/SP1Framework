@@ -8,6 +8,7 @@ bool nameActive;
 extern Console g_Console;
 extern int level;
 extern EGAMESTATES g_eGameState;
+extern SGameChar g_sChar;
 
 void enterName()
 {
@@ -44,6 +45,7 @@ void enterName()
 	{
 		NewLevel();
 		level = 7;
+		g_sChar.name = name;
 		g_eGameState = S_LOADLEVEL;
 	}
 	g_Console.writeToBuffer(c, name, 0x0F);

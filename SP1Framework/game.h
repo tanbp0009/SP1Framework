@@ -57,6 +57,7 @@ struct SGameChar
 	char playerdir;
 	int lives;
 	int keys;
+	int currentlevel;
 };
 
 

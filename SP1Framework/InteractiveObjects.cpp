@@ -96,7 +96,7 @@ void something()
 void nextlevel()
 {
 	savelevel(level, std::to_string(playernum));
-	saveChar(g_sChar);
+	saveChar(g_sChar, std::to_string(playernum));
 	switch (level)
 	{
 	case 14:
@@ -218,7 +218,7 @@ void teletospawn()
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
 
 	savelevel(level, std::to_string(playernum));
-	saveChar(g_sChar);
+	saveChar(g_sChar, std::to_string(playernum));
 	level = 15;
 	g_eGameState = S_LOADLEVEL;
 }

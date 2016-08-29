@@ -310,7 +310,7 @@ void processUserInput()
 		{
 			level = oldlevel;
 		}
-		saveChar(g_sChar);
+		saveChar(g_sChar, std::to_string(playernum));
 		g_bQuitGame = true;
 	}
 	if (g_abKeyPressed[K_I] && level != 2 && level != 3)

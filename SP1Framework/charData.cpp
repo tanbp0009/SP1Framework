@@ -7,46 +7,53 @@ extern double g_dBounceTime;
 extern double g_dElapsedTime;
 extern bool g_abKeyPressed[K_COUNT];
 extern int playernum;
+extern SGameChar g_sChar;
 
-void saveChar(struct SGameChar g_sChar)
+void saveChar(struct SGameChar Ing_sChar, std::string filedir)
 {
-	std::ofstream myfile("save/Save_Data.txt");
+	std::string filelocation = "save/save";
+	filelocation += filedir;
+	filelocation += "/Save_Data.txt";
+	std::ofstream myfile(filelocation);
 	if (myfile.is_open())
 	{
-		myfile << g_sChar.name << "\n";
-		myfile << g_sChar.playerdir << "\n";
-		myfile << g_sChar.m_cLocation.Y << "\n";
-		myfile << g_sChar.m_cLocation.X << "\n";
-		myfile << g_sChar.lives << "\n";
-		myfile << g_sChar.keys << "\n";
+		myfile << Ing_sChar.name << "\n";
+		myfile << Ing_sChar.playerdir << "\n";
+		myfile << Ing_sChar.m_cLocation.Y << "\n";
+		myfile << Ing_sChar.m_cLocation.X << "\n";
+		myfile << Ing_sChar.lives << "\n";
+		myfile << Ing_sChar.keys << "\n";
 		myfile << level << "\n";
 		myfile.close();
 	}
 }
 
-struct SGameChar loadChar(struct SGameChar g_sChar)
+struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 {
 	std::string line;
-	std::ifstream myfile("save/Save_Data.txt");
+	std::string filelocation = "save/save";
+	filelocation += filedir;
+	filelocation += "/Save_Data.txt";
+	std::ifstream myfile(filelocation);
 	if (myfile.is_open())
 	{
 		getline(myfile, line);
-		g_sChar.name = line;
+		Ing_sChar.name = line;
 		getline(myfile, line);
-		g_sChar.playerdir = line[0];
+		Ing_sChar.playerdir = line[0];
 		getline(myfile, line);
-		g_sChar.m_cLocation.Y = std::stoi(line);
+		Ing_sChar.m_cLocation.Y = std::stoi(line);
 		getline(myfile, line);
-		g_sChar.m_cLocation.X = std::stoi(line);
+		Ing_sChar.m_cLocation.X = std::stoi(line);
 		getline(myfile, line);
-		g_sChar.lives = std::stoi(line);
+		Ing_sChar.lives = std::stoi(line);
 		getline(myfile, line);
-		g_sChar.keys = std::stoi(line);
+		Ing_sChar.keys = std::stoi(line);
 		getline(myfile, line);
-		level = std::stoi(line);
+		Ing_sChar.currentlevel = std::stoi(line);
 		myfile.close();
 	}
-	return g_sChar;
+	return Ing_sChar;
 }
 
 int getNumberOfSaveFile()
@@ -65,7 +72,7 @@ int getNumberOfSaveFile()
 	return numberOfSaveFiles;
 }
 
-void renderSaveFile(struct SGameChar g_sChar)
+void renderSaveFile(struct SGameChar Ing_sChar)
 {
 	bool bSomethingHappened = false;
 	SetMap();
@@ -214,27 +221,26 @@ void renderSaveFile(struct SGameChar g_sChar)
 			switch (selection)
 			{
 			case 0:
-				playernum = 0;
-				loadChar(g_sChar);
+				playernum = 1;
+				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
+				level = g_sChar.currentlevel;
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 1:
-				playernum = 1;
-				loadChar(g_sChar);
+				playernum = 2;
+				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 2:
-				playernum = 2;
-				loadChar(g_sChar);
+				playernum = 3;
+				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 3:
-				playernum = 3;
-				loadChar(g_sChar);
+				playernum = 4;
+				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
 				g_eGameState = S_LOADLEVEL;
 				break;
-
-
 			}
 		}
 	}

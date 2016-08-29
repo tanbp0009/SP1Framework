@@ -186,7 +186,7 @@ void SetMap()
 
 void savelevel(int Inlevel, std::string filedir)
 {
-	std::string filelocation = "save/save1";
+	std::string filelocation = "save/save";
 	filelocation += filedir;
 	switch (Inlevel)
 	{
