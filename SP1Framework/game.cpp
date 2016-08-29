@@ -366,10 +366,8 @@ void renderInventory()
 void renderMainMenu()
 {
 	bool bSomethingHappened = false;
-	std::string Menu[3] = { " Start New Adventure ", " Continue Old Adventure " , " Exit " };
-	std::string up = { "<Start New Adventure>" };
-	std::string center = { "<Continue Old Adventure>" };
-	std::string down = { "<Exit>" };
+	std::string Menu[4] = { " Start New Adventure ", " Continue Old Adventure " , " Instructions " ,  " Exit " };
+	std::string arrow[4] = { "<Start New Adventure>", "<Continue Old Adventure>", "<Instructions>", "<Exit>" };
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
 	c.Y = 16;
@@ -380,13 +378,16 @@ void renderMainMenu()
 	switch (gmmc)
 	{
 	case 0:
-		g_Console.writeToBuffer(c, up, 0x06);
+		g_Console.writeToBuffer(c, arrow[0], 0x06);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		c.Y += 1;
-		c.X = c.X / 2 + 22;
+		c.X = c.X / 2 + 19;
 		g_Console.writeToBuffer(c, Menu[2], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 21;
+		g_Console.writeToBuffer(c, Menu[3], 0x07);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
@@ -413,10 +414,13 @@ void renderMainMenu()
 		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		c.Y += 1;
 		c.X = c.X / 2 + 13;
-		g_Console.writeToBuffer(c, center, 0x06);
+		g_Console.writeToBuffer(c, arrow[1], 0x06);
 		c.Y += 1;
-		c.X = c.X / 2 + 22;
+		c.X = c.X / 2 + 19;
 		g_Console.writeToBuffer(c, Menu[2], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 21;
+		g_Console.writeToBuffer(c, Menu[3], 0x07);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
@@ -444,8 +448,11 @@ void renderMainMenu()
 		c.X = c.X / 2 + 13;
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		c.Y += 1;
-		c.X = c.X / 2 + 22;
-		g_Console.writeToBuffer(c, down, 0x06);
+		c.X = c.X / 2 + 19;
+		g_Console.writeToBuffer(c, arrow[2], 0x06);
+		c.Y += 1;
+		c.X = c.X / 2 + 21;
+		g_Console.writeToBuffer(c, Menu[3], 0x07);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
@@ -458,7 +465,39 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_DOWN])
 		{
 			bSomethingHappened = true;
+			gmmc = 3;
+		}
+		if (g_abKeyPressed[K_SPACE])
+		{
+			bSomethingHappened = true;
+			level = 3;
+			g_eGameState = S_LOADLEVEL;
+		}
+		break;
+	case 3:
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 13;
+		g_Console.writeToBuffer(c, Menu[1], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 19;
+		g_Console.writeToBuffer(c, Menu[2], 0x07);
+		c.Y += 1;
+		c.X = c.X / 2 + 21;
+		g_Console.writeToBuffer(c, arrow[3], 0x06);
+		if (g_dBounceTime > g_dElapsedTime)
+		{
+			return;
+		}
+		if (g_abKeyPressed[K_UP])
+		{
+			bSomethingHappened = true;
 			gmmc = 2;
+		}
+		if (g_abKeyPressed[K_DOWN])
+		{
+			bSomethingHappened = true;
+			gmmc = 3;
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
