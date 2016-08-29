@@ -115,6 +115,7 @@ void getInput( void )
 	g_abKeyPressed[K_1] = isKeyPressed('1');
 	g_abKeyPressed[K_I] = isKeyPressed(73);
 	g_abKeyPressed[K_H] = isKeyPressed(72);
+	g_abKeyPressed[K_N] = isKeyPressed(78);
 }
 
 //--------------------------------------------------------------
@@ -322,6 +323,14 @@ void processUserInput()
 	else if (g_abKeyPressed[K_I])
 	{
 		level = oldlevel;
+		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+	if (g_abKeyPressed[K_N] && level != 1)
+	{
+		savelevel(level);
+		oldlevel = level;
+		level = 1;
 		g_eGameState = S_LOADLEVEL;
 		bSomethingHappened = true;
 	}
