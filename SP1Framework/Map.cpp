@@ -260,6 +260,7 @@ void savelevel(int Inlevel)
 
 void loadLevel()
 {
+	selection = 0;
 	if (level == 7 || level == 8 || level == 9 || level == 10 || level == 11 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{
 		GetSavedMap(level);
