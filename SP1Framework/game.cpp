@@ -657,7 +657,7 @@ void renderLives()
 	ss << "Lives :";
 	for (int i = 0; i < g_sChar.lives; i++)
 	{
-		ss << " Û";
+		ss << (char)3;
 	}
 	c.X = 0;
 	c.Y = 0;

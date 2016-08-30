@@ -46,6 +46,30 @@ void SetMap()
 		{
 			switch (mapCurrent[setmapcoord.Y][setmapcoord.X])
 			{
+				case 'D':
+				if (level == 15)
+				{
+					if (setmapcoord.Y < 10)
+					{
+						if (g_sChar.keys == 3)
+						{
+							g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+						}
+						else
+						{
+							g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
+						}
+					}
+					else
+					{
+						g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+					}
+				}
+				else
+				{
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
+				}
+				break;
 			case '#':
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x04);
 				break;
