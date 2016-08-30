@@ -360,6 +360,7 @@ void renderInventory()
 {
 	SetMap();
 	renderFramerate();
+	renderElapsedtime();
 	renderitems();
 	processUserInput();
 }
@@ -598,8 +599,10 @@ void renderGame()
 	{
 		renderEnemy();
 	}
-    renderCharacter();  // renders the character into the buffer
+    
+	renderElapsedtime();
 	renderLives();
+	renderCharacter();  // renders the character into the buffer
 }
 
 void renderMap()
@@ -630,21 +633,26 @@ void renderCharacter()
 
 void renderFramerate()
 {
-    COORD c;
-    // displays the framerate
-    std::ostringstream ss;
-    ss << std::fixed << std::setprecision(3);
-    ss << 1.0 / g_dDeltaTime << "fps";
-    c.X = g_Console.getConsoleSize().X - 10;
-    c.Y = 1;
-    g_Console.writeToBuffer(c, ss.str());
-
+	COORD c;
+	// displays the framerate
+	std::ostringstream ss;
+	ss << std::fixed << std::setprecision(3);
+	ss << 1.0 / g_dDeltaTime << "fps";
+	c.X = 0;
+	c.Y = 0;
+	g_Console.writeToBuffer(c, ss.str(), 0x87);
+}
+void renderElapsedtime()
+{
+	COORD c;
     // displays the elapsed time
+	std::ostringstream ss;
+	ss << std::fixed << std::setprecision(3);
     ss.str("");
-    ss << "Elapsed time : " << g_dElapsedTime << "secs";
-    c.X = 1;
-    c.Y = 1;
-    g_Console.writeToBuffer(c, ss.str());
+    ss << "Time : " << g_dElapsedTime << "secs";
+	c.X = g_Console.getConsoleSize().X - 18;
+	c.Y = 0;
+    g_Console.writeToBuffer(c, ss.str(), 0x87);
 }
 void renderToScreen()
 {
@@ -664,7 +672,7 @@ void renderLives()
 	}
 	c.X = 0;
 	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str(), 0x84);
+	g_Console.writeToBuffer(c, ss.str(), 0x8C);
 }
 
 void renderitems()
@@ -682,6 +690,7 @@ void renderInstruction()
 {
 	SetMap();
 	renderFramerate();
+	renderElapsedtime();
 	processUserInput();
 }
 
