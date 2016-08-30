@@ -200,6 +200,7 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 void gameplay()            // gameplay logic
 {
+	mainMenuButton();
 	if (level == 15)
 	{
 		enemyPathing();
