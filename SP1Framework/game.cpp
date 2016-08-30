@@ -200,7 +200,6 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 void gameplay()            // gameplay logic
 {
-	mainMenuButton();
 	if (level == 15)
 	{
 		enemyPathing();
@@ -363,7 +362,6 @@ void renderInventory()
 	renderFramerate();
 	renderitems();
 	processUserInput();
-	mainMenuButton();
 }
 
 void renderMainMenu()
@@ -685,7 +683,6 @@ void renderInstruction()
 	SetMap();
 	renderFramerate();
 	processUserInput();
-	mainMenuButton();
 }
 
 void renderWin()
@@ -742,26 +739,5 @@ void renderWin()
 		// set the bounce time to some time in the future to prevent accidental triggers
 		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 		//bSomethingHappened = false;
-	}
-}
-
-void mainMenuButton()
-{
-	bool bSomethingHappened = false;
-	if (g_dBounceTime > g_dElapsedTime)
-		return;
-	if (g_abKeyPressed[K_B] && level != 1)
-	{
-		savelevel(level, std::to_string(playernum));
-		oldlevel = level;
-		level = 1;
-		g_eGameState = S_LOADLEVEL;
-		bSomethingHappened = true;
-	}
-
-	if (bSomethingHappened)
-	{
-		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 	}
 }

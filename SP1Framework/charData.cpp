@@ -58,7 +58,6 @@ struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 
 void renderSaveFile(struct SGameChar Ing_sChar)
 {
-	mainMenuButton();
 	bool bSomethingHappened = false;
 	SetMap();
 	WORD color1, color2, color3, color4;
@@ -269,6 +268,11 @@ void renderSaveFile(struct SGameChar Ing_sChar)
 				myfile4.close();
 				remove("save/save4/Save_Data.txt");
 			}
+		}
+		if (isKeyPressed(VK_HOME))
+		{
+			level = 1;
+			g_eGameState = S_LOADLEVEL;
 		}
 	}
 

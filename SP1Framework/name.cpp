@@ -49,6 +49,11 @@ void enterName()
 		g_sChar.name = name;
 		g_eGameState = S_LOADLEVEL;
 	}
+	if (isKeyPressed(VK_HOME))
+	{
+		level = 1;
+		g_eGameState = S_LOADLEVEL;
+	}
 	g_Console.writeToBuffer(c, name, 0x0F);
 }
 
