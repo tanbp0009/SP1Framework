@@ -330,7 +330,7 @@ void processUserInput()
 	}
 	if (g_abKeyPressed[K_N] && level != 1)
 	{
-		savelevel(level);
+		savelevel(level, std::to_string(playernum));
 		oldlevel = level;
 		level = 1;
 		g_eGameState = S_LOADLEVEL;

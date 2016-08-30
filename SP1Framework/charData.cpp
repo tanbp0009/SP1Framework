@@ -243,6 +243,29 @@ void renderSaveFile(struct SGameChar Ing_sChar)
 				break;
 			}
 		}
+		if (isKeyPressed(VK_DELETE))
+		{
+			if (selection == 0)
+			{
+				myfile1.close();
+				remove("save/save1/Save_Data.txt");
+			}
+			if (selection == 1)
+			{
+				myfile2.close();
+				remove("save/save2/Save_Data.txt");
+			}
+			if (selection == 2)
+			{
+				myfile3.close();
+				remove("save/save3/Save_Data.txt");
+			}
+			if (selection == 3)
+			{
+				myfile4.close();
+				remove("save/save4/Save_Data.txt");
+			}
+		}
 	}
 
 	if (bSomethingHappened)
