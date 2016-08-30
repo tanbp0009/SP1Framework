@@ -227,7 +227,7 @@ void renderRoomInfo(int level)
 	COORD c = g_Console.getConsoleSize();
 	c.X = g_Console.getConsoleSize().X / 2 - 2;
 	c.Y /= 2;
-	if (level == 15 || level == 7)
+	if (level == 15)
 	{
 		switch (info)
 		{
@@ -248,6 +248,98 @@ void renderRoomInfo(int level)
 
 		}
 		break;
+		}
+	}
+	if (level == 7)
+	{
+		switch (info)
+		{
+		case 0:
+		{
+				  c.X -= 7;
+				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+		}
+			if (isKeyPressed(67))
+			{
+				bSomethingHappened = true;
+				info = 1;
+			}
+			break;
+		case 1:
+		{
+				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+
+		}
+			break;
+		}
+	}
+	if (level == 16)
+	{
+		switch (info)
+		{
+		case 0:
+		{
+				  c.X -= 7;
+				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+		}
+			if (isKeyPressed(67))
+			{
+				bSomethingHappened = true;
+				info = 1;
+			}
+			break;
+		case 1:
+		{
+				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+
+		}
+			break;
+		}
+	}
+	if (level == 17)
+	{
+		switch (info)
+		{
+		case 0:
+		{
+				  c.X -= 7;
+				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+		}
+			if (isKeyPressed(67))
+			{
+				bSomethingHappened = true;
+				info = 1;
+			}
+			break;
+		case 1:
+		{
+				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+
+		}
+			break;
+		}
+	}
+	if (level == 18)
+	{
+		switch (info)
+		{
+		case 0:
+		{
+				  c.X -= 7;
+				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+		}
+			if (isKeyPressed(67))
+			{
+				bSomethingHappened = true;
+				info = 1;
+			}
+			break;
+		case 1:
+		{
+				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+
+		}
+			break;
 		}
 	}
 }
