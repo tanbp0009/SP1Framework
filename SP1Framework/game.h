@@ -59,6 +59,12 @@ struct SGameChar
 	char playerdir;
 	int lives;
 	int keys;
+	int relic_scepter;
+	int relic_amulet;
+	int relic_tablet;
+	int relic_ankh;
+	int relic_goblet;
+	int relic_scarab;
 	int currentlevel;
 };
 

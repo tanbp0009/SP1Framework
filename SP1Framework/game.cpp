@@ -56,6 +56,12 @@ void init( void )
 	selection = 0;
 	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
+	g_sChar.relic_scepter = 0;
+	g_sChar.relic_amulet = 0;
+	g_sChar.relic_tablet = 0;
+	g_sChar.relic_ankh = 0;
+	g_sChar.relic_goblet = 0;
+	g_sChar.relic_scarab = 0;
 	g_sEnemy.m_bActive = false;
 	g_dEnemyBounceTime = 0;
 	g_dEnemyDamageTime = 0;
@@ -715,14 +721,38 @@ void renderLives()
 
 void renderitems()
 {
-	std::ostringstream ss;
+	std::ostringstream ss, sa, sb, sc, sd, se, sf;
 	COORD c;
 	ss.str("");
-	ss << std::fixed << std::setprecision(3);
-	ss << g_sChar.keys << "x key(s)";
-	c.X = g_Console.getConsoleSize().X - 43;
+	sa.str("");
+	sb.str("");
+	sc.str("");
+	sd.str("");
+	se.str("");
+	sf.str("");
+	c.X = g_Console.getConsoleSize().X / 2 - 5;
 	c.Y = 7;
+	ss << g_sChar.keys << "x key(s)";
 	g_Console.writeToBuffer(c, ss.str());
+	c.Y += 2;
+	sa << g_sChar.relic_scepter << "x scepter piece(s)";
+	g_Console.writeToBuffer(c, sa.str());
+	c.Y += 2;
+	sb << g_sChar.relic_amulet << "x amulet piece(s)";
+	g_Console.writeToBuffer(c, sb.str());
+	c.Y += 2;
+	sc << g_sChar.relic_tablet << "x tablet piece(s)";
+	g_Console.writeToBuffer(c, sc.str());
+	c.Y += 2;
+	sd << g_sChar.relic_ankh << "x ankh piece(s)";
+	g_Console.writeToBuffer(c, sd.str());
+	c.Y += 2;
+	se << g_sChar.relic_goblet << "x goblet piece(s)";
+	g_Console.writeToBuffer(c, se.str());
+	c.Y += 2;
+	sf << g_sChar.relic_scarab << "x scarab piece(s)";
+	g_Console.writeToBuffer(c, sf.str());
+
 }
 void renderInstruction()
 {

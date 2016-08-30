@@ -59,6 +59,18 @@ void interactobjectinfront()
 		break;
 	case 'Ÿ': keys(); // gameplay logic when we are in the game
 		break;
+	case 'ï': relic();
+		break;
+	case 'í': relic();
+		break;
+	case 'ë': relic();
+		break;
+	case 'é': relic();
+		break;
+	case 'ì': relic();
+		break;
+	case 'ä': relic();
+		break;
 	case 'è': teletospawn(); // gameplay logic when we are in the game
 		break;
 	case '¤': healthpack(); // gameplay logic when we are in the game
@@ -209,6 +221,37 @@ void keys()
 	{
 		g_sChar.keys++;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+	}
+}
+
+void relic()
+{
+	switch (mapCurrent[ObjectPosition.Y][ObjectPosition.X])
+	{
+	case 'ï':
+		g_sChar.relic_scepter++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
+	case 'í':
+		g_sChar.relic_amulet++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
+	case 'ë':
+		g_sChar.relic_tablet++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
+	case 'é':
+		g_sChar.relic_ankh++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
+	case 'ì':
+		g_sChar.relic_goblet++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
+	case 'ä':
+		g_sChar.relic_scarab++;
+		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
+		break;
 	}
 }
 

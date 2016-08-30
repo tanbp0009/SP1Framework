@@ -16,6 +16,7 @@ void nextlevel();
 void moveboulder();
 bool ice_check();
 void keys();
+void relic();
 void teletospawn();
 void healthpack();
 void movement_interaction();

@@ -125,6 +125,8 @@ void SetMap()
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x05);
 				else if (level == 5)
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
+				else if (level == 6)
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
 				else
 				{
 					door2coord = setmapcoord;
@@ -202,6 +204,9 @@ void SetMap()
 					break;
 				case '+':
 					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x00);
+					break;
+				case 'ï':  case 'í':  case 'ë':  case 'é':  case 'ì': case 'ä':
+					g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x06);
 					break;
 			default:
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0A);
