@@ -58,7 +58,7 @@ struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 
 void renderSaveFile(struct SGameChar Ing_sChar)
 {
-	previousScreenButton();
+	mainMenuButton();
 	bool bSomethingHappened = false;
 	SetMap();
 	WORD color1, color2, color3, color4;

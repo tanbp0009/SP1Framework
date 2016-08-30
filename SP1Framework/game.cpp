@@ -362,7 +362,7 @@ void renderInventory()
 	renderFramerate();
 	renderitems();
 	processUserInput();
-	previousScreenButton();
+	mainMenuButton();
 }
 
 void renderMainMenu()
@@ -684,7 +684,7 @@ void renderInstruction()
 	SetMap();
 	renderFramerate();
 	processUserInput();
-	previousScreenButton();
+	mainMenuButton();
 }
 
 void renderWin()
@@ -744,7 +744,7 @@ void renderWin()
 	}
 }
 
-void previousScreenButton()
+void mainMenuButton()
 {
 	bool bSomethingHappened = false;
 	if (g_dBounceTime > g_dElapsedTime)

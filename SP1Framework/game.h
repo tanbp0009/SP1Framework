@@ -91,5 +91,5 @@ void renderitems();
 void renderInstruction();
 void renderWin();
 void enterName();
-void previousScreenButton();
+void mainMenuButton();
 #endif // _GAME_H
