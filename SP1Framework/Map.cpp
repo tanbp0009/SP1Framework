@@ -8,6 +8,7 @@ extern SGameChar g_sChar;
 extern SGameEnemy g_sEnemy;
 extern int level;
 extern int selection;
+extern int info;
 char mapCurrent[25][80];
 COORD doorcoord;
 COORD door2coord;
@@ -291,6 +292,7 @@ void savelevel(int Inlevel, std::string filedir)
 
 void loadLevel()
 {
+	info = 0;
 	selection = 0;
 	if (level == 7 || level == 8 || level == 9 || level == 10 || level == 11 || level == 14 || level == 15 || level == 16 || level == 17 || level == 18)
 	{

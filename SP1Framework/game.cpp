@@ -204,7 +204,7 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-    if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
+    if (g_dElapsedTime > 0.0) // wait for 3 seconds to switch to game mode, else do nothing
         g_eGameState = S_LOADLEVEL;
 }
 
@@ -227,28 +227,27 @@ void renderRoomInfo(int level)
 	COORD c = g_Console.getConsoleSize();
 	c.X = g_Console.getConsoleSize().X / 2 - 2;
 	c.Y /= 2;
-	if (level == 15)
+	if (level == 15 || level == 7)
 	{
-
 		switch (info)
 		{
 		case 0:
 		{
-				  c.X -= 7;
-				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+			  c.X -= 7;
+			  g_Console.writeToBuffer(c, infostring[0], 0x07);
 		}
-			if (isKeyPressed(67))
-			{
-				bSomethingHappened = true;
-				info = 1;
-			}
+		if (isKeyPressed(67))
+		{
+			bSomethingHappened = true;
+			info = 1;
+		}
 			break;
 		case 1:
 		{
-				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+			  g_Console.writeToBuffer(c, infostring[1], 0x07);
 
 		}
-			break;
+		break;
 		}
 	}
 }
