@@ -10,6 +10,7 @@
 #include "ice.h"
 #include "name.h"
 
+int info;
 int level;
 int selection;
 int oldlevel;
@@ -44,6 +45,7 @@ extern int numberOfChar;
 //--------------------------------------------------------------
 void init( void )
 {
+	info = 0;
 	playernum = 1;
 	numberOfChar = 0;
 	nameActive = false;
@@ -118,6 +120,8 @@ void getInput( void )
 	g_abKeyPressed[K_I] = isKeyPressed(73);
 	g_abKeyPressed[K_H] = isKeyPressed(72);
 	g_abKeyPressed[K_B] = isKeyPressed(66);
+	g_abKeyPressed[K_C] = isKeyPressed(67);
+
 }
 
 //--------------------------------------------------------------
@@ -208,6 +212,39 @@ void gameplay()            // gameplay logic
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
+	
+}
+void renderRoomInfo(int level)
+{
+	bool bSomethingHappened = false;
+	std::string infostring[2] {"Press 'c' to close", ""};
+	COORD c = g_Console.getConsoleSize();
+	c.X = g_Console.getConsoleSize().X / 2 - 2;
+	c.Y /= 2;
+	if (level == 15)
+	{
+
+		switch (info)
+		{
+		case 0:
+		{
+				  c.X -= 7;
+				  g_Console.writeToBuffer(c, infostring[0], 0x07);
+		}
+			if (isKeyPressed(67))
+			{
+				bSomethingHappened = true;
+				info = 1;
+			}
+			break;
+		case 1:
+		{
+				  g_Console.writeToBuffer(c, infostring[1], 0x07);
+
+		}
+			break;
+		}
+	}
 }
 
 void moveCharacter()
@@ -603,6 +640,7 @@ void renderGame()
 	renderElapsedtime();
 	renderLives();
 	renderCharacter();  // renders the character into the buffer
+	renderRoomInfo(level);
 }
 
 void renderMap()

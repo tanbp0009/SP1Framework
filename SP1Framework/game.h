@@ -28,7 +28,8 @@ enum EKEYS
 	K_I,
     K_COUNT,
 	K_H,
-	K_B
+	K_B,
+	K_C
 };
 
 // Enumeration for the different screen states
@@ -92,4 +93,6 @@ void renderitems();
 void renderInstruction();
 void renderWin();
 void enterName();
+void renderRoomInfo(int level);
+
 #endif // _GAME_H
