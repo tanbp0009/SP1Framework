@@ -206,24 +206,43 @@ void renderSaveFile(struct SGameChar Ing_sChar)
 			switch (selection)
 			{
 			case 0:
+				if (!checkFile("save/save1/Save_Data.txt"))
+				{
+					break;
+				}
 				playernum = 1;
 				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
 				level = g_sChar.currentlevel;
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 1:
+				if (!checkFile("save/save2/Save_Data.txt"))
+				{
+					break;
+				}
 				playernum = 2;
 				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
+				level = g_sChar.currentlevel;
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 2:
+				if (!checkFile("save/save3/Save_Data.txt"))
+				{
+					break;
+				}
 				playernum = 3;
 				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
+				level = g_sChar.currentlevel;
 				g_eGameState = S_LOADLEVEL;
 				break;
 			case 3:
+				if (!checkFile("save/save4/Save_Data.txt"))
+				{
+					break;
+				}
 				playernum = 4;
 				g_sChar = loadChar(Ing_sChar, std::to_string(playernum));
+				level = g_sChar.currentlevel;
 				g_eGameState = S_LOADLEVEL;
 				break;
 			}
