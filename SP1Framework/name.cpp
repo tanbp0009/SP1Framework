@@ -9,6 +9,7 @@ extern Console g_Console;
 extern int level;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
+extern int playernum;
 
 void enterName()
 {
@@ -43,10 +44,36 @@ void enterName()
 	}
 	if (isKeyPressed(VK_RETURN) && numberOfChar != 0)
 	{
-		NewLevel();
+		NewLevel(playernum);
 		level = 7;
 		g_sChar.name = name;
 		g_eGameState = S_LOADLEVEL;
 	}
 	g_Console.writeToBuffer(c, name, 0x0F);
+}
+
+bool newGame()
+{
+	if (!checkFile("save/save1/Save_Data.txt"))
+	{
+		playernum = 1;
+		return true;
+	}
+	else  if (!checkFile("save/save2/Save_Data.txt"))
+	{
+		playernum = 2;
+		return true;
+	}
+	else if (!checkFile("save/save3/Save_Data.txt"))
+	{
+		playernum = 3;
+		return true;
+	}
+	else if (!checkFile("save/save4/Save_Data.txt"))
+	{
+		playernum = 4;
+		return true;
+	}
+	else
+		return false;
 }

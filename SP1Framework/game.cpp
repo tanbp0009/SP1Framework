@@ -407,8 +407,13 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_SPACE])
 		{
 			bSomethingHappened = true;
-			level = 5;
-			g_eGameState = S_LOADLEVEL;
+			if (newGame() == true)
+			{
+				level = 5;
+				g_eGameState = S_LOADLEVEL;
+			}
+			else
+				g_Console.writeToBuffer(5, 5, "No character slots available", 0x07);
 		}
 		break;
 	case 1:
@@ -439,7 +444,6 @@ void renderMainMenu()
 		if (g_abKeyPressed[K_SPACE])
 		{
 			level = 6;
-			//g_sChar = loadChar(g_sChar);
 			bSomethingHappened = true;
 			g_eGameState = S_LOADLEVEL;
 		}
@@ -547,7 +551,7 @@ void renderGameOver()
 		g_Console.writeToBuffer(c, Menu[1], 0x07);
 		if (g_abKeyPressed[K_SPACE])
 		{
-			NewLevel();
+			NewLevel(playernum);
 			init();
 			g_eGameState = S_LOADLEVEL;
 		}
@@ -715,7 +719,7 @@ void renderWin()
 		}
 		if (g_abKeyPressed[K_SPACE])
 		{
-			NewLevel();
+			NewLevel(playernum);
 			init();
 			g_eGameState = S_MAINMENU;
 		}

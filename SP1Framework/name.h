@@ -5,3 +5,4 @@
 #include <string>
 
 void enterName();
+bool newGame();

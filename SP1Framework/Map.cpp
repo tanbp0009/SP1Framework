@@ -13,12 +13,14 @@ COORD doorcoord;
 COORD door2coord;
 
 
-void GetNewMap(std::string filelocation)
+void GetNewMap(std::string filelocation, int InSaveFileNo)
 {
 	std::string fileaffix = "config/";
 	fileaffix += filelocation;
 	std::ifstream infile(fileaffix);
-	fileaffix = "save/save1/";
+	fileaffix = "save/save";
+	fileaffix += std::to_string(InSaveFileNo);
+	fileaffix += "/";
 	fileaffix += filelocation;
 	std::ofstream outfile(fileaffix);
 	std::string content = "";
@@ -432,25 +434,25 @@ void GetSavedMap(int Inlevel, std::string filedir)
 	}
 }
 
-void NewLevel()
+void NewLevel(int InSaveFileNo)
 {
-	GetNewMap("Save_Data.txt");
-	GetNewMap("Title_Game.txt");
-	GetNewMap("Main_Menu.txt");
-	GetNewMap("Inventory.txt");
-	GetNewMap("Instruction.txt");
-	GetNewMap("Light_01.txt");
-	GetNewMap("Light_02.txt");
-	GetNewMap("Light_03.txt");
-	GetNewMap("Light_04.txt");
-	GetNewMap("Light_05.txt");
-	GetNewMap("Vault_Key_1.txt");
-	GetNewMap("Vault_Connect.txt");
-	GetNewMap("Vault_Key_2.txt");
-	GetNewMap("Vault_Key_3.txt");
-	GetNewMap("Vault_Room.txt");
-	GetNewMap("Game_Over.txt");
-	GetNewMap("Win.txt");
-	GetNewMap("Name.txt");
-	GetNewMap("Load_Save_File.txt");
+	GetNewMap("Save_Data.txt", InSaveFileNo);
+	GetNewMap("Title_Game.txt", InSaveFileNo);
+	GetNewMap("Main_Menu.txt", InSaveFileNo);
+	GetNewMap("Inventory.txt", InSaveFileNo);
+	GetNewMap("Instruction.txt", InSaveFileNo);
+	GetNewMap("Light_01.txt", InSaveFileNo);
+	GetNewMap("Light_02.txt", InSaveFileNo);
+	GetNewMap("Light_03.txt", InSaveFileNo );
+	GetNewMap("Light_04.txt", InSaveFileNo);
+	GetNewMap("Light_05.txt", InSaveFileNo);
+	GetNewMap("Vault_Key_1.txt", InSaveFileNo);
+	GetNewMap("Vault_Connect.txt", InSaveFileNo);
+	GetNewMap("Vault_Key_2.txt", InSaveFileNo);
+	GetNewMap("Vault_Key_3.txt", InSaveFileNo);
+	GetNewMap("Vault_Room.txt", InSaveFileNo);
+	GetNewMap("Game_Over.txt", InSaveFileNo);
+	GetNewMap("Win.txt", InSaveFileNo);
+	GetNewMap("Name.txt", InSaveFileNo);
+	GetNewMap("Load_Save_File.txt", InSaveFileNo);
 }

@@ -6,10 +6,10 @@
 #include <string>
 #include <vector>
 
-void GetNewMap(std::string filelocation);
+void GetNewMap(std::string filelocation, int InSaveFileNo);
 void SetMap();
 void loadLevel();
 void savelevel(int Inlevel, std::string filedir);
 void GetSavedMap(int Inlevel, std::string filedir);
-void NewLevel();
+void NewLevel(int InSaveFileNo);
 void getfog(int Inlevel);
