@@ -23,6 +23,12 @@ void saveChar(struct SGameChar Ing_sChar, std::string filedir)
 		myfile << Ing_sChar.m_cLocation.X << "\n";
 		myfile << Ing_sChar.lives << "\n";
 		myfile << Ing_sChar.keys << "\n";
+		myfile << Ing_sChar.relic_amulet << "\n";
+		myfile << Ing_sChar.relic_ankh << "\n";
+		myfile << Ing_sChar.relic_goblet << "\n";
+		myfile << Ing_sChar.relic_scarab << "\n";
+		myfile << Ing_sChar.relic_scepter << "\n";
+		myfile << Ing_sChar.relic_tablet << "\n";
 		myfile << level << "\n";
 		myfile.close();
 	}
@@ -49,6 +55,19 @@ struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 		Ing_sChar.lives = std::stoi(line);
 		getline(myfile, line);
 		Ing_sChar.keys = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_amulet = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_ankh = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_goblet = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_scarab = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_scepter = std::stoi(line);
+		getline(myfile, line);
+		Ing_sChar.relic_tablet = std::stoi(line);
+
 		getline(myfile, line);
 		Ing_sChar.currentlevel = std::stoi(line);
 		myfile.close();
