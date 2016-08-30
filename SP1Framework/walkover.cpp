@@ -31,5 +31,4 @@ void teleport()
 	{
 		g_sChar.m_cLocation.Y -= 3;
 	}
-
 }

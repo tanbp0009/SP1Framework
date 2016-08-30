@@ -56,24 +56,9 @@ struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 	return Ing_sChar;
 }
 
-int getNumberOfSaveFile()
-{
-	int numberOfSaveFiles = 0;
-	std::string filename = "save/Save_Data";
-	for (int i = 0; i < 4; i++)
-	{
-		filename += char(i);
-		filename += ".txt";
-		if (std::ifstream(filename))
-		{
-			numberOfSaveFiles++;
-		}
-	}
-	return numberOfSaveFiles;
-}
-
 void renderSaveFile(struct SGameChar Ing_sChar)
 {
+	previousScreenButton();
 	bool bSomethingHappened = false;
 	SetMap();
 	WORD color1, color2, color3, color4;

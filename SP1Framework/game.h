@@ -28,7 +28,7 @@ enum EKEYS
 	K_I,
     K_COUNT,
 	K_H,
-	K_N
+	K_B
 };
 
 // Enumeration for the different screen states
@@ -91,4 +91,5 @@ void renderitems();
 void renderInstruction();
 void renderWin();
 void enterName();
+void previousScreenButton();
 #endif // _GAME_H

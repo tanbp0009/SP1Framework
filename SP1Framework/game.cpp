@@ -117,7 +117,7 @@ void getInput( void )
 	g_abKeyPressed[K_1] = isKeyPressed('1');
 	g_abKeyPressed[K_I] = isKeyPressed(73);
 	g_abKeyPressed[K_H] = isKeyPressed(72);
-	g_abKeyPressed[K_N] = isKeyPressed(78);
+	g_abKeyPressed[K_B] = isKeyPressed(66);
 }
 
 //--------------------------------------------------------------
@@ -328,14 +328,6 @@ void processUserInput()
 		g_eGameState = S_LOADLEVEL;
 		bSomethingHappened = true;
 	}
-	if (g_abKeyPressed[K_N] && level != 1)
-	{
-		savelevel(level, std::to_string(playernum));
-		oldlevel = level;
-		level = 1;
-		g_eGameState = S_LOADLEVEL;
-		bSomethingHappened = true;
-	}
 	if (g_abKeyPressed[K_H] && level != 3 && level !=2)
 	{
 		savelevel(level, std::to_string(playernum));
@@ -370,6 +362,7 @@ void renderInventory()
 	renderFramerate();
 	renderitems();
 	processUserInput();
+	previousScreenButton();
 }
 
 void renderMainMenu()
@@ -687,6 +680,7 @@ void renderInstruction()
 	SetMap();
 	renderFramerate();
 	processUserInput();
+	previousScreenButton();
 }
 
 void renderWin()
@@ -743,5 +737,26 @@ void renderWin()
 		// set the bounce time to some time in the future to prevent accidental triggers
 		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 		//bSomethingHappened = false;
+	}
+}
+
+void previousScreenButton()
+{
+	bool bSomethingHappened = false;
+	if (g_dBounceTime > g_dElapsedTime)
+		return;
+	if (g_abKeyPressed[K_B] && level != 1)
+	{
+		savelevel(level, std::to_string(playernum));
+		oldlevel = level;
+		level = 1;
+		g_eGameState = S_LOADLEVEL;
+		bSomethingHappened = true;
+	}
+
+	if (bSomethingHappened)
+	{
+		// set the bounce time to some time in the future to prevent accidental triggers
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 	}
 }
