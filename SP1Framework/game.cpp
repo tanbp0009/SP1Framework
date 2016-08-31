@@ -487,7 +487,13 @@ void processUserInput()
 		g_eGameState = S_LOADLEVEL;
 		bSomethingHappened = true;
 	}
-
+	if (isKeyPressed(VK_HOME))
+	{
+		saveChar(g_sChar, std::to_string(playernum));
+		savelevel(level, std::to_string(playernum));
+		level = 1;
+		g_eGameState = S_LOADLEVEL;
+	}
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
