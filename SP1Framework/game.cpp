@@ -216,9 +216,16 @@ void gameplay()            // gameplay logic
 		enemyCollision();
 	}
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
-    moveCharacter();    // moves the character, collision detection, physics, etc
-                        // sound can be played here too.
-	
+	ice_check();
+	if (ice_check() == true)
+	{
+		ice_movement_loop();
+	}
+	else if (ice_check() == false)
+	{
+		moveCharacter();    // moves the character, collision detection, physics, etc
+		// sound can be played here too.
+	}
 }
 void renderRoomInfo(int level)
 {
@@ -233,18 +240,18 @@ void renderRoomInfo(int level)
 		{
 		case 0:
 		{
-			  c.X -= 7;
-			  g_Console.writeToBuffer(c, infostring[0], 0x07);
+			c.X -= 7;
+			g_Console.writeToBuffer(c, infostring[0], 0x07);
 		}
 		if (isKeyPressed(67))
 		{
 			bSomethingHappened = true;
 			info = 1;
 		}
-			break;
+		break;
 		case 1:
 		{
-			  g_Console.writeToBuffer(c, infostring[1], 0x07);
+			g_Console.writeToBuffer(c, infostring[1], 0x07);
 
 		}
 		break;
@@ -343,7 +350,6 @@ void renderRoomInfo(int level)
 		}
 	}
 }
-
 void moveCharacter()
 {
     bool bSomethingHappened = false; 
@@ -358,14 +364,7 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '0')
 		{
 			//Beep(1440, 30);
-			if (ice_check() == false)
-			{
-				movement_interaction();
-			}
-			else
-			{
-				ice_movement_loop();
-			}
+			movement_interaction();
 			bSomethingHappened = true;
 		}
 	}
@@ -375,14 +374,7 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '/' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X - 1] == '0')
 		{
 			//Beep(1440, 30);
-			if (ice_check() == false)
-			{
-				movement_interaction();
-			}
-			else
-			{
-				ice_movement_loop();
-			}
+			movement_interaction();
 			bSomethingHappened = true;
 		}
 	}
@@ -392,14 +384,7 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == ' ' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '#' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '°' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '/' || mapCurrent[g_sChar.m_cLocation.Y + 1][g_sChar.m_cLocation.X] == '0')
 		{
 			//Beep(1440, 30);
-			if (ice_check() == false)
-			{
-				movement_interaction();
-			}
-			else
-			{
-				ice_movement_loop();
-			}
+			movement_interaction();
 			bSomethingHappened = true;
 		}
 	}
@@ -409,14 +394,7 @@ void moveCharacter()
 		if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == ' ' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '#' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '°' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '/' || mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X + 1] == '0')
 		{
 			//Beep(1440, 30);
-			if (ice_check() == false)
-			{
-				movement_interaction();
-			}
-			else
-			{
-				ice_movement_loop();
-			}
+			movement_interaction();
 			bSomethingHappened = true;
 		}
 	}
@@ -687,6 +665,7 @@ void renderGameOver()
 		{
 			NewLevel(playernum);
 			init();
+			saveChar(g_sChar, std::to_string(playernum));
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;

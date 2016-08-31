@@ -47,6 +47,7 @@ void enterName()
 		NewLevel(playernum);
 		level = 7;
 		g_sChar.name = name;
+		saveChar(g_sChar, std::to_string(playernum));
 		g_eGameState = S_LOADLEVEL;
 	}
 	if (isKeyPressed(VK_HOME))

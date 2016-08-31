@@ -8,3 +8,4 @@ void ice_left();
 void ice_right();
 void ice_movement_loop();
 void ice_movement();
+void ice_movement_loop1();
