@@ -595,6 +595,7 @@ void renderGameOver()
 		{
 			NewLevel(playernum);
 			init();
+			saveChar(g_sChar, std::to_string(playernum));
 			g_eGameState = S_LOADLEVEL;
 		}
 		break;
