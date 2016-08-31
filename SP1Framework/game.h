@@ -9,6 +9,7 @@
 #include "charData.h"
 #include "Enemy.h"
 #include "name.h"
+#include <Windows.h>
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
