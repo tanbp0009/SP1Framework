@@ -232,75 +232,100 @@ void renderRoomInfo(int level)
 	bool bSomethingHappened = false;
 	std::string infostring[2] {"Press 'c' to close", ""};
 	COORD c = g_Console.getConsoleSize();
-	c.X = g_Console.getConsoleSize().X / 2 - 2;
-	c.Y /= 2;
-	if (level == 15)
+	c.X = 1;
+	c.Y = 1;
+	if (isKeyPressed(67))
+	{
+		bSomethingHappened = true;
+		info = 1;
+	}
+	std::string infostringborder[1]{"ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛPress 'c' to closeÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ"};
+	std::string infostring1[4]{"This pyramid is pretty dark, I should get that torch '§'.", "Those pieces of ruins might be worth a forturne, I should take some of it.", "Damn those spikes '#' look like they will hurt alot... I better avoid those.", "(Press space to interact)"};
+	std::string infostring2[3]{"Oh, is that a button 'o'? Pushing buttons is gonna do something right?        ", "Perhaps it opens a door ')'?                                                  ", "(Press space to push buttons)                                                 "};
+	std::string infostring3[3]{"Wha... What is that... Is that a teleporter?                                  ", "I wonder where it will lead me to.                                            "};
+	std::string infostring4[3]{"I must me getting closer to the treasure, I need to keep pressing on.         ", "The north door 'D' has three locks, I wonder where the keys 'Ÿ' are.          ", "Hmmm... the other rooms might contain the keys.                               "};
+	std::string infostring5[1]{"(Press space to interact)"};
+		if (level == 7)
 	{
 		switch (info)
 		{
 		case 0:
 		{
-			c.X -= 7;
-			g_Console.writeToBuffer(c, infostring[0], 0x07);
+				  g_Console.writeToBuffer(c, infostring1[0], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostring1[1], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostring1[2], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostring1[3], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
 		}
-		if (isKeyPressed(67))
-		{
-			bSomethingHappened = true;
-			info = 1;
-		}
-		break;
-		case 1:
-		{
-			g_Console.writeToBuffer(c, infostring[1], 0x07);
-
-		}
-		break;
+		case 1:;
 		}
 	}
-	if (level == 7)
+		if (level == 9)
 	{
 		switch (info)
 		{
 		case 0:
 		{
-				  c.X -= 7;
-				  g_Console.writeToBuffer(c, infostring[0], 0x07);
-		}
-			if (isKeyPressed(67))
-			{
-				bSomethingHappened = true;
-				info = 1;
+				  g_Console.writeToBuffer(c, infostring2[0], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostring2[1], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostring2[2], 0x0F);
+				  c.Y += 1;
+				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
 			}
-			break;
-		case 1:
-		{
-				  g_Console.writeToBuffer(c, infostring[1], 0x07);
-
+			case 1:;
+			}
 		}
-			break;
+		if (level == 11)
+		{
+			switch (info)
+			{
+			case 0:;
+				g_Console.writeToBuffer(c, infostring3[0], 0x07);
+				c.Y += 1;
+				g_Console.writeToBuffer(c, infostring3[1], 0x07);
+				c.Y += 1;
+				g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			case 1:;
+			}
+		}
+		if (level == 15)
+	{
+			c.Y = 3;
+		switch (info)
+		{
+		case 0:
+		{
+				  if (g_sChar.keys == 0)
+				  {
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring4[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring4[1], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring4[2], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+				  }
+		}
+		case 1:;
 		}
 	}
+
 	if (level == 16)
 	{
 		switch (info)
 		{
 		case 0:
 		{
-				  c.X -= 7;
-				  g_Console.writeToBuffer(c, infostring[0], 0x07);
 		}
-			if (isKeyPressed(67))
-			{
-				bSomethingHappened = true;
-				info = 1;
-			}
-			break;
-		case 1:
-		{
-				  g_Console.writeToBuffer(c, infostring[1], 0x07);
-
-		}
-			break;
+		case 1:;
 		}
 	}
 	if (level == 17)
@@ -309,21 +334,10 @@ void renderRoomInfo(int level)
 		{
 		case 0:
 		{
-				  c.X -= 7;
-				  g_Console.writeToBuffer(c, infostring[0], 0x07);
-		}
-			if (isKeyPressed(67))
-			{
-				bSomethingHappened = true;
-				info = 1;
-			}
-			break;
-		case 1:
-		{
-				  g_Console.writeToBuffer(c, infostring[1], 0x07);
 
 		}
-			break;
+
+		case 1:;
 		}
 	}
 	if (level == 18)
@@ -332,21 +346,9 @@ void renderRoomInfo(int level)
 		{
 		case 0:
 		{
-				  c.X -= 7;
-				  g_Console.writeToBuffer(c, infostring[0], 0x07);
-		}
-			if (isKeyPressed(67))
-			{
-				bSomethingHappened = true;
-				info = 1;
-			}
-			break;
-		case 1:
-		{
-				  g_Console.writeToBuffer(c, infostring[1], 0x07);
 
 		}
-			break;
+		case 1:;
 		}
 	}
 }
