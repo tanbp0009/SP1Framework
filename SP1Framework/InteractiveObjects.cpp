@@ -8,7 +8,6 @@ extern EGAMESTATES g_eGameState;
 extern COORD doorcoord;
 extern COORD door2coord;
 extern int playernum;
-extern double scoring;
 
 char objectinfront;
 COORD ObjectPosition;
@@ -231,32 +230,32 @@ void relic()
 	{
 	case 'ï':
 		g_sChar.relic_scepter++;
-		scoring += 50;
+		g_sChar.score += 50;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	case 'í':
 		g_sChar.relic_amulet++;
-		scoring += 100;
+		g_sChar.score += 100;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	case 'ë':
 		g_sChar.relic_tablet++;
-		scoring += 150;
+		g_sChar.score += 150;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	case 'é':
 		g_sChar.relic_ankh++;
-		scoring += 200;
+		g_sChar.score += 200;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	case 'ì':
 		g_sChar.relic_goblet++;
-		scoring += 250;
+		g_sChar.score += 250;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	case 'ä':
 		g_sChar.relic_scarab++;
-		scoring += 300;
+		g_sChar.score += 300;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		break;
 	}
@@ -345,10 +344,6 @@ void VaultRoomPuzzleDoor()
 }
 void crown()
 {
-	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] = 'ß')
-	{
-		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
-		level = 4;
-		g_eGameState = S_LOADLEVEL;
-	}
+	level = 4;
+	g_eGameState = S_LOADLEVEL;
 }

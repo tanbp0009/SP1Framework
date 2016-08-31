@@ -15,7 +15,6 @@ int level;
 int selection;
 int oldlevel;
 int playernum;
-double scoring;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -68,7 +67,7 @@ void init( void )
 	g_dEnemyDamageTime = 0;
 	g_sEnemy.m_cLocation.X = 40;
 	g_sEnemy.m_cLocation.Y = 1;
-	scoring = 0;
+	g_sChar.score = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -645,7 +644,7 @@ void renderGameOver()
 	std::string yes = { "<Yes>" };
 	std::stringstream score;
 	score.str() = "";
-	score << "Score : " << scoring << " point(s)";
+	score << "Score : " << g_sChar.score << " point(s)";
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
 	c.Y = 22;
@@ -846,12 +845,14 @@ void renderWin()
 	std::string yes = { "<Yes>" };
 	std::stringstream score;
 	score.str() = "";
-	score << "Score : " << scoring << " point(s)";
-	COORD c = g_Console.getConsoleSize();
-	SetMap(); 	c.Y = 10;
-	c.X = 60;
+	score << "Score : " << g_sChar.score << " point(s)";
+	COORD c;
+	SetMap();
+	c.Y = 10;
+	c.X = 57;
 	g_Console.writeToBuffer(c, score.str(), 0x03);
 	c.Y = 16;
+	c.X += 5;
 	g_Console.writeToBuffer(c, "Restart?", 0x03);
 	c.Y += 4;
 	c.X = 68;
@@ -888,10 +889,10 @@ void renderWin()
 			g_bQuitGame = true;
 		break;
 	}
-	if (bSomethingHappened)
-	{
-		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-		//bSomethingHappened = false;
-	}
+	//if (bSomethingHappened)
+	//{
+	//	// set the bounce time to some time in the future to prevent accidental triggers
+	//	g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+	//	//bSomethingHappened = false;
+	//}
 }

@@ -166,10 +166,6 @@ void SetMap()
 					}
 				}
 				break;
-			//case '™':
-			//	g_sEnemy.m_cLocation = setmapcoord;
-			//	g_Console.writeToBuffer(setmapcoord, " ", 0x00);
-			//	break;
 			case 'ß':
 				if (level == 0)
 				g_Console.writeToBuffer(setmapcoord, mapCurrent[setmapcoord.Y][setmapcoord.X], 0x0C);
