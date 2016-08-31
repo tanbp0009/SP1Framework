@@ -15,6 +15,7 @@ int level;
 int selection;
 int oldlevel;
 int playernum;
+double scoring;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -56,17 +57,18 @@ void init( void )
 	selection = 0;
 	g_sChar.playerdir = '^';
 	g_sChar.keys = 0;
-	g_sChar.relic_scepter = 0;
-	g_sChar.relic_amulet = 0;
-	g_sChar.relic_tablet = 0;
-	g_sChar.relic_ankh = 0;
-	g_sChar.relic_goblet = 0;
-	g_sChar.relic_scarab = 0;
+	g_sChar.relic_scepter = 0; // 50 points per
+	g_sChar.relic_amulet = 0; // 100 points per
+	g_sChar.relic_tablet = 0; // 150 points per
+	g_sChar.relic_ankh = 0; // 200 points per
+	g_sChar.relic_goblet = 0; // 250 points per
+	g_sChar.relic_scarab = 0; // 300 points per
 	g_sEnemy.m_bActive = false;
 	g_dEnemyBounceTime = 0;
 	g_dEnemyDamageTime = 0;
 	g_sEnemy.m_cLocation.X = 40;
 	g_sEnemy.m_cLocation.Y = 1;
+	scoring = 0;
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
@@ -643,14 +645,16 @@ void renderGameOver()
 	std::string yes = { "<Yes>" };
 	std::stringstream score;
 	score.str() = "";
-	score << "Score : " << g_dElapsedTime << 's';
+	score << "Score : " << scoring << " point(s)";
 	COORD c = g_Console.getConsoleSize();
 	SetMap();
 	c.Y = 22;
-	c.X = c.X / 2 + 11;
+	c.X = c.X / 2 + 5;
 	g_Console.writeToBuffer(c, score.str(), 0x03);
+	c.X = c.X + 5;
 	c.Y = 16;
 	g_Console.writeToBuffer(c, "Continue?", 0x03);
+	c.X -= 1;
 	c.X = c.X / 2 + 25;
 	c.Y += 2;
 	if (g_abKeyPressed[K_LEFT])
@@ -841,10 +845,11 @@ void renderWin()
 	std::string no = { "<No>" };
 	std::string yes = { "<Yes>" };
 	std::stringstream score;
+	score.str() = "";
+	score << "Score : " << scoring << " point(s)";
 	COORD c = g_Console.getConsoleSize();
-	SetMap();
-	c.Y = 10;
-	c.X = 62;
+	SetMap(); 	c.Y = 10;
+	c.X = 60;
 	g_Console.writeToBuffer(c, score.str(), 0x03);
 	c.Y = 16;
 	g_Console.writeToBuffer(c, "Restart?", 0x03);

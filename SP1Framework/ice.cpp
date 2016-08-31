@@ -15,7 +15,7 @@ bool ice_check()
 	a = 0;
 	b = 0;
 	ice_movement();
-	if ((mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') && (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] != ' '))
+	if ((mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') && (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] != ' ') || (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°'))
 	{
 		return true;
 	}
@@ -45,23 +45,23 @@ void ice_movement()
 }
 void ice_movement_loop()
 {
-		a = 0;
-		b = 0;
-		ice_movement();
-				if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#' || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°'))
-				{
-					move = true;
-				}
-				if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
-				{
-					move = true;
-				}
-				if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ')
-				{
-					move = false;
-				}
-				if (move == true)
-				{
-					movement_interaction();
-				}
+	a = 0;
+	b = 0;
+	ice_movement();
+	if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°' || mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#' || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '#') || (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == '°'))
+	{
+		move = true;
+	}
+	if (mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ' && mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '°')
+	{
+		move = true;
+	}
+	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#' && mapCurrent[g_sChar.m_cLocation.Y + a][g_sChar.m_cLocation.X + b] == ' ')
+	{
+		move = false;
+	}
+	if (move == true)
+	{
+		movement_interaction();
+	}
 }
