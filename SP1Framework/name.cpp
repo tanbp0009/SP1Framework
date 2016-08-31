@@ -44,10 +44,13 @@ void enterName()
 	}
 	if (isKeyPressed(VK_RETURN) && numberOfChar != 0)
 	{
+		
 		NewLevel(playernum);
+		g_sChar = loadChar(g_sChar, std::to_string(playernum));
 		level = 7;
 		g_sChar.name = name;
 		saveChar(g_sChar, std::to_string(playernum));
+		
 		g_eGameState = S_LOADLEVEL;
 	}
 	if (isKeyPressed(VK_HOME))
