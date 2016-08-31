@@ -29,6 +29,7 @@ void saveChar(struct SGameChar Ing_sChar, std::string filedir)
 		myfile << Ing_sChar.relic_scarab << "\n";
 		myfile << Ing_sChar.relic_scepter << "\n";
 		myfile << Ing_sChar.relic_tablet << "\n";
+		myfile << Ing_sChar.score << "\n";
 		myfile << level << "\n";
 		myfile.close();
 	}
@@ -67,7 +68,8 @@ struct SGameChar loadChar(struct SGameChar Ing_sChar, std::string filedir)
 		Ing_sChar.relic_scepter = std::stoi(line);
 		getline(myfile, line);
 		Ing_sChar.relic_tablet = std::stoi(line);
-
+		getline(myfile, line);
+		Ing_sChar.score = std::stoi(line);
 		getline(myfile, line);
 		Ing_sChar.currentlevel = std::stoi(line);
 		myfile.close();
