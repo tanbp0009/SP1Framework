@@ -10,9 +10,18 @@ void trap()
 	if (mapCurrent[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
 	{
 		g_sChar.lives--;
+		if (g_sChar.lives == 2)
+		{
+			PlaySound(TEXT("audio/life.wav"), NULL, SND_ASYNC);
+		}
+		if (g_sChar.lives == 1)
+		{
+			PlaySound(TEXT("audio/life2.wav"), NULL, SND_ASYNC);
+		}
 	}
 	if (g_sChar.lives == 0)
 	{
+		PlaySound(TEXT("audio/life3.wav"), NULL, SND_ASYNC);
 		level = 19;
 		g_eGameState = S_LOADLEVEL;
 	}

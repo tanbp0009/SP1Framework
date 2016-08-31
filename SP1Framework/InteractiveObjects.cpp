@@ -86,6 +86,7 @@ void interactobjectinfront()
 
 void door()
 {
+	PlaySound(TEXT("audio/door.wav"), NULL, SND_ASYNC);
 	if (mapCurrent[doorcoord.Y][doorcoord.X] == ')')
 	{
 		mapCurrent[doorcoord.Y][doorcoord.X] = ' ';
@@ -98,6 +99,7 @@ void door()
 
 void door2()
 {
+	PlaySound(TEXT("audio/door.wav"), NULL, SND_ASYNC);
 	mapCurrent[door2coord.Y][door2coord.X] = ' ';
 }
 void something()
@@ -107,6 +109,7 @@ void something()
 
 void nextlevel()
 {
+	PlaySound(TEXT("audio/door.wav"), NULL, SND_ASYNC);
 	savelevel(level, std::to_string(playernum));
 	saveChar(g_sChar, std::to_string(playernum));
 	switch (level)
@@ -176,6 +179,7 @@ void nextlevel()
 
 void moveboulder()
 {
+	PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 	if (g_sChar.playerdir == '^')
 	{
 		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == 'P')
@@ -219,6 +223,7 @@ void keys()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == 'Ÿ')
 	{
+		PlaySound(TEXT("audio/collect.wav"), NULL, SND_ASYNC);
 		g_sChar.keys++;
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 	}
@@ -226,6 +231,7 @@ void keys()
 
 void relic()
 {
+	PlaySound(TEXT("audio/collect.wav"), NULL, SND_ASYNC);
 	switch (mapCurrent[ObjectPosition.Y][ObjectPosition.X])
 	{
 	case 'ï':
@@ -277,6 +283,7 @@ void healthpack()
 	{
 		if (g_sChar.lives != 3)
 		{
+			PlaySound(TEXT("audio/collect.wav"), NULL, SND_ASYNC);
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			g_sChar.lives++;
 		}
@@ -284,6 +291,7 @@ void healthpack()
 }
 void movement_interaction()
 {
+	PlaySound(TEXT("audio/footstep.wav"), NULL, SND_ASYNC);
 	if (g_sChar.playerdir == '^')
 	{
 		g_sChar.m_cLocation.Y--;

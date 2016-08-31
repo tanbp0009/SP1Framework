@@ -60,9 +60,18 @@ void enemyCollision()
 		g_sChar.lives--;
 		g_dEnemyDamageTime = g_dElapsedTime + 0.4; // give player damage immunity
 		g_sEnemy.m_bActive = true;
+		if (g_sChar.lives == 2)
+		{
+			PlaySound(TEXT("audio/life.wav"), NULL, SND_ASYNC);
+		}
+		if (g_sChar.lives == 1)
+		{
+			PlaySound(TEXT("audio/life2.wav"), NULL, SND_ASYNC);
+		}
 	}
 	if (g_sChar.lives == 0)
 	{
+		PlaySound(TEXT("audio/life3.wav"), NULL, SND_ASYNC);
 		level = 19;
 		g_eGameState = S_LOADLEVEL;
 	}

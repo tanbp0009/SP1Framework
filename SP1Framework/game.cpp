@@ -80,6 +80,7 @@ void init( void )
 	}
 	else
 	{
+		PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 		g_eGameState = S_SPLASHSCREEN;
 	}
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
@@ -438,7 +439,7 @@ void moveCharacter()
     if (bSomethingHappened)
     {
         // set the bounce time to some time in the future to prevent accidental triggers
-        g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+        g_dBounceTime = g_dElapsedTime + 0.150; // 125ms should be enough
     }
 }
 void processUserInput()
@@ -668,6 +669,7 @@ void renderMainMenu()
 
 void renderGameOver()
 {
+	PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 	std::string Menu[2] = { " Yes ", " No " };
 	std::string no = { "<No>" };
 	std::string yes = { "<Yes>" };
@@ -868,6 +870,7 @@ void renderInstruction()
 
 void renderWin()
 {
+	PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 	bool bSomethingHappened = false;
 	std::string Menu[2] = { " Yes ", " No " };
 	std::string no = { "<No>" };
