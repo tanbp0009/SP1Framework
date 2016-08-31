@@ -76,6 +76,7 @@ void init( void )
     // sets the initial state for the game
 	if (g_eGameState == S_GAMEOVER)
 	{
+		PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 		level = 7;
 	}
 	else
@@ -675,7 +676,6 @@ void renderMainMenu()
 
 void renderGameOver()
 {
-	PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 	std::string Menu[2] = { " Yes ", " No " };
 	std::string no = { "<No>" };
 	std::string yes = { "<Yes>" };
@@ -876,7 +876,6 @@ void renderInstruction()
 
 void renderWin()
 {
-	PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 	bool bSomethingHappened = false;
 	std::string Menu[2] = { " Yes ", " No " };
 	std::string no = { "<No>" };

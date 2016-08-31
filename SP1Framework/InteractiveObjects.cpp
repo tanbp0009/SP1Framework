@@ -179,11 +179,11 @@ void nextlevel()
 
 void moveboulder()
 {
-	PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 	if (g_sChar.playerdir == '^')
 	{
 		if (mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == ' ' || mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] == 'P')
 		{
+			PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y - 1][ObjectPosition.X] = 'ê';
 			
@@ -193,6 +193,7 @@ void moveboulder()
 	{
 		if (mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == ' '|| mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] == 'P')
 		{
+			PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y + 1][ObjectPosition.X] = 'ê';
 		}
@@ -201,6 +202,7 @@ void moveboulder()
 	{
 		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
 		{
+			PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			if (mapCurrent[ObjectPosition.Y][ObjectPosition.X - 1] == 'P')
 			{
@@ -213,6 +215,7 @@ void moveboulder()
 	{
 		if (mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == ' ' || mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] == 'P')
 		{
+			PlaySound(TEXT("audio/boulder.wav"), NULL, SND_ASYNC);
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 			mapCurrent[ObjectPosition.Y][ObjectPosition.X + 1] = 'ê';
 		}
@@ -269,6 +272,7 @@ void relic()
 
 void teletospawn()
 {
+	PlaySound(TEXT("audio/collect.wav"), NULL, SND_ASYNC);
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
 
