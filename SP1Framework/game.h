@@ -67,6 +67,7 @@ struct SGameChar
 	int relic_goblet;
 	int relic_scarab;
 	int currentlevel;
+	int score;
 };
 
 
