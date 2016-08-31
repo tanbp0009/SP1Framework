@@ -244,11 +244,11 @@ void renderRoomInfo(int level)
 	std::string infostring1[4]{"This pyramid is pretty dark, I should get that torch '§'.", "Those pieces of ruins might be worth a forturne, I should take some of it.", "Damn those spikes '#' look like they will hurt alot... I better avoid those.", "(Press space to interact)"};
 	std::string infostring2[3]{"Oh, is that a button 'o'? Pushing buttons is gonna do something right?        ", "Perhaps it opens a door ')'?                                                  ", "(Press space to push buttons)                                                 "};
 	std::string infostring3[3]{"Wha... What is that... Is that a teleporter 'è'?                              ", "I wonder where it will lead me to.                                            "};
-	std::string infostring4[4]{"I must me getting closer to the treasure, I need to keep pressing on.         ", "The north door 'D' has three locks, I wonder where the keys 'Ÿ' are.          ", "Hmmm... the other rooms might contain the keys.                               ", "I should avoid that red guy over there... he looks scary.                     "};
+	std::string infostring4[4]{"I must me getting closer to the treasure, I need to keep pressing on.         ", "The north door 'D' has three locks, I wonder where the keys 'Ÿ' are.          ", "Hmmm... the other rooms might contain the keys.                               ", "I should avoid that red guy '™' over there... he looks scary.                 "};
 	std::string infostring5[1]{"If I want to get that key I i'll have to get through this maze.               "};
-	std::string infostring6[2]{"These boulders looks light enough to be pushed,                               ", "lets put my training to the test!                                            "};
-	std::string infostring7[2]{"The floors here look slippery, it will be wise for me to watch my step.       ", "That looks like a medkit, that would heal my wounds.                         "};
-	std::string infostring8[2]{"The treasure is in this room, i just need to figure out how to get to it.     "};
+	std::string infostring6[2]{"These boulders 'ê' looks light enough to be pushed,                           ", "lets put my training to the test!                                            "};
+	std::string infostring7[2]{"The floors here look slippery, it will be wise for me to watch my step.       ", "That looks like a medkit '¤', that would heal my wounds.                     "};
+	std::string infostring8[2]{"The treasure 'ß' is in this room, i just need to figure out how to get to it. "};
 
 		if (level == 7)
 	{
