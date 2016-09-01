@@ -10,13 +10,14 @@ extern int level;
 extern EGAMESTATES g_eGameState;
 extern SGameChar g_sChar;
 extern int playernum;
-
+int i = 65;
 void enterName()
 {
 	SetMap();
 	COORD c = g_Console.getConsoleSize();
 	c.Y = 13;
 	c.X = c.X / 2 - 9;
+	nameActive = true;
 	if (nameBounceTime < g_dElapsedTime)
 	{
 		if (isKeyPressed(VK_BACK) && numberOfChar !=0)
@@ -30,17 +31,24 @@ void enterName()
 		{
 			if (isKeyPressed(i))
 			{
-				name[numberOfChar] = char(i);
+				name[numberOfChar] = (char)(i);
 				numberOfChar++;
 				nameActive = false;
+				g_Console.writeToBuffer(c, name, 0x0F);
 			}
+
 		}
+		//if ((detectKeysPressed() > 64) && (detectKeysPressed() < 91))
+		//{
+		//	name[numberOfChar] = (char)(detectKeysPressed());
+		//	numberOfChar++;
+		//	nameActive = false;
+		//}
 	}
 	if (nameActive == false)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
 		nameBounceTime = g_dElapsedTime + 0.3; // 125ms should be enough
-		nameActive = true;
 	}
 	if (isKeyPressed(VK_RETURN) && numberOfChar != 0)
 	{
@@ -85,4 +93,15 @@ bool newGame()
 	}
 	else
 		return false;
+}
+
+int detectKeysPressed()
+{
+	for (int i = 65; i < 91; i++)
+	{
+		if (isKeyPressed(i))
+		{
+			return i;
+		}
+	}
 }

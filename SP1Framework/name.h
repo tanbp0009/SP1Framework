@@ -6,3 +6,4 @@
 
 void enterName();
 bool newGame();
+int detectKeysPressed();

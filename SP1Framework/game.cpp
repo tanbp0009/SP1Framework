@@ -15,6 +15,7 @@ int level;
 int selection;
 int oldlevel;
 int playernum;
+bool dialogFlag = false;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -182,6 +183,7 @@ void render()
 	case S_GAME: renderGame();
 		break;
 	case S_LOADLEVEL: loadLevel();
+		dialogFlag = false;
 		break;
 	case S_GAMEOVER: renderGameOver();
 		break;
@@ -194,6 +196,7 @@ void render()
 	case S_WIN: renderWin();
 		break;
 	case S_NAME: enterName();
+		renderFramerate();
 		break;
 	case S_LOADSAVE: renderSaveFile(g_sChar);
 		break;
@@ -244,49 +247,53 @@ void renderRoomInfo(int level)
 	{
 		bSomethingHappened = true;
 		info = 1;
+		dialogFlag = true;
 	}
-	std::string infostringborder[1]{"ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛPress 'c' to closeÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ"};
-	std::string infostring1[4]{"This pyramid is pretty dark, I should get that torch '§'.", "Those pieces of ruins might be worth a forturne, I should take some of it.", "Damn those spikes '#' look like they will hurt alot... I better avoid those.", "(Press space to interact)"};
-	std::string infostring2[3]{"Oh, is that a button 'o'? Pushing buttons is gonna do something right?        ", "Perhaps it opens a door ')'?                                                  ", "(Press space to push buttons)                                                 "};
-	std::string infostring3[3]{"Wha... What is that... Is that a teleporter 'è'?                              ", "I wonder where it will lead me to.                                            "};
-	std::string infostring4[4]{"I must me getting closer to the treasure, I need to keep pressing on.         ", "The north door 'D' has three locks, I wonder where the keys 'Ÿ' are.          ", "Hmmm... the other rooms might contain the keys.                               ", "I should avoid that red guy '™' over there... he looks scary.                 "};
-	std::string infostring5[1]{"If I want to get that key I i'll have to get through this maze.               "};
-	std::string infostring6[2]{"These boulders 'ê' looks light enough to be pushed,                           ", "lets put my training to the test!                                            "};
-	std::string infostring7[2]{"The floors here look slippery, it will be wise for me to watch my step.       ", "That looks like a medkit '¤', that would heal my wounds.                     "};
-	std::string infostring8[2]{"The treasure 'ß' is in this room, i just need to figure out how to get to it. "};
+
+	if (dialogFlag == false)
+	{
+		std::string infostringborder[1]{"ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛPress 'c' to closeÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ"};
+		std::string infostring1[4]{"This pyramid is pretty dark, I should get that torch '§'.", "Those pieces of ruins might be worth a forturne, I should take some of it.", "Damn those spikes '#' look like they will hurt alot... I better avoid those.", "(Press space to interact)"};
+		std::string infostring2[3]{"Oh, is that a button 'o'? Pushing buttons is gonna do something right?        ", "Perhaps it opens a door ')'?                                                  ", "(Press space to push buttons)                                                 "};
+		std::string infostring3[3]{"Wha... What is that... Is that a teleporter 'è'?                              ", "I wonder where it will lead me to.                                            "};
+		std::string infostring4[4]{"I must me getting closer to the treasure, I need to keep pressing on.         ", "The north door 'D' has three locks, I wonder where the keys 'Ÿ' are.          ", "Hmmm... the other rooms might contain the keys.                               ", "I should avoid that red guy '™' over there... he looks scary.                 "};
+		std::string infostring5[1]{"If I want to get that key I i'll have to get through this maze.               "};
+		std::string infostring6[2]{"These boulders 'ê' looks light enough to be pushed,                           ", "lets put my training to the test!                                            "};
+		std::string infostring7[2]{"The floors here look slippery, it will be wise for me to watch my step.       ", "That looks like a medkit '¤', that would heal my wounds.                     "};
+		std::string infostring8[2]{"The treasure 'ß' is in this room, i just need to figure out how to get to it. "};
 
 		if (level == 7)
-	{
-		switch (info)
 		{
-		case 0:
-		{
-				  g_Console.writeToBuffer(c, infostring1[0], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring1[1], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring1[2], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring1[3], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			switch (info)
+			{
+			case 0:
+			{
+					  g_Console.writeToBuffer(c, infostring1[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring1[1], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring1[2], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring1[3], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			}
+			case 1:;
+			}
 		}
-		case 1:;
-		}
-	}
 		if (level == 9)
-	{
-		switch (info)
 		{
-		case 0:
-		{
-				  g_Console.writeToBuffer(c, infostring2[0], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring2[1], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring2[2], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			switch (info)
+			{
+			case 0:
+			{
+					  g_Console.writeToBuffer(c, infostring2[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring2[1], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring2[2], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
 			}
 			case 1:;
 			}
@@ -305,30 +312,30 @@ void renderRoomInfo(int level)
 			}
 		}
 		if (level == 15)
-	{
+		{
 			c.Y = 3;
-		switch (info)
-		{
-		case 0:
-		{
-				  if (g_sChar.keys == 0)
-				  {
-					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
-					  c.Y += 1;
-					  g_Console.writeToBuffer(c, infostring4[0], 0x0F);
-					  c.Y += 1;
-					  g_Console.writeToBuffer(c, infostring4[1], 0x0F);
-					  c.Y += 1;
-					  g_Console.writeToBuffer(c, infostring4[2], 0x0F);
-					  c.Y += 1;
-					  g_Console.writeToBuffer(c, infostring4[3], 0x0F);
-					  c.Y += 1;
-					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
-				  }
+			switch (info)
+			{
+			case 0:
+			{
+					  if (g_sChar.keys == 0)
+					  {
+						  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+						  c.Y += 1;
+						  g_Console.writeToBuffer(c, infostring4[0], 0x0F);
+						  c.Y += 1;
+						  g_Console.writeToBuffer(c, infostring4[1], 0x0F);
+						  c.Y += 1;
+						  g_Console.writeToBuffer(c, infostring4[2], 0x0F);
+						  c.Y += 1;
+						  g_Console.writeToBuffer(c, infostring4[3], 0x0F);
+						  c.Y += 1;
+						  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+					  }
+			}
+			case 1:;
+			}
 		}
-		case 1:;
-		}
-	}
 		if (level == 14)
 		{
 			switch (info)
@@ -342,48 +349,49 @@ void renderRoomInfo(int level)
 			case 1:;
 			}
 		}
-	if (level == 16)
-	{
-		switch (info)
+		if (level == 16)
 		{
-		case 0:
-		{
-				  g_Console.writeToBuffer(c, infostring7[0], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring7[1], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			switch (info)
+			{
+			case 0:
+			{
+					  g_Console.writeToBuffer(c, infostring7[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring7[1], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			}
+			case 1:;
+			}
 		}
-		case 1:;
-		}
-	}
-	if (level == 17)
-	{
-		switch (info)
+		if (level == 17)
 		{
-		case 0:
-		{
-				  g_Console.writeToBuffer(c, infostring6[0], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostring6[1], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
-		}
+			switch (info)
+			{
+			case 0:
+			{
+					  g_Console.writeToBuffer(c, infostring6[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostring6[1], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			}
 
-		case 1:;
+			case 1:;
+			}
 		}
-	}
-	if (level == 18)
-	{
-		switch (info)
+		if (level == 18)
 		{
-		case 0:
-		{
-				  g_Console.writeToBuffer(c, infostring8[0], 0x0F);
-				  c.Y += 1;
-				  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
-		}
-		case 1:;
+			switch (info)
+			{
+			case 0:
+			{
+					  g_Console.writeToBuffer(c, infostring8[0], 0x0F);
+					  c.Y += 1;
+					  g_Console.writeToBuffer(c, infostringborder[0], 0x08);
+			}
+			case 1:;
+			}
 		}
 	}
 }
