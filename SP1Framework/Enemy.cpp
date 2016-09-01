@@ -74,5 +74,6 @@ void enemyCollision()
 		PlaySound(TEXT("audio/life3.wav"), NULL, SND_ASYNC);
 		level = 19;
 		g_eGameState = S_LOADLEVEL;
+		PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 	}
 }

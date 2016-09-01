@@ -323,6 +323,7 @@ void lightswitch()
 {
 	if (mapCurrent[ObjectPosition.Y][ObjectPosition.X] == '§')
 	{
+		PlaySound(TEXT("audio/collect.wav"), NULL, SND_ASYNC);
 		mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
 		level += 1;
 		g_eGameState = S_LOADLEVEL;
@@ -351,4 +352,5 @@ void crown()
 {
 	level = 4;
 	g_eGameState = S_LOADLEVEL;
+	PlaySound(TEXT("audio/menu.wav"), NULL, SND_ASYNC);
 }
