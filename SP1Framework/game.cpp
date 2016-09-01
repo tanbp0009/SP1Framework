@@ -522,6 +522,7 @@ void renderInventory()
 
 void renderMainMenu()
 {
+	level = 1;
 	bool bSomethingHappened = false;
 	std::string Menu[4] = { " Start New Adventure ", " Continue Old Adventure " , " Instructions " ,  " Exit " };
 	std::string arrow[4] = { "<Start New Adventure>", "<Continue Old Adventure>", "<Instructions>", "<Exit>" };
