@@ -51,8 +51,6 @@ void interactobjectinfront()
 	{
 	case 'o': door(); // game logic for the splash screen
 		break;
-	case 'Û': something(); // gameplay logic when we are in the game
-		break;
 	case 'D': nextlevel(); // gameplay logic when we are in the game
 		break;
 	case 'ê': moveboulder(); // gameplay logic when we are in the game
@@ -102,11 +100,6 @@ void door2()
 	PlaySound(TEXT("audio/door.wav"), NULL, SND_ASYNC);
 	mapCurrent[door2coord.Y][door2coord.X] = ' ';
 }
-void something()
-{
-	mapCurrent[ObjectPosition.Y][ObjectPosition.X] = ' ';
-}
-
 void nextlevel()
 {
 	PlaySound(TEXT("audio/door.wav"), NULL, SND_ASYNC);
