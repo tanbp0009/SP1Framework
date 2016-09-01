@@ -310,7 +310,7 @@ void loadLevel()
 	if (level == 0)
 	{
 		GetSavedMap(level, std::to_string(playernum));
-		g_eGameState = S_TITLE;
+		g_eGameState = S_SPLASHSCREEN;
 	}
 	if (level == 2)
 	{

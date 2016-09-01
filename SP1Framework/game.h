@@ -37,7 +37,6 @@ enum EKEYS
 enum EGAMESTATES
 {
 	S_SPLASHSCREEN,
-	S_TITLE,
 	S_GAME,
 	S_MAINMENU,
 	S_LOADLEVEL,
@@ -45,7 +44,6 @@ enum EGAMESTATES
 	S_INVENTORY,
 	S_COUNT,
 	S_INSTRUCTION,
-	S_BLACKROOM,
 	S_WIN,
 	S_NAME,
 	S_LOADSAVE,
@@ -92,7 +90,6 @@ void renderElapsedtime();	// renders elapsed time
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void losegame();
 void renderMainMenu();
-void renderTitle();
 void GameOver();
 void renderGameOver();
 void renderInventory();
