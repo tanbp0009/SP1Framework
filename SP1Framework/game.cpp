@@ -915,9 +915,9 @@ void renderWin()
 		}
 		break;
 	case 1:
-		g_Console.writeToBuffer(c, no, 0x07);
+		g_Console.writeToBuffer(c, no, 0x06);
 		c.X = 60;
-		g_Console.writeToBuffer(c, Menu[0], 0x06);
+		g_Console.writeToBuffer(c, Menu[0], 0x07);
 		if (g_dBounceTime > g_dElapsedTime)
 		{
 			return;
@@ -926,10 +926,10 @@ void renderWin()
 			g_bQuitGame = true;
 		break;
 	}
-	//if (bSomethingHappened)
-	//{
-	//	// set the bounce time to some time in the future to prevent accidental triggers
-	//	g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
-	//	//bSomethingHappened = false;
-	//}
+	if (bSomethingHappened)
+	{
+		// set the bounce time to some time in the future to prevent accidental triggers
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+		//bSomethingHappened = false;
+	}
 }
